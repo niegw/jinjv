@@ -3,35 +3,140 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Day01 金句积累 | 基层治理</title>
+  <title>Day 01 每日学习 | 陕西遴选备考</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-      background: #f5f6fa;
+      background: #f0f2f5;
       color: #333;
-      padding: 20px;
     }
-    .container { max-width: 680px; margin: 0 auto; }
-    .header {
-      background: linear-gradient(135deg, #c0392b, #922b21);
+
+    /* ===== 顶部封面 ===== */
+    .cover {
+      background: linear-gradient(135deg, #1a3a6b 0%, #0d2340 60%, #1a3a6b 100%);
       color: white;
-      border-radius: 12px;
-      padding: 24px 20px;
-      margin-bottom: 20px;
+      padding: 40px 20px 30px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-    .header h1 { font-size: 22px; margin-bottom: 6px; }
-    .header p { font-size: 13px; opacity: 0.85; }
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 250px; height: 250px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 50%;
+    }
+    .cover-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 4px 16px;
+      font-size: 13px;
+      margin-bottom: 14px;
+      letter-spacing: 1px;
+    }
+    .cover h1 {
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+    .cover h1 span { color: #f0c040; }
+    .cover-sub {
+      font-size: 14px;
+      opacity: 0.75;
+      margin-bottom: 20px;
+    }
+    .cover-tags {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .cover-tag {
+      background: rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* ===== 导航 ===== */
+    .nav {
+      background: white;
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      border-bottom: 1px solid #e8e8e8;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .nav-btn {
+      padding: 14px 18px;
+      font-size: 13px;
+      color: #666;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .nav-btn:hover { color: #c0392b; }
+    .nav-btn.active { color: #c0392b; border-bottom-color: #c0392b; font-weight: bold; }
+
+    /* ===== 内容区 ===== */
+    .content { padding: 20px 16px; max-width: 700px; margin: 0 auto; }
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* ===== 通用卡片 ===== */
     .card {
       background: white;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 20px;
       margin-bottom: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1a3a6b;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e0e6f0;
+    }
+
+    /* ===== 金句区 ===== */
+    .juju-card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
       border-left: 5px solid #c0392b;
     }
-    .card-num {
+    .juju-num {
       display: inline-block;
       background: #c0392b;
       color: white;
@@ -43,24 +148,24 @@
       font-weight: bold;
       margin-bottom: 10px;
     }
-    .card-title {
-      font-size: 17px;
+    .juju-title {
+      font-size: 16px;
       font-weight: bold;
       color: #c0392b;
       margin-bottom: 12px;
     }
-    .quote {
+    .juju-quote {
       background: #fdf2f2;
       border-radius: 8px;
-      padding: 14px 16px;
+      padding: 14px 16px 14px 32px;
       font-size: 15px;
-      line-height: 1.8;
+      line-height: 1.9;
       color: #222;
       font-weight: 500;
       margin-bottom: 12px;
       position: relative;
     }
-    .quote::before {
+    .juju-quote::before {
       content: '"';
       font-size: 40px;
       color: #e8b4b4;
@@ -68,8 +173,7 @@
       top: -4px; left: 8px;
       line-height: 1;
     }
-    .meta { font-size: 13px; color: #666; line-height: 1.8; }
-    .meta span { margin-right: 4px; }
+    .meta { font-size: 13px; color: #666; line-height: 2; }
     .tag {
       display: inline-block;
       background: #fdeaea;
@@ -80,118 +184,582 @@
       margin-right: 4px;
       margin-top: 4px;
     }
-    .review {
-      background: white;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      margin-top: 8px;
+    .blue-tag {
+      display: inline-block;
+      background: #d6eaf8;
+      color: #1a5276;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      margin-right: 4px;
+      margin-top: 4px;
     }
-    .review h3 { font-size: 15px; color: #555; margin-bottom: 12px; }
-    table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    th { background: #c0392b; color: white; padding: 8px 10px; text-align: left; }
-    td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; }
-    tr:last-child td { border-bottom: none; }
-    .tip { text-align: center; color: #999; font-size: 12px; margin-top: 20px; padding-bottom: 10px; }
+
+    /* ===== 复习表 ===== */
+    .review-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .review-table th {
+      background: #c0392b;
+      color: white;
+      padding: 8px 10px;
+      text-align: left;
+    }
+    .review-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .review-table tr:last-child td { border-bottom: none; }
+    .review-table tr:nth-child(even) td { background: #fdf5f5; }
+
+    /* ===== 故事区 ===== */
+    .story-bg {
+      background: #eaf4fb;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 14px;
+      line-height: 1.9;
+      margin-bottom: 12px;
+      color: #555;
+    }
+    .story-bg strong { color: #1a5276; }
+    .ganjiang {
+      background: #fdf2e9;
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 14px;
+      line-height: 2;
+      color: #444;
+      border-left: 4px solid #e67e22;
+      margin-bottom: 4px;
+    }
+    .story-quote {
+      background: #fef9e7;
+      border-left: 4px solid #f39c12;
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      font-size: 15px;
+      font-weight: bold;
+      color: #333;
+      margin: 12px 0;
+      line-height: 1.8;
+    }
+    .story-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .story-table th {
+      background: #1a5276;
+      color: white;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    .story-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #f0f0f0;
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .story-table tr:last-child td { border-bottom: none; }
+    .story-table td:first-child { color: #666; width: 90px; white-space: nowrap; }
+    .action-list { list-style: none; padding: 0; }
+    .action-list li {
+      padding: 6px 0 6px 20px;
+      border-bottom: 1px dashed #eee;
+      font-size: 14px;
+      line-height: 1.7;
+      position: relative;
+    }
+    .action-list li::before { content: "▸"; position: absolute; left: 0; color: #1a5276; }
+    .action-list li:last-child { border-bottom: none; }
+    .result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .result-item {
+      background: #eaf4fb;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .result-item strong { color: #1a5276; font-size: 15px; display: block; }
+    .keyword {
+      display: inline-block;
+      background: #1a5276;
+      color: white;
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-size: 13px;
+      margin: 4px 4px 0 0;
+    }
+
+    /* ===== 计划区 ===== */
+    .plan-week-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .plan-week-header {
+      background: linear-gradient(135deg, #1a3a6b, #0d2340);
+      color: white;
+      padding: 14px 18px;
+      font-size: 15px;
+      font-weight: bold;
+    }
+    .plan-day {
+      padding: 14px 18px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .plan-day:last-child { border-bottom: none; }
+    .plan-day-title {
+      font-weight: bold;
+      color: #1a3a6b;
+      font-size: 14px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .plan-today {
+      background: #fff8f0;
+      border-left: 3px solid #e67e22;
+    }
+    .plan-today .plan-day-title { color: #c0392b; }
+    .plan-task {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.8;
+      padding-left: 20px;
+    }
+    .today-badge {
+      background: #e67e22;
+      color: white;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: normal;
+    }
+
+    /* ===== 框架区 ===== */
+    .framework-card {
+      background: white;
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      border-top: 4px solid #1a3a6b;
+    }
+    .fw-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .fw-num {
+      background: #1a3a6b;
+      color: white;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+    .fw-name { font-size: 16px; font-weight: bold; color: #1a3a6b; }
+    .fw-logic {
+      background: #eaf0f9;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 13px;
+      line-height: 1.9;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .fw-scene {
+      font-size: 12px;
+      color: #888;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .fw-scene::before { content: "💡"; }
+
+    /* ===== 底部 ===== */
+    .footer {
+      text-align: center;
+      color: #aaa;
+      font-size: 12px;
+      padding: 20px 0 30px;
+    }
+
+    /* ===== 进度条 ===== */
+    .progress-bar-wrap {
+      background: #f0f0f0;
+      border-radius: 10px;
+      height: 6px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .progress-bar {
+      height: 100%;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #c0392b, #e74c3c);
+    }
   </style>
 </head>
 <body>
-<div class="container">
 
-  <div class="header">
-    <h1>📌 Day 01 金句积累</h1>
-    <p>主题：基层治理 · 2026年03月16日</p>
-    <p>来源：习近平总书记系列重要讲话</p>
+<!-- 封面 -->
+<div class="cover">
+  <div class="cover-badge">陕西遴选 · 备考计划</div>
+  <h1>Day <span>01</span></h1>
+  <div class="cover-sub">2026年03月17日（周二）· 第一周</div>
+  <div class="cover-tags">
+    <div class="cover-tag">📌 金句积累 · 基层治理</div>
+    <div class="cover-tag">📖 故事素材 · 廖俊波</div>
+    <div class="cover-tag">✍️ 框架学习 · 总分总</div>
   </div>
+</div>
 
-  <div class="card">
-    <div class="card-num">①</div>
-    <div class="card-title">基础不牢，地动山摇</div>
-    <div class="quote">基础不牢，地动山摇。只有把基层党组织建设强、把基层政权巩固好，中国特色社会主义的根基才能稳固。</div>
-    <div class="meta">
-      <div>▶ <span>出处：</span>2020年9月17日，基层代表座谈会</div>
-      <div style="margin-top:6px">▶ 适用场景：
-        <span class="tag">基层治理重要性</span>
-        <span class="tag">党的执政基础</span>
-        <span class="tag">基层党组织建设</span>
+<!-- 导航 -->
+<div class="nav">
+  <div class="nav-btn active" onclick="switchTab('juju', this)">📌 今日金句</div>
+  <div class="nav-btn" onclick="switchTab('story', this)">📖 故事素材</div>
+  <div class="nav-btn" onclick="switchTab('plan', this)">📅 本周计划</div>
+  <div class="nav-btn" onclick="switchTab('framework', this)">✍️ 写作框架</div>
+</div>
+
+<!-- 内容 -->
+<div class="content">
+
+  <!-- ===== 金句 ===== -->
+  <div class="section active" id="sec-juju">
+    <div class="section-title">📌 Day 01 金句积累 · 基层治理</div>
+
+    <div class="juju-card">
+      <div class="juju-num">①</div>
+      <div class="juju-title">基础不牢，地动山摇</div>
+      <div class="juju-quote">基础不牢，地动山摇。只有把基层党组织建设强、把基层政权巩固好，中国特色社会主义的根基才能稳固。</div>
+      <div class="meta">
+        <div>▶ 出处：2020年9月17日，基层代表座谈会</div>
+        <div style="margin-top:6px">▶ 适用：<span class="tag">基层治理重要性</span><span class="tag">党的执政基础</span><span class="tag">基层党组织建设</span></div>
+        <div style="margin-top:6px">▶ 写作示范：开篇点题，强调基层重要性；用于分论点标题"夯实基础，方能大厦稳固"</div>
       </div>
-      <div style="margin-top:6px">▶ 写作示范：开篇点题，强调基层重要性；或用于分论点小标题"夯实基础，方能大厦稳固"</div>
+    </div>
+
+    <div class="juju-card">
+      <div class="juju-num">②</div>
+      <div class="juju-title">上面千条线，底下一根针</div>
+      <div class="juju-quote">上面千条线，底下一根针。只有把基层组织建设好，我们的各项工作才能真正落到实处。</div>
+      <div class="meta">
+        <div>▶ 出处：1990年6月 / 2022年新疆考察 多次引用</div>
+        <div style="margin-top:6px">▶ 适用：<span class="tag">基层执行力</span><span class="tag">政策落地</span><span class="tag">基层干部价值</span></div>
+        <div style="margin-top:6px">▶ 写作示范：说明基层工作的枢纽性地位，可与"最后一公里"搭配使用</div>
+      </div>
+    </div>
+
+    <div class="juju-card">
+      <div class="juju-num">③</div>
+      <div class="juju-title">基层强则国家强，基层安则天下安</div>
+      <div class="juju-quote">基层强则国家强，基层安则天下安，必须抓好基层治理现代化这项基础性工作。</div>
+      <div class="meta">
+        <div>▶ 出处：《习近平关于基层治理论述摘编》</div>
+        <div style="margin-top:6px">▶ 适用：<span class="tag">文章立意</span><span class="tag">开篇破题</span><span class="tag">分论点标题</span></div>
+        <div style="margin-top:6px">▶ 写作示范：适合作为大作文第一句破题，气势磅礴</div>
+      </div>
+    </div>
+
+    <div class="juju-card">
+      <div class="juju-num">④</div>
+      <div class="juju-title">基层是党的执政之基、力量之源</div>
+      <div class="juju-quote">基层是党的执政之基、力量之源。只有基层党组织坚强有力，党员发挥应有作用，党的根基才能牢固，党才能有战斗力。</div>
+      <div class="meta">
+        <div>▶ 出处：2016年，"两学一做"学习教育重要指示</div>
+        <div style="margin-top:6px">▶ 适用：<span class="tag">党建引领基层治理</span><span class="tag">基层党组织建设</span></div>
+        <div style="margin-top:6px">▶ 写作示范：党建类题目必备金句，可与"战斗堡垒"意象配合</div>
+      </div>
+    </div>
+
+    <div class="juju-card">
+      <div class="juju-num">⑤</div>
+      <div class="juju-title">社区治理，只能加强、不能削弱</div>
+      <div class="juju-quote">推进国家治理体系和治理能力现代化，社区治理只能加强、不能削弱。要加强党的领导，推动治理重心下移。</div>
+      <div class="meta">
+        <div>▶ 出处：2024年4月，习近平重要讲话</div>
+        <div style="margin-top:6px">▶ 适用：<span class="tag">社区治理</span><span class="tag">基层服务能力提升</span><span class="tag">城市精细化管理</span></div>
+        <div style="margin-top:6px">▶ 写作示范：论述社区治理时直接引用，体现政策高度</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title" style="font-size:15px">📝 复习速查</div>
+      <table class="review-table">
+        <tr><th>序号</th><th>关键词记忆</th><th>出处时间</th></tr>
+        <tr><td>①</td><td>基础不牢→地动山摇</td><td>2020年9月</td></tr>
+        <tr><td>②</td><td>千条线→一根针</td><td>1990年/2022年</td></tr>
+        <tr><td>③</td><td>基层强→国家强</td><td>《基层治理论述摘编》</td></tr>
+        <tr><td>④</td><td>执政之基→力量之源</td><td>2016年两学一做</td></tr>
+        <tr><td>⑤</td><td>社区治理→只能加强不能削弱</td><td>2024年4月</td></tr>
+      </table>
+      <div style="margin-top:12px;font-size:13px;color:#999">💡 建议：今日抄写一遍，明天默写①②，后天默写③④⑤</div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-num">②</div>
-    <div class="card-title">上面千条线，底下一根针</div>
-    <div class="quote">上面千条线，底下一根针。只有把基层组织建设好，我们的各项工作才能真正落到实处。</div>
-    <div class="meta">
-      <div>▶ <span>出处：</span>1990年6月/2022年新疆考察 多次引用</div>
-      <div style="margin-top:6px">▶ 适用场景：
-        <span class="tag">基层执行力</span>
-        <span class="tag">政策落地</span>
-        <span class="tag">基层干部价值</span>
+  <!-- ===== 故事 ===== -->
+  <div class="section" id="sec-story">
+    <div class="section-title">📖 Day 01 故事素材 · 廖俊波</div>
+
+    <div class="card">
+      <div style="font-size:16px;font-weight:bold;color:#1a5276;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #d6eaf8">🧑 人物简介</div>
+      <table class="story-table">
+        <tr><td>姓名</td><td>廖俊波</td></tr>
+        <tr><td>身份</td><td>福建省南平市委常委、副市长，曾任政和县委书记</td></tr>
+        <tr><td>荣誉</td><td>全国优秀共产党员、全国优秀县委书记、时代楷模</td></tr>
+        <tr><td>生卒</td><td>1968年8月生，2017年3月18日因公殉职，年仅48岁</td></tr>
+        <tr><td>习近平批示</td><td>"牢记党的嘱托，尽心尽责，带领干部群众扑下身子、苦干实干"</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div style="font-size:16px;font-weight:bold;color:#1a5276;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #d6eaf8">🔥 核心故事：背着石头上山建工业园</div>
+      <div class="story-bg"><strong>背景：</strong>2011年6月，廖俊波赴任福建省政和县委书记。政和县是福建省扶贫开发工作重点县，经济各项指标长期<strong>全省末位</strong>，被当地人戏称为"省尾"。</div>
+      <div class="story-bg"><strong>困境：</strong>廖俊波提出要建省级工业园区，被众多干部泼冷水：<br>"有钱还不如拿来发工资。"<br>"山区搞工业，是背着石头上山，吃力不讨好。"</div>
+      <div class="story-quote">"认准的事，背着石头上山也要干！"</div>
+      <div style="margin-bottom:10px;font-weight:bold;color:#1a5276;font-size:14px">⚡ 行动：</div>
+      <ul class="action-list">
+        <li><strong>3个月</strong>完成征地3600亩</li>
+        <li><strong>半年</strong>后首家企业投产</li>
+        <li>园区现场踏勘记录达 <strong>136次</strong>，"开发区是廖书记用脚踩出来的"</li>
+      </ul>
+      <div style="margin:14px 0 8px;font-weight:bold;color:#1a5276;font-size:14px">🏆 成果：</div>
+      <div class="result-grid">
+        <div class="result-item"><strong>财政翻倍</strong>1.6亿→4亿多元，连续3年全省十佳</div>
+        <div class="result-item"><strong>脱贫攻坚</strong>贫困人口减少3万多人</div>
       </div>
-      <div style="margin-top:6px">▶ 写作示范：说明基层工作的枢纽性地位，可与"最后一公里"搭配使用</div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:16px;font-weight:bold;color:#1a5276;margin-bottom:12px">💬 感动中国颁奖词（2017年度）</div>
+      <div class="ganjiang">"人民的樵夫，不忘初心。上山寻路，扎实工作，廉洁奉公。牢记党的话，温暖群众的心。春茶记住你的目光，青山留下你的足迹。谁把人民扛在肩上，人民就把谁装进心里。"</div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:16px;font-weight:bold;color:#1a5276;margin-bottom:12px">✍️ 大作文使用指南</div>
+      <table class="story-table">
+        <tr><th>使用场景</th><th>用法示范</th></tr>
+        <tr><td>基层治理</td><td>廖俊波用双脚丈量政和的山山水水，诠释"能在现场就不在会场"的担当精神</td></tr>
+        <tr><td>实干精神</td><td>"认准的事，背着石头上山也要干"——无数基层干部的精神写照</td></tr>
+        <tr><td>为民情怀</td><td>廖俊波把百姓的期盼化为奋斗的动力，把"政声人去后"的口碑化为毕生追求</td></tr>
+        <tr><td>改革创新</td><td>在传统农业县建工业园：深调研、聚共识、快行动</td></tr>
+        <tr><td>奉献牺牲</td><td>48岁，在赶往会场的路上永远停下了脚步，把全部生命献给了脚下这片土地</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div style="font-size:16px;font-weight:bold;color:#1a5276;margin-bottom:12px">🔑 可提炼关键词</div>
+      <div>
+        <span class="keyword">背石上山</span>
+        <span class="keyword">苦干实干</span>
+        <span class="keyword">能在现场就不在会场</span>
+        <span class="keyword">政声人去后</span>
+        <span class="keyword">谁把人民扛在肩上</span>
+      </div>
+      <div style="margin-top:12px">
+        <span class="blue-tag">基层干部</span>
+        <span class="blue-tag">实干精神</span>
+        <span class="blue-tag">担当作为</span>
+        <span class="blue-tag">为民情怀</span>
+        <span class="blue-tag">改革创新</span>
+      </div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-num">③</div>
-    <div class="card-title">基层强则国家强，基层安则天下安</div>
-    <div class="quote">基层强则国家强，基层安则天下安，必须抓好基层治理现代化这项基础性工作。</div>
-    <div class="meta">
-      <div>▶ <span>出处：</span>《习近平关于基层治理论述摘编》核心论断</div>
-      <div style="margin-top:6px">▶ 适用场景：
-        <span class="tag">文章立意</span>
-        <span class="tag">开篇破题</span>
-        <span class="tag">分论点标题</span>
+  <!-- ===== 计划 ===== -->
+  <div class="section" id="sec-plan">
+    <div class="section-title">📅 本周学习计划 · 第一周</div>
+
+    <div class="card" style="background:linear-gradient(135deg,#fff8f0,#fff);border-left:4px solid #e67e22">
+      <div style="font-size:15px;font-weight:bold;color:#c0392b;margin-bottom:8px">🌟 今日任务（周二）</div>
+      <div style="font-size:14px;color:#555;line-height:2">
+        ✅ 📌 金句积累：<strong>基层治理主题，5条</strong>（已完成）<br>
+        ✅ 📖 故事素材：<strong>廖俊波故事</strong>（已完成）<br>
+        ⬜ ✍️ 框架学习：<strong>框架①总分总结构</strong>（切换到"写作框架"查看）<br>
+        ⬜ 📝 练习：用总分总框架写一段<strong>200字小段落</strong>
       </div>
-      <div style="margin-top:6px">▶ 写作示范：适合作为大作文第一句破题，气势磅礴</div>
+    </div>
+
+    <div class="plan-week-card">
+      <div class="plan-week-header">📅 第一周每日任务安排</div>
+      <div class="plan-day">
+        <div class="plan-day-title">周一</div>
+        <div class="plan-task">📌 金句积累：基层治理主题，5条<br>📖 故事素材：积累1个故事（焦裕禄、廖俊波等先进典型）</div>
+      </div>
+      <div class="plan-day plan-today">
+        <div class="plan-day-title">周二 <span class="today-badge">今天</span></div>
+        <div class="plan-task">📌 金句积累：乡村振兴主题，5条<br>✍️ 框架学习：框架①总分总结构<br>📝 练习：用框架写200字段落</div>
+      </div>
+      <div class="plan-day">
+        <div class="plan-day-title">周三</div>
+        <div class="plan-task">📌 金句积累：政务服务/数字政府主题，5条（结合陕西热点）<br>📖 故事素材：积累1个（历史典故或时代楷模）</div>
+      </div>
+      <div class="plan-day">
+        <div class="plan-day-title">周四</div>
+        <div class="plan-task">📌 金句积累：生态文明/绿色发展主题，5条<br>🔍 精析文章①：重点分析立意、结构、开头结尾</div>
+      </div>
+      <div class="plan-day">
+        <div class="plan-day-title">周五</div>
+        <div class="plan-task">📌 金句积累：社会治理/民生保障主题，5条<br>📄 范文学习①：学习分论点提炼方式、材料运用</div>
+      </div>
+      <div class="plan-day">
+        <div class="plan-day-title">周六</div>
+        <div class="plan-task">📌 金句积累：党建/廉洁自律主题，5条<br>📄 范文学习②：重点学开头引入与结尾升华技巧</div>
+      </div>
+      <div class="plan-day">
+        <div class="plan-day-title">周日</div>
+        <div class="plan-task">🔍 精析文章②：可选政论文/领导讲话，输出精析笔记<br>✍️ 框架学习：框架②问题-原因-对策结构<br>📝 总结：复习本周金句30条，巩固记忆</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:15px;font-weight:bold;color:#1a3a6b;margin-bottom:12px">📊 30天学习目标</div>
+      <table class="review-table">
+        <tr><th>模块</th><th>每日目标</th><th>30天完成量</th></tr>
+        <tr><td>主题金句</td><td>每日5条，覆盖1个主题</td><td>150条</td></tr>
+        <tr><td>故事素材</td><td>每日1个典型故事</td><td>30个故事</td></tr>
+        <tr><td>范文精析</td><td>每周精析2篇</td><td>8篇精析</td></tr>
+        <tr><td>范文阅读</td><td>每周阅读2篇</td><td>8篇范文</td></tr>
+        <tr><td>实战写作</td><td>每两周写1篇</td><td>2篇</td></tr>
+        <tr><td>框架掌握</td><td>系统学习10个框架</td><td>全程贯穿</td></tr>
+      </table>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-num">④</div>
-    <div class="card-title">基层是党的执政之基、力量之源</div>
-    <div class="quote">基层是党的执政之基、力量之源。只有基层党组织坚强有力，党员发挥应有作用，党的根基才能牢固，党才能有战斗力。</div>
-    <div class="meta">
-      <div>▶ <span>出处：</span>2016年，"两学一做"学习教育重要指示</div>
-      <div style="margin-top:6px">▶ 适用场景：
-        <span class="tag">党建引领基层治理</span>
-        <span class="tag">基层党组织建设</span>
-      </div>
-      <div style="margin-top:6px">▶ 写作示范：党建类题目必备金句，可与"战斗堡垒"意象配合</div>
+  <!-- ===== 框架 ===== -->
+  <div class="section" id="sec-framework">
+    <div class="section-title">✍️ 10大写作框架</div>
+
+    <div class="card" style="background:linear-gradient(135deg,#fff8f0,#fff);border-left:4px solid #e67e22;margin-bottom:20px">
+      <div style="font-size:14px;font-weight:bold;color:#c0392b;margin-bottom:6px">🌟 本周重点：框架①② 必须熟练</div>
+      <div style="font-size:13px;color:#666;line-height:1.8">框架①③为万能基础框架，可应对70%以上题目。<br>框架②⑦⑧偏向治理类、民生类，陕西遴选高频考查。</div>
     </div>
-  </div>
 
-  <div class="card">
-    <div class="card-num">⑤</div>
-    <div class="card-title">社区治理，只能加强、不能削弱</div>
-    <div class="quote">推进国家治理体系和治理能力现代化，社区治理只能加强、不能削弱。要加强党的领导，推动治理重心下移。</div>
-    <div class="meta">
-      <div>▶ <span>出处：</span>2024年4月，习近平重要讲话</div>
-      <div style="margin-top:6px">▶ 适用场景：
-        <span class="tag">社区治理</span>
-        <span class="tag">基层服务能力提升</span>
-        <span class="tag">城市精细化管理</span>
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架①</span>
+        <span class="fw-name">总 — 分 — 总</span>
+        <span class="today-badge" style="background:#c0392b">本周重点</span>
       </div>
-      <div style="margin-top:6px">▶ 写作示范：论述社区治理时直接引用，体现政策高度</div>
+      <div class="fw-logic">引论（点题）→ 分论点1 → 分论点2 → 分论点3 → 结论升华</div>
+      <div class="fw-scene">适用题型：观点类、意义类（如"谈谈你对……的认识"）</div>
     </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架②</span>
+        <span class="fw-name">问题 — 原因 — 对策</span>
+        <span class="today-badge" style="background:#c0392b">本周重点</span>
+      </div>
+      <div class="fw-logic">提出问题 → 分析根源 → 系统对策 → 愿景展望</div>
+      <div class="fw-scene">适用题型：问题分析类（如"针对……存在的问题……"）</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架③</span>
+        <span class="fw-name">是什么 — 为什么 — 怎么做</span>
+      </div>
+      <div class="fw-logic">概念阐释 → 重要意义 → 路径举措 → 结尾</div>
+      <div class="fw-scene">适用题型：万能通用框架，几乎适合所有题目</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架④</span>
+        <span class="fw-name">历史 — 现状 — 展望</span>
+      </div>
+      <div class="fw-logic">历史成就 → 当前形势 → 未来方向</div>
+      <div class="fw-scene">适用题型：发展类、成就类主题</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架⑤</span>
+        <span class="fw-name">政治 — 经济 — 社会 — 文化</span>
+      </div>
+      <div class="fw-logic">从四个维度分别展开论述</div>
+      <div class="fw-scene">适用题型：宏观综合类题目</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架⑥</span>
+        <span class="fw-name">思想 — 制度 — 行动</span>
+      </div>
+      <div class="fw-logic">思想认识 → 制度保障 → 具体行动</div>
+      <div class="fw-scene">适用题型：党建、治理类主题</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架⑦</span>
+        <span class="fw-name">知 — 信 — 行</span>
+      </div>
+      <div class="fw-logic">认知层 → 信念层 → 实践层</div>
+      <div class="fw-scene">适用题型：党员修养、价值观类主题</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架⑧</span>
+        <span class="fw-name">主体分析法</span>
+      </div>
+      <div class="fw-logic">政府 → 社会 → 个人（各主体职责分析）</div>
+      <div class="fw-scene">适用题型：社会治理、民生类主题</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架⑨</span>
+        <span class="fw-name">理论 — 实践 — 价值</span>
+      </div>
+      <div class="fw-logic">理论依据 → 实践路径 → 现实价值</div>
+      <div class="fw-scene">适用题型：政策解读类题目</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架⑩</span>
+        <span class="fw-name">破立结合</span>
+      </div>
+      <div class="fw-logic">破（批判错误观点/现象）→ 立（正确做法）→ 升华</div>
+      <div class="fw-scene">适用题型：辩证分析类题目</div>
+    </div>
+
   </div>
 
-  <div class="review">
-    <h3>📝 复习速查表</h3>
-    <table>
-      <tr><th>序号</th><th>关键词记忆</th><th>出处时间</th></tr>
-      <tr><td>①</td><td>基础不牢→地动山摇</td><td>2020年9月</td></tr>
-      <tr><td>②</td><td>千条线→一根针</td><td>1990年/2022年</td></tr>
-      <tr><td>③</td><td>基层强→国家强</td><td>《基层治理论述摘编》</td></tr>
-      <tr><td>④</td><td>执政之基→力量之源</td><td>2016年两学一做</td></tr>
-      <tr><td>⑤</td><td>社区治理→只能加强不能削弱</td><td>2024年4月</td></tr>
-    </table>
-  </div>
-
-  <div class="tip">下次复习：明天默写①②两条，后天默写③④⑤</div>
+  <div class="footer">Day 01 · 2026-03-17 · 陕西遴选备考 · 基层治理主题</div>
 
 </div>
+
+<script>
+  function switchTab(name, btn) {
+    // 切换导航样式
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    // 切换内容
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('sec-' + name).classList.add('active');
+    // 滚动到内容顶部
+    window.scrollTo({ top: document.querySelector('.nav').offsetTop - 10, behavior: 'smooth' });
+  }
+</script>
+
 </body>
 </html>
