@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 02 每日学习 | 陕西遴选备考</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f0f2f5;
+      color: #333;
+    }
+
+    /* ===== 顶部封面 ===== */
+    .cover {
+      background: linear-gradient(135deg, #1a5c2a 0%, #0d3318 60%, #1a5c2a 100%);
+      color: white;
+      padding: 40px 20px 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 250px; height: 250px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 50%;
+    }
+    .cover-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 4px 16px;
+      font-size: 13px;
+      margin-bottom: 14px;
+      letter-spacing: 1px;
+    }
+    .cover h1 {
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+    .cover h1 span { color: #f0c040; }
+    .cover-sub {
+      font-size: 14px;
+      opacity: 0.75;
+      margin-bottom: 20px;
+    }
+    .cover-tags {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .cover-tag {
+      background: rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* ===== 导航 ===== */
+    .nav {
+      background: white;
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      border-bottom: 1px solid #e8e8e8;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .nav-btn {
+      padding: 14px 18px;
+      font-size: 13px;
+      color: #666;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .nav-btn:hover { color: #27ae60; }
+    .nav-btn.active { color: #27ae60; border-bottom-color: #27ae60; font-weight: bold; }
+
+    /* ===== 内容区 ===== */
+    .content { padding: 20px 16px; max-width: 700px; margin: 0 auto; }
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* ===== 通用卡片 ===== */
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1a5c2a;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #c8e6c9;
+    }
+
+    /* ===== 金句区 ===== */
+    .juju-card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      border-left: 5px solid #27ae60;
+    }
+    .juju-num {
+      display: inline-block;
+      background: #27ae60;
+      color: white;
+      border-radius: 50%;
+      width: 28px; height: 28px;
+      line-height: 28px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .juju-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #1a8a4a;
+      margin-bottom: 12px;
+    }
+    .juju-quote {
+      background: #f0faf4;
+      border-radius: 8px;
+      padding: 14px 16px 14px 32px;
+      font-size: 15px;
+      line-height: 1.9;
+      color: #222;
+      font-weight: 500;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .juju-quote::before {
+      content: '"';
+      font-size: 40px;
+      color: #a8dab5;
+      position: absolute;
+      top: -4px; left: 8px;
+      line-height: 1;
+    }
+    .meta { font-size: 13px; color: #666; line-height: 2; }
+    .tag {
+      display: inline-block;
+      background: #e8f5e9;
+      color: #1a8a4a;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      margin-right: 4px;
+      margin-top: 4px;
+    }
+    .blue-tag {
+      display: inline-block;
+      background: #d6eaf8;
+      color: #1a5276;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      margin-right: 4px;
+      margin-top: 4px;
+    }
+
+    /* ===== 复习表 ===== */
+    .review-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .review-table th {
+      background: #27ae60;
+      color: white;
+      padding: 8px 10px;
+      text-align: left;
+    }
+    .review-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .review-table tr:last-child td { border-bottom: none; }
+    .review-table tr:nth-child(even) td { background: #f4faf6; }
+
+    /* ===== 框架区 ===== */
+    .framework-card {
+      background: white;
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      border-top: 4px solid #1a5c2a;
+    }
+    .fw-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .fw-num {
+      background: #1a5c2a;
+      color: white;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+    .fw-name { font-size: 16px; font-weight: bold; color: #1a5c2a; }
+    .fw-logic {
+      background: #f0f9f4;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 13px;
+      line-height: 1.9;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .fw-scene {
+      font-size: 12px;
+      color: #888;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .fw-scene::before { content: "💡"; }
+
+    /* 框架结构图 */
+    .fw-structure {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin: 14px 0;
+    }
+    .fw-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .fw-step-num {
+      background: #27ae60;
+      color: white;
+      border-radius: 50%;
+      min-width: 24px; height: 24px;
+      line-height: 24px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    .fw-step-content {
+      flex: 1;
+      background: #f0f9f4;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .fw-step-content strong { color: #1a5c2a; }
+    .fw-arrow {
+      text-align: center;
+      color: #27ae60;
+      font-size: 18px;
+      line-height: 1;
+      margin-left: 12px;
+    }
+
+    /* 写作练习区 */
+    .practice-card {
+      background: linear-gradient(135deg, #f0f9f4, white);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      border: 1px solid #c8e6c9;
+    }
+    .practice-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #1a5c2a;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #c8e6c9;
+    }
+    .practice-topic {
+      background: #1a5c2a;
+      color: white;
+      border-radius: 10px;
+      padding: 16px;
+      font-size: 15px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+    .outline-item {
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .outline-intro { background: #e8f5e9; border-left: 3px solid #27ae60; }
+    .outline-body { background: #f3f9f5; border-left: 3px solid #81c784; }
+    .outline-conclude { background: #e0f2e9; border-left: 3px solid #1a8a4a; }
+    .outline-title { font-weight: bold; color: #1a5c2a; margin-bottom: 4px; font-size: 13px; }
+    .sample-essay {
+      background: #fafafa;
+      border-radius: 10px;
+      padding: 16px;
+      font-size: 14px;
+      line-height: 2.1;
+      color: #333;
+      border: 1px solid #e0e0e0;
+      margin-top: 12px;
+    }
+    .sample-essay .highlight { color: #1a8a4a; font-weight: bold; }
+    .word-count {
+      text-align: right;
+      font-size: 12px;
+      color: #999;
+      margin-top: 8px;
+    }
+
+    /* 计划区 */
+    .plan-week-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .plan-week-header {
+      background: linear-gradient(135deg, #1a5c2a, #0d3318);
+      color: white;
+      padding: 14px 18px;
+      font-size: 15px;
+      font-weight: bold;
+    }
+    .plan-day {
+      padding: 14px 18px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .plan-day:last-child { border-bottom: none; }
+    .plan-day-title {
+      font-weight: bold;
+      color: #1a5c2a;
+      font-size: 14px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .plan-done { background: #f8fffe; }
+    .plan-done .plan-day-title { color: #888; }
+    .plan-today {
+      background: #f0faf4;
+      border-left: 3px solid #27ae60;
+    }
+    .plan-today .plan-day-title { color: #1a5c2a; }
+    .plan-task {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.8;
+      padding-left: 20px;
+    }
+    .plan-done .plan-task { color: #aaa; }
+    .today-badge {
+      background: #27ae60;
+      color: white;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: normal;
+    }
+    .done-badge {
+      background: #aaa;
+      color: white;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: normal;
+    }
+
+    /* ===== 底部 ===== */
+    .footer {
+      text-align: center;
+      color: #aaa;
+      font-size: 12px;
+      padding: 20px 0 30px;
+    }
+
+    /* ===== 进度条 ===== */
+    .progress-wrap {
+      background: #f0f0f0;
+      border-radius: 10px;
+      height: 8px;
+      overflow: hidden;
+      margin: 10px 0 4px;
+    }
+    .progress-bar {
+      height: 100%;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #27ae60, #2ecc71);
+    }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+<!-- 封面 -->
+<div class="cover">
+  <div class="cover-badge">陕西遴选 · 备考计划</div>
+  <h1>Day <span>02</span></h1>
+  <div class="cover-sub">2026年03月18日（周三）· 第一周</div>
+  <div class="cover-tags">
+    <div class="cover-tag">🌾 金句积累 · 乡村振兴</div>
+    <div class="cover-tag">✍️ 框架精讲 · 总分总结构</div>
+    <div class="cover-tag">📝 写作练习 · 200字段落</div>
+  </div>
+</div>
+
+<!-- 导航 -->
+<div class="nav">
+  <div class="nav-btn active" onclick="switchTab('juju', this)">🌾 今日金句</div>
+  <div class="nav-btn" onclick="switchTab('framework', this)">✍️ 框架精讲</div>
+  <div class="nav-btn" onclick="switchTab('practice', this)">📝 写作练习</div>
+  <div class="nav-btn" onclick="switchTab('plan', this)">📅 本周计划</div>
+</div>
+
+<!-- 内容 -->
+<div class="content">
+
+  <!-- ===== 金句 ===== -->
+  <div class="section active" id="sec-juju">
+    <div class="section-title">🌾 Day 02 金句积累 · 乡村振兴</div>
+
+    <div class="juju-card">
+      <div class="juju-num">①</div>
+      <div class="juju-title">让农业成为有奔头的产业</div>
+      <div class="juju-quote">要让农业成为有奔头的产业，让农民成为有吸引力的职业，让农村成为安居乐业的美丽家园。</div>
+      <div class="meta">
+        <div>▶ 出处：习近平总书记关于"三农"工作重要论述</div>
+        <div style="margin-top:6px">▶ 适用：<span class="tag">乡村振兴战略</span><span class="tag">农业现代化</span><span class="tag">农民职业化</span></div>
+        <div style="margin-top:6px">▶ 写作示范：三个"让"字排比结构，可直接化为三个分论点标题，气势充足</div>
+      </div>
+    </div>
+
+    <div class="juju-card">
+      <div class="juju-num">②</div>
+      <div class="juju-title">没有农业农村现代化，就没有整个国家现代化</div>
+      <div class="juju-quote">没有农业农村现代化，就没有整个国家现代化。在现代化进程中，如何处理好工农关系、城乡关系，在一定程度上决定着现代化的成败。</div>
+      <div class="meta">
+        <div>▶ 出处：2021年12月，中央农村工作会议</div>
+        <div style="margin-top:6px">▶ 适用：<span class="tag">开篇破题</span><span class="tag">三农重要性</span><span class="tag">城乡融合发展</span></div>
+        <div style="margin-top:6px">▶ 写作示范："没有……就没有……"双重否定句式，逻辑有力，适合开篇立论</div>
+      </div>
+    </div>
+
+    <div class="juju-card">
+      <div class="juju-num">③</div>
+      <div class="juju-title">全面推进乡村振兴是新时代建设农业强国的重要任务</div>
+      <div class="juju-quote">全面推进乡村振兴，是新时代建设农业强国的重要任务，是关系国家粮食安全和中华民族伟大复兴的全局性、历史性任务。</div>
+      <div class="meta">
+        <div>▶ 出处：2023年中央一号文件精神及习近平重要讲话</div>
+        <div style="margin-top:6px">▶ 适用：<span class="tag">政策高度定位</span><span class="tag">粮食安全</span><span class="tag">民族复兴</span></div>
+        <div style="margin-top:6px">▶ 写作示范：强调战略高度，用于论述乡村振兴重要意义的首段</div>
+      </div>
+    </div>
+
+    <div class="juju-card">
+      <div class="juju-num">④</div>
+      <div class="juju-title">产业振兴是乡村振兴的重中之重</div>
+      <div class="juju-quote">产业振兴是乡村振兴的重中之重，也是实际工作的切入点。要做好"土特产"文章，依托农业农村特色资源，推动乡村产业全链条升级。</div>
+      <div class="meta">
+        <div>▶ 出处：2022年12月，中央农村工作会议</div>
+        <div style="margin-top:6px">▶ 适用：<span class="tag">乡村产业发展</span><span class="tag">土特产经济</span><span class="tag">一二三产融合</span></div>
+        <div style="margin-top:6px">▶ 写作示范：可结合陕西"苹果、猕猴桃、小米"等特色农产品展开</div>
+      </div>
+    </div>
+
+    <div class="juju-card">
+      <div class="juju-num">⑤</div>
+      <div class="juju-title">中国人的饭碗任何时候都要牢牢端在自己手中</div>
+      <div class="juju-quote">中国人的饭碗任何时候都要牢牢端在自己手中，我们的饭碗应该主要装中国粮。</div>
+      <div class="meta">
+        <div>▶ 出处：习近平总书记关于粮食安全的重要论述（多次强调）</div>
+        <div style="margin-top:6px">▶ 适用：<span class="tag">粮食安全</span><span class="tag">耕地保护</span><span class="tag">粮食主权</span></div>
+        <div style="margin-top:6px">▶ 写作示范：形象生动，"端在自己手中"是高频考点表达，务必熟记</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title" style="font-size:15px">📝 复习速查</div>
+      <table class="review-table">
+        <tr><th>序号</th><th>关键词记忆</th><th>核心场景</th></tr>
+        <tr><td>①</td><td>让农业→有奔头的产业</td><td>三个"让"字排比</td></tr>
+        <tr><td>②</td><td>没有农业现代化→没有国家现代化</td><td>开篇破题</td></tr>
+        <tr><td>③</td><td>全面推进→全局性历史性任务</td><td>战略定位</td></tr>
+        <tr><td>④</td><td>产业振兴→重中之重→土特产</td><td>具体路径</td></tr>
+        <tr><td>⑤</td><td>饭碗→牢牢端在自己手中</td><td>粮食安全</td></tr>
+      </table>
+      <div style="margin-top:12px">
+        <div class="progress-label"><span>本周金句进度</span><span>10/35条</span></div>
+        <div class="progress-wrap"><div class="progress-bar" style="width:28%"></div></div>
+      </div>
+      <div style="margin-top:8px;font-size:13px;color:#999">💡 建议：今日抄写一遍；明天复习 Day01 ①② + 今天 ①②，逐步叠加</div>
+    </div>
+  </div>
+
+  <!-- ===== 框架精讲 ===== -->
+  <div class="section" id="sec-framework">
+    <div class="section-title">✍️ 框架精讲 · 框架①总分总结构</div>
+
+    <div class="card" style="background:linear-gradient(135deg,#f0faf4,#fff);border-left:4px solid #27ae60;margin-bottom:20px">
+      <div style="font-size:14px;font-weight:bold;color:#1a5c2a;margin-bottom:6px">🌟 为什么先学框架①？</div>
+      <div style="font-size:13px;color:#666;line-height:1.9">
+        框架①总分总是遴选大作文<strong style="color:#1a5c2a">最高频、最基础</strong>的结构，可应对70%以上题目。
+        所有其他框架都是总分总的变体。<br>
+        目标：<strong style="color:#1a5c2a">30分钟内用此框架列出完整提纲</strong>
+      </div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架①</span>
+        <span class="fw-name">总 — 分 — 总</span>
+        <span class="today-badge" style="background:#27ae60">今日精讲</span>
+      </div>
+
+      <div style="font-size:14px;font-weight:bold;color:#1a5c2a;margin-bottom:10px">📐 完整结构图</div>
+      <div class="fw-structure">
+        <div class="fw-step">
+          <div class="fw-step-num">总</div>
+          <div class="fw-step-content">
+            <strong>引论（开篇点题）</strong><br>
+            引出核心观点 → 用金句/数据/时代背景破题 → 明确全文立意<br>
+            <span style="color:#888;font-size:12px">约150字，1-2段</span>
+          </div>
+        </div>
+        <div class="fw-arrow">↓</div>
+        <div class="fw-step">
+          <div class="fw-step-num">分①</div>
+          <div class="fw-step-content">
+            <strong>分论点一：提出论点</strong><br>
+            小标题（一般用4-10字概括）→ 论述 + 举例/金句支撑<br>
+            <span style="color:#888;font-size:12px">约300字，并列或递进</span>
+          </div>
+        </div>
+        <div class="fw-arrow">↓</div>
+        <div class="fw-step">
+          <div class="fw-step-num">分②</div>
+          <div class="fw-step-content">
+            <strong>分论点二：深化论点</strong><br>
+            小标题 → 论述 + 举例/金句支撑<br>
+            <span style="color:#888;font-size:12px">约300字</span>
+          </div>
+        </div>
+        <div class="fw-arrow">↓</div>
+        <div class="fw-step">
+          <div class="fw-step-num">分③</div>
+          <div class="fw-step-content">
+            <strong>分论点三：落地论点</strong><br>
+            小标题 → 论述 + 举例/金句支撑<br>
+            <span style="color:#888;font-size:12px">约300字</span>
+          </div>
+        </div>
+        <div class="fw-arrow">↓</div>
+        <div class="fw-step">
+          <div class="fw-step-num">总</div>
+          <div class="fw-step-content">
+            <strong>结论（收尾升华）</strong><br>
+            总结三个分论点 → 呼应开头 → 升华主题/展望愿景<br>
+            <span style="color:#888;font-size:12px">约100字，1段</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="framework-card">
+      <div style="font-size:15px;font-weight:bold;color:#1a5c2a;margin-bottom:14px">🔑 分论点提炼三大技巧</div>
+
+      <div style="margin-bottom:14px">
+        <div style="font-weight:bold;color:#27ae60;font-size:14px;margin-bottom:8px">技巧① 并列式——"三个XX"</div>
+        <div class="fw-logic">
+          同一层面，三个角度并列展开<br>
+          示例：主题"加强基层治理"<br>
+          &emsp;分论点① 党建引领，凝聚治理合力<br>
+          &emsp;分论点② 服务下沉，提升治理效能<br>
+          &emsp;分论点③ 数字赋能，创新治理方式
+        </div>
+      </div>
+
+      <div style="margin-bottom:14px">
+        <div style="font-weight:bold;color:#27ae60;font-size:14px;margin-bottom:8px">技巧② 递进式——"从……到……"</div>
+        <div class="fw-logic">
+          由浅入深，层层递进<br>
+          示例：主题"推进乡村振兴"<br>
+          &emsp;分论点① 夯实产业基础（物质基础）<br>
+          &emsp;分论点② 完善治理体系（组织保障）<br>
+          &emsp;分论点③ 激活内生动力（精神文明）
+        </div>
+      </div>
+
+      <div>
+        <div style="font-weight:bold;color:#27ae60;font-size:14px;margin-bottom:8px">技巧③ 主体式——"谁来做"</div>
+        <div class="fw-logic">
+          按不同主体分层论述<br>
+          示例：主题"共同富裕"<br>
+          &emsp;分论点① 政府：完善分配制度，兜牢民生底线<br>
+          &emsp;分论点② 企业：履行社会责任，创造就业机会<br>
+          &emsp;分论点③ 个人：发扬奋斗精神，创造幸福生活
+        </div>
+      </div>
+    </div>
+
+    <div class="framework-card">
+      <div style="font-size:15px;font-weight:bold;color:#1a5c2a;margin-bottom:14px">📌 小标题写法公式</div>
+      <div class="fw-logic">
+        好标题 = <strong style="color:#1a5c2a">动词/形容词</strong> + <strong style="color:#27ae60">核心词</strong> + 逻辑关系词<br><br>
+        示范：<br>
+        ✅ 「党建引领，凝聚治理合力」（动词+名词+结果）<br>
+        ✅ 「以产业振兴夯实乡村发展根基」（以……+动词+目标）<br>
+        ✅ 「数字赋能，让服务更有温度」（两分句对仗）<br><br>
+        ❌ 「要加强基层治理」（太平淡，无文采）<br>
+        ❌ 「加强基层治理的重要性」（论文标题感，不适合）
+      </div>
+      <div class="fw-scene">4-10字最佳，追求"词语有力、逻辑清晰、略有文采"</div>
+    </div>
+
+  </div>
+
+  <!-- ===== 写作练习 ===== -->
+  <div class="section" id="sec-practice">
+    <div class="section-title">📝 今日写作练习</div>
+
+    <div class="practice-card">
+      <div class="practice-title">🎯 练习题目</div>
+      <div class="practice-topic">
+        请用"总分总"框架，围绕"推进乡村振兴，建设宜居宜业和美乡村"，写一段约200字的小段落（可以是引论+分论点提纲，也可以是完整小段落）
+      </div>
+      <div style="font-size:13px;color:#666;line-height:1.8;padding:10px 14px;background:#f9f9f9;border-radius:8px">
+        ⏱ 建议时间：15分钟<br>
+        📋 要求：①有清晰的总起句；②用上今日至少1条金句；③结尾要回扣主题
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:15px;font-weight:bold;color:#1a5c2a;margin-bottom:14px">📐 提纲参考（可套用）</div>
+
+      <div class="outline-item outline-intro">
+        <div class="outline-title">【引论·总起】</div>
+        「没有农业农村现代化，就没有整个国家现代化。」→ 引出核心：乡村振兴是建设中国式现代化的必然要求 → 全文围绕"宜居宜业和美乡村"展开
+      </div>
+      <div style="text-align:center;color:#27ae60;margin:4px 0">↓</div>
+
+      <div class="outline-item outline-body">
+        <div class="outline-title">【分论点①】产业兴旺，筑牢乡村振兴的物质根基</div>
+        做好"土特产"文章，推动一二三产业融合发展，让农民在家门口增收致富
+      </div>
+      <div style="text-align:center;color:#27ae60;margin:4px 0">↓</div>
+
+      <div class="outline-item outline-body">
+        <div class="outline-title">【分论点②】生态宜居，绘就乡村振兴的美丽底色</div>
+        推进农村人居环境整治，守住绿水青山，让农村天更蓝、水更清、村更美
+      </div>
+      <div style="text-align:center;color:#27ae60;margin:4px 0">↓</div>
+
+      <div class="outline-item outline-body">
+        <div class="outline-title">【分论点③】治理有效，夯实乡村振兴的组织保障</div>
+        发挥基层党组织战斗堡垒作用，完善村民自治，推动治理重心下移
+      </div>
+      <div style="text-align:center;color:#27ae60;margin:4px 0">↓</div>
+
+      <div class="outline-item outline-conclude">
+        <div class="outline-title">【结论·总收】</div>
+        呼应开头 → 「让农业成为有奔头的产业，让农民成为有吸引力的职业，让农村成为安居乐业的美丽家园」→ 展望：在以习近平同志为核心的党中央坚强领导下，乡村振兴的美好蓝图必将化为现实
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:15px;font-weight:bold;color:#1a5c2a;margin-bottom:14px">✨ 范例小段落（约220字）</div>
+      <div class="sample-essay">
+        <span class="highlight">「没有农业农村现代化，就没有整个国家现代化。」</span>乡村振兴，是关乎国家粮食安全、关乎亿万农民美好生活、关乎中华民族伟大复兴全局的重大战略任务。建设宜居宜业和美乡村，必须从产业、生态、治理三维度协同发力。
+        <br><br>
+        一要以产业振兴夯实物质基础。做好<span class="highlight">「土特产」</span>文章，推动一二三产业融合发展，拓宽农民增收渠道，让农民口袋更鼓、底气更足。
+        <br><br>
+        二要以绿色发展绘就生态底色。坚持<span class="highlight">「绿水青山就是金山银山」</span>，加快农村人居环境整治，让田园风光成为乡村最宝贵的资产。
+        <br><br>
+        三要以善治有效巩固振兴根基。发挥基层党组织核心引领作用，健全村民自治机制，让乡村既有"颜值"、更有"气质"。
+        <br><br>
+        <span class="highlight">「让农业成为有奔头的产业，让农民成为有吸引力的职业，让农村成为安居乐业的美丽家园。」</span>这既是殷殷嘱托，更是前进的方向。
+      </div>
+      <div class="word-count">约 220 字 · 含3条金句 · 总分总结构完整</div>
+    </div>
+
+    <div class="card" style="background:#fffbf0;border-left:4px solid #f39c12">
+      <div style="font-size:14px;font-weight:bold;color:#d35400;margin-bottom:10px">🔎 自我评分维度</div>
+      <table class="review-table">
+        <tr><th>维度</th><th>检查点</th></tr>
+        <tr><td>结构</td><td>是否有明确的总起句、分论点、收尾句？</td></tr>
+        <tr><td>金句</td><td>是否至少融入1条习近平总书记语录？是否自然不生硬？</td></tr>
+        <tr><td>逻辑</td><td>三个分论点是否相互独立、层次清晰？</td></tr>
+        <tr><td>文采</td><td>小标题/关键词是否有一定文采，避免流水账？</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== 计划 ===== -->
+  <div class="section" id="sec-plan">
+    <div class="section-title">📅 本周学习计划 · 第一周</div>
+
+    <div class="card" style="background:linear-gradient(135deg,#f0faf4,#fff);border-left:4px solid #27ae60">
+      <div style="font-size:15px;font-weight:bold;color:#1a5c2a;margin-bottom:8px">🌟 今日任务（周三）</div>
+      <div style="font-size:14px;color:#555;line-height:2">
+        ⬜ 🌾 金句积累：<strong>乡村振兴主题，5条</strong>（切换到"今日金句"查看）<br>
+        ⬜ ✍️ 框架精讲：<strong>框架①总分总结构</strong>（切换到"框架精讲"查看）<br>
+        ⬜ 📝 写作练习：<strong>用总分总框架写约200字段落</strong>（切换到"写作练习"查看）
+      </div>
+    </div>
+
+    <div class="plan-week-card">
+      <div class="plan-week-header">📅 第一周每日任务安排</div>
+      <div class="plan-day plan-done">
+        <div class="plan-day-title">周一 <span class="done-badge">已完成</span></div>
+        <div class="plan-task">✅ 📌 金句积累：基层治理主题，5条<br>✅ 📖 故事素材：廖俊波</div>
+      </div>
+      <div class="plan-day plan-done">
+        <div class="plan-day-title">周二 <span class="done-badge">已完成</span></div>
+        <div class="plan-task">✅ 📌 金句积累：基层治理（复习）+ 完善 Day01 学习页</div>
+      </div>
+      <div class="plan-day plan-today">
+        <div class="plan-day-title">周三 <span class="today-badge">今天</span></div>
+        <div class="plan-task">🌾 金句积累：乡村振兴主题，5条<br>✍️ 框架精讲：框架①总分总结构<br>📝 写作练习：用框架写约200字段落</div>
+      </div>
+      <div class="plan-day">
+        <div class="plan-day-title">周四</div>
+        <div class="plan-task">📌 金句积累：政务服务/数字政府主题，5条（结合陕西热点）<br>📖 故事素材：积累1个（历史典故或时代楷模）</div>
+      </div>
+      <div class="plan-day">
+        <div class="plan-day-title">周五</div>
+        <div class="plan-task">📌 金句积累：生态文明/绿色发展主题，5条<br>🔍 精析文章①：重点分析立意、结构、开头结尾</div>
+      </div>
+      <div class="plan-day">
+        <div class="plan-day-title">周六</div>
+        <div class="plan-task">📌 金句积累：社会治理/民生保障主题，5条<br>📄 范文学习①：学习分论点提炼方式、材料运用</div>
+      </div>
+      <div class="plan-day">
+        <div class="plan-day-title">周日</div>
+        <div class="plan-task">🔍 精析文章②：可选政论文/领导讲话，输出精析笔记<br>✍️ 框架学习：框架②问题-原因-对策结构<br>📝 总结：复习本周金句，巩固记忆</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:15px;font-weight:bold;color:#1a5c2a;margin-bottom:12px">📊 30天学习进度</div>
+      <div style="margin-bottom:12px">
+        <div class="progress-label"><span>金句积累</span><span>10/150条</span></div>
+        <div class="progress-wrap"><div class="progress-bar" style="width:6.7%"></div></div>
+      </div>
+      <div style="margin-bottom:12px">
+        <div class="progress-label"><span>故事素材</span><span>1/30个</span></div>
+        <div class="progress-wrap"><div class="progress-bar" style="width:3.3%"></div></div>
+      </div>
+      <div style="margin-bottom:12px">
+        <div class="progress-label"><span>写作框架</span><span>1/10个</span></div>
+        <div class="progress-wrap"><div class="progress-bar" style="width:10%"></div></div>
+      </div>
+      <div>
+        <div class="progress-label"><span>写作练习</span><span>0/2篇</span></div>
+        <div class="progress-wrap"><div class="progress-bar" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">Day 02 · 2026-03-18 · 陕西遴选备考 · 乡村振兴主题</div>
+
+</div>
+
+<script>
+  function switchTab(name, btn) {
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('sec-' + name).classList.add('active');
+    window.scrollTo({ top: document.querySelector('.nav').offsetTop - 10, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
