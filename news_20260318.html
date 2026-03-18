@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>今日时政要闻 · 2026年3月18日</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: #f0f2f5;
+      color: #222;
+      min-height: 100vh;
+    }
+
+    /* ===== 顶部 Header ===== */
+    .header {
+      background: linear-gradient(135deg, #c0392b 0%, #96281b 100%);
+      color: #fff;
+      padding: 28px 20px 22px;
+      text-align: center;
+    }
+    .header .date-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 20px;
+      padding: 4px 16px;
+      font-size: 13px;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    .header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      line-height: 1.3;
+    }
+    .header .subtitle {
+      margin-top: 8px;
+      font-size: 13px;
+      opacity: 0.85;
+      letter-spacing: 0.5px;
+    }
+    .header .star-bar {
+      margin-top: 14px;
+      font-size: 12px;
+      opacity: 0.7;
+    }
+
+    /* ===== 主体 ===== */
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 16px 14px 20px;
+    }
+
+    /* ===== 重要性图例 ===== */
+    .legend {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 12px;
+      color: #666;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .legend span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .badge {
+      display: inline-block;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      letter-spacing: 0.5px;
+    }
+    .badge-vip { background: #fef0f0; color: #c0392b; border: 1px solid #f5c6c6; }
+    .badge-imp { background: #fff7e6; color: #d68910; border: 1px solid #f0d9a0; }
+
+    /* ===== 新闻卡片 ===== */
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 18px 16px 14px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      border-left: 4px solid #e0e0e0;
+      transition: box-shadow 0.2s;
+    }
+    .card.vip { border-left-color: #c0392b; }
+    .card.imp { border-left-color: #e67e22; }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .card-num {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #f0f2f5;
+      color: #888;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+    .card.vip .card-num { background: #fef0f0; color: #c0392b; }
+    .card.imp .card-num { background: #fff7e6; color: #e67e22; }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.5;
+      color: #1a1a1a;
+      flex: 1;
+    }
+
+    .card-summary {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #444;
+      margin-bottom: 12px;
+      padding-left: 32px;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-left: 32px;
+      flex-wrap: wrap;
+    }
+    .meta-source {
+      font-size: 12px;
+      color: #888;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .meta-source::before { content: "📰"; font-size: 11px; }
+
+    /* ===== 写作素材提示 ===== */
+    .writing-tip {
+      margin-top: 4px;
+      background: #f6f8ff;
+      border: 1px dashed #bad0f8;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-left: 32px;
+      font-size: 12.5px;
+      color: #2c5fa8;
+      line-height: 1.7;
+    }
+    .writing-tip::before {
+      content: "✍️ 写作提示：";
+      font-weight: 600;
+    }
+
+    /* ===== 大作文素材专区 ===== */
+    .essay-section {
+      background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);
+      border: 1px solid #f5d87a;
+      border-radius: 12px;
+      padding: 20px 18px;
+      margin-top: 6px;
+      margin-bottom: 20px;
+    }
+    .essay-section h2 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #8a6200;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .essay-item {
+      margin-bottom: 14px;
+      padding-bottom: 14px;
+      border-bottom: 1px dashed #f5d87a;
+    }
+    .essay-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .essay-item .essay-tag {
+      display: inline-block;
+      background: #e67e22;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 10px;
+      margin-bottom: 6px;
+    }
+    .essay-item p {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #5a4000;
+    }
+    .essay-item .essay-angle {
+      margin-top: 6px;
+      font-size: 13px;
+      color: #7a5a00;
+      font-style: italic;
+    }
+
+    /* ===== 底部 ===== */
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #aaa;
+      padding: 16px 0 24px;
+    }
+    .footer a { color: #c0392b; text-decoration: none; }
+
+    /* ===== 分割线 ===== */
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #888;
+      letter-spacing: 1px;
+      margin: 20px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #e5e5e5;
+    }
+  </style>
+</head>
+<body>
+
+<!-- 顶部 -->
+<div class="header">
+  <div class="date-tag">2026年3月18日 · 星期三</div>
+  <h1>今日时政要闻</h1>
+  <div class="subtitle">陕西遴选备考 · 时政素材积累</div>
+  <div class="star-bar">★★ 非常重要 &nbsp;|&nbsp; ★ 重要</div>
+</div>
+
+<div class="container">
+
+  <!-- 重要性图例 -->
+  <div class="legend">
+    <span><span class="badge badge-vip">★★ 非常重要</span> 高频考点，必读</span>
+    <span><span class="badge badge-imp">★ 重要</span> 关注掌握</span>
+  </div>
+
+  <!-- 新闻 1 -->
+  <div class="card vip">
+    <div class="card-header">
+      <div class="card-num">1</div>
+      <div class="card-title">
+        <span class="badge badge-vip">★★ 非常重要</span><br/>
+        国务院第十一次全体会议部署2026年六大重点工作
+      </div>
+    </div>
+    <div class="card-summary">
+      3月16日，国务院总理李强主持召开国务院第十一次全体会议，深入学习贯彻习近平总书记全国两会重要讲话精神，对落实国务院2026年重点工作进行全面部署。会议提出六大重点方向：纵深推进全国统一大市场建设、积极谋划推动服务业扩能提质、加快发展新一代智能制造、系统推进重大基础设施网络建设、更大力度投资于人服务于民生、更好应对新形势下的外部冲击挑战。会议还强调，要扎实开展树立和践行正确政绩观学习教育，抓好一批牵引性撬动性强的重点工作。
+    </div>
+    <div class="card-meta">
+      <span class="meta-source">来源：新华社 / 2026年3月16-17日</span>
+    </div>
+    <div class="writing-tip">可用于"政府治理效能提升""民生导向发展""正确政绩观"类大作文。核心词：统一大市场、投资于人、正确政绩观。写作时可引用"更大力度投资于人、服务于民生"阐述以人民为中心的发展理念。</div>
+  </div>
+
+  <!-- 新闻 2 -->
+  <div class="card vip">
+    <div class="card-header">
+      <div class="card-num">2</div>
+      <div class="card-title">
+        <span class="badge badge-vip">★★ 非常重要</span><br/>
+        《生态环境法典》表决通过——我国第二部以"法典"命名的基本法律
+      </div>
+    </div>
+    <div class="card-summary">
+      3月12日，十四届全国人大四次会议表决通过《中华人民共和国生态环境法典》，这是继《民法典》之后我国第二部以"法典"命名的基本法律。法典共五编，涵盖总则、污染防治、生态保护、绿色低碳发展及法律责任，整合了现行30余部生态环境法律，推动生态治理从"碎片化管理"转向"全过程、全地域、全要素系统治理"。法典首创"绿色低碳发展"编，将碳达峰、碳中和国家战略上升为法律，将"三线一单"制度法定化，为企业绿色转型提供制度保障。
+    </div>
+    <div class="card-meta">
+      <span class="meta-source">来源：人民日报 / 2026年3月12-16日</span>
+    </div>
+    <div class="writing-tip">可用于"生态文明建设""依法治国""绿色发展"类大作文。亮点论据：将习近平生态文明思想制度化、法治化；"用最严格制度、最严密法治保护生态环境"。陕西秦岭保护可结合此法典做实例论证。</div>
+  </div>
+
+  <!-- 新闻 3 -->
+  <div class="card vip">
+    <div class="card-header">
+      <div class="card-num">3</div>
+      <div class="card-title">
+        <span class="badge badge-vip">★★ 非常重要</span><br/>
+        《求是》发表习近平重要文章《推动海洋经济高质量发展》
+      </div>
+    </div>
+    <div class="card-summary">
+      3月16日出版的第6期《求是》杂志发表习近平总书记重要文章《推动海洋经济高质量发展》。文章强调，推进中国式现代化必须高效开发利用海洋，走出具有中国特色的"向海图强之路"。文章提出五大思路：注重创新驱动推动海洋科技自立自强；注重陆海统筹增强协同发展合力；注重产业更新建设现代海洋产业体系；注重人海和谐建设可持续海洋生态；注重合作共赢参与全球海洋治理。还就顶层设计、科技攻关、产业发展等六个方面提出具体部署。
+    </div>
+    <div class="card-meta">
+      <span class="meta-source">来源：《求是》杂志 / 2026年3月16日</span>
+    </div>
+    <div class="writing-tip">可用于"高质量发展""创新驱动""可持续发展""对外开放"类大作文。金句引用："推进中国式现代化，必须高效开发利用海洋"，体现了习近平总书记对新质生产力发展的战略眼光。</div>
+  </div>
+
+  <!-- 新闻 4 -->
+  <div class="card imp">
+    <div class="card-header">
+      <div class="card-num">4</div>
+      <div class="card-title">
+        <span class="badge badge-imp">★ 重要</span><br/>
+        "十五五"规划纲要正式发布——奋力开创中国式现代化建设新局面
+      </div>
+    </div>
+    <div class="card-summary">
+      3月13日，《中华人民共和国国民经济和社会发展第十五个五年（2026—2030年）规划纲要》由新华社受权发布。纲要明确5年发展目标：经济保持中高速增长、创新能力显著增强、数字化绿色化深度融合、民生福祉持续改善、社会治理效能大幅提升。重点任务涵盖建设强大国内市场、加快发展新质生产力、深化改革开放、促进城乡区域协调、保障改善民生、推动绿色转型等六大方面，是指导今后五年国家发展的纲领性文件。
+    </div>
+    <div class="card-meta">
+      <span class="meta-source">来源：新华社 / 2026年3月13日</span>
+    </div>
+    <div class="writing-tip">可用于"全局观念""高质量发展""新质生产力""城乡协调"类大作文。写作时可以"十五五"为宏观背景，阐述个人岗位在国家发展大局中的价值定位，体现格局意识。</div>
+  </div>
+
+  <!-- 新闻 5 -->
+  <div class="card imp">
+    <div class="card-header">
+      <div class="card-num">5</div>
+      <div class="card-title">
+        <span class="badge badge-imp">★ 重要</span><br/>
+        国务院常务会议通过《国务院2026年重点工作分工方案》并研究建立财政补贴负面清单管理机制
+      </div>
+    </div>
+    <div class="card-summary">
+      3月13日，国务院总理李强主持召开国务院常务会议，讨论通过《国务院2026年重点工作分工方案》，要求各部门增强紧迫感和执行力，政策靠前发力、提质增效，形成全过程闭环管理。会议还研究建立地方财政补贴负面清单管理机制，旨在规范地方补贴行为、维护公平竞争市场秩序，推进全国统一大市场建设。此外，会议审议通过《全国农业普查条例（修订草案）》，为高质量开展第四次全国农业普查提供法律依据。
+    </div>
+    <div class="card-meta">
+      <span class="meta-source">来源：新华社 / 2026年3月13日</span>
+    </div>
+    <div class="writing-tip">可用于"行政效能""公平竞争""乡村振兴基础保障"类大作文。关键词：全过程闭环管理、政策靠前发力、公平竞争。结合基层公务员视角，可论述"执行力是政策落地的最后一公里"。</div>
+  </div>
+
+  <!-- 新闻 6 -->
+  <div class="card imp">
+    <div class="card-header">
+      <div class="card-num">6</div>
+      <div class="card-title">
+        <span class="badge badge-imp">★ 重要</span><br/>
+        陕西省委常委会（扩大）会议：以正确政绩观推动"十五五"良好开局
+      </div>
+    </div>
+    <div class="card-summary">
+      3月13日，陕西省委常委会召开扩大会议，由省委书记赵一德主持，学习传达全国两会精神及习近平总书记重要讲话。会议强调要将两会精神与习近平总书记历次来陕考察重要讲话相结合，抓紧稳增长政策落地、推进春季农业生产、防范化解风险隐患，确保社会大局稳定，实现"十五五"良好开局。同时部署开展树立和践行正确政绩观学习教育，与"三个年"活动、"八场硬仗"、"三服务"质效提升相结合，落实好生态环境法典、民族团结进步促进法等新法律。
+    </div>
+    <div class="card-meta">
+      <span class="meta-source">来源：群众新闻 / 2026年3月13-14日</span>
+    </div>
+    <div class="writing-tip">可用于"正确政绩观""基层治理""陕西地方发展"类大作文，尤其适合陕西遴选考试。亮点："三个年"活动、"八场硬仗"是陕西地方特色表达，体现在大作文中可彰显地域认同感和政策熟悉度。</div>
+  </div>
+
+  <!-- 新闻 7 -->
+  <div class="card imp">
+    <div class="card-header">
+      <div class="card-num">7</div>
+      <div class="card-title">
+        <span class="badge badge-imp">★ 重要</span><br/>
+        2026年政府工作报告确立民生保障七大重点任务
+      </div>
+    </div>
+    <div class="card-summary">
+      2026年政府工作报告提出"更大力度保障和改善民生"，重点任务包括：城镇新增就业1200万人以上、完善基本养老医疗保险全国统筹、推动义务教育优质均衡发展、深化医疗卫生体系改革提升基层医疗服务能力、加强低收入人口动态监测和救助帮扶、推进农村人居环境整治学习"千万工程"经验，以及发展乡村特色产业壮大新型农村集体经济。这是两会后基层政府落实民生工作的核心依据。
+    </div>
+    <div class="card-meta">
+      <span class="meta-source">来源：国务院政府工作报告 / 2026年3月5日</span>
+    </div>
+    <div class="writing-tip">可用于"民生保障""基层治理""乡村振兴""共同富裕"类大作文。实用论据：将就业、教育、医疗、养老、兜底保障等具体数字融入写作，体现数据支撑能力；"千万工程"可作为乡村振兴政策典型案例引用。</div>
+  </div>
+
+  <!-- 大作文素材专区 -->
+  <div class="section-title">📌 今日写作素材重点推荐</div>
+
+  <div class="essay-section">
+    <h2>📝 今日大作文素材指南</h2>
+
+    <div class="essay-item">
+      <div class="essay-tag">首选素材</div>
+      <p><strong>《生态环境法典》通过 × 正确政绩观</strong></p>
+      <p>如遇"生态文明建设""依法行政""为官有为"等题目，此条新闻是绝佳素材。可论述：从"多法分立"到"法典整合"，体现了党和国家推进国家治理体系现代化的系统思维；将生态文明纳入法典，彰显"绿水青山就是金山银山"的制度决心。</p>
+      <div class="essay-angle">推荐角度：制度建设 / 系统思维 / 生态文明 / 法治思维</div>
+    </div>
+
+    <div class="essay-item">
+      <div class="essay-tag">次选素材</div>
+      <p><strong>国务院部署"投资于人、服务于民生"</strong></p>
+      <p>如遇"以人民为中心""民生导向""基层服务"等题目，国务院第十一次全体会议提出的"更大力度投资于人、服务于民生"是高质量引用语。可结合陕西基层实际，论述如何在公务员岗位上践行民生导向，将抽象理念化为具体行动。</p>
+      <div class="essay-angle">推荐角度：民生保障 / 公仆意识 / 基层服务 / 为民办事</div>
+    </div>
+
+    <div class="essay-item">
+      <div class="essay-tag">陕西专用</div>
+      <p><strong>陕西"三个年""八场硬仗""三服务"</strong></p>
+      <p>陕西遴选大作文如涉及"地方发展""攻坚克难""实干精神"，可引用陕西省委部署的"三个年"活动（追赶超越）、"八场硬仗"（重点攻坚领域）、"三服务"质效提升（服务企业、服务群众、服务基层），体现对陕西省情的深度了解，是加分项。</p>
+      <div class="essay-angle">推荐角度：实干担当 / 地方治理 / 服务型政府 / 攻坚克难</div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    数据来源：新华社、人民日报、央视新闻、陕西日报等权威媒体<br/>
+    整理时间：2026年3月18日 · <a href="https://niegw.github.io/jinjv/news_20260318.html">在线阅读</a>
+  </div>
+
+</div>
+</body>
+</html>
