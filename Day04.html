@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 04 每日学习 | 陕西遴选备考</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f0f2f5;
+      color: #333;
+    }
+
+    /* ===== 顶部封面 ===== */
+    .cover {
+      background: linear-gradient(135deg, #1a4a6b 0%, #0d2a40 60%, #1a4a6b 100%);
+      color: white;
+      padding: 40px 20px 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 250px; height: 250px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 50%;
+    }
+    .cover-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 4px 16px;
+      font-size: 13px;
+      margin-bottom: 14px;
+      letter-spacing: 1px;
+    }
+    .cover h1 {
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+    .cover h1 span { color: #40c0f0; }
+    .cover-sub {
+      font-size: 14px;
+      opacity: 0.75;
+      margin-bottom: 20px;
+    }
+    .cover-tags {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .cover-tag {
+      background: rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* ===== 导航 ===== */
+    .nav {
+      background: white;
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      border-bottom: 1px solid #e8e8e8;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .nav-btn {
+      padding: 14px 18px;
+      font-size: 13px;
+      color: #666;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .nav-btn:hover { color: #1a7bc0; }
+    .nav-btn.active { color: #1a7bc0; border-bottom-color: #1a7bc0; font-weight: bold; }
+
+    /* ===== 内容区 ===== */
+    .content { padding: 20px 16px; max-width: 700px; margin: 0 auto; }
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* ===== 通用卡片 ===== */
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1a4a6b;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e0e6f0;
+    }
+
+    /* ===== 金句区 ===== */
+    .juju-card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      border-left: 5px solid #1a7bc0;
+    }
+    .juju-num {
+      display: inline-block;
+      background: #1a7bc0;
+      color: white;
+      border-radius: 50%;
+      width: 28px; height: 28px;
+      line-height: 28px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .juju-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #1a7bc0;
+      margin-bottom: 12px;
+    }
+    .juju-quote {
+      background: #f0f7ff;
+      border-radius: 8px;
+      padding: 14px 16px 14px 32px;
+      font-size: 15px;
+      line-height: 1.9;
+      color: #222;
+      font-weight: 500;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .juju-quote::before {
+      content: '"';
+      font-size: 40px;
+      color: #a0c8e8;
+      position: absolute;
+      top: -4px; left: 8px;
+      line-height: 1;
+    }
+    .meta { font-size: 13px; color: #666; line-height: 2; }
+    .tag {
+      display: inline-block;
+      background: #e8f4ff;
+      color: #1a7bc0;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      margin-right: 4px;
+      margin-top: 4px;
+    }
+    .blue-tag {
+      display: inline-block;
+      background: #d6eaf8;
+      color: #1a5276;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      margin-right: 4px;
+      margin-top: 4px;
+    }
+    .green-tag {
+      display: inline-block;
+      background: #d5f5e3;
+      color: #1e8449;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      margin-right: 4px;
+      margin-top: 4px;
+    }
+
+    /* ===== 复习表 ===== */
+    .review-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .review-table th {
+      background: #1a7bc0;
+      color: white;
+      padding: 8px 10px;
+      text-align: left;
+    }
+    .review-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .review-table tr:last-child td { border-bottom: none; }
+    .review-table tr:nth-child(even) td { background: #f0f7ff; }
+
+    /* ===== 故事区 ===== */
+    .story-bg {
+      background: #e8f4ff;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 14px;
+      line-height: 1.9;
+      margin-bottom: 12px;
+      color: #555;
+    }
+    .story-bg strong { color: #1a4a6b; }
+    .ganjiang {
+      background: #fdf2e9;
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 14px;
+      line-height: 2;
+      color: #444;
+      border-left: 4px solid #e67e22;
+      margin-bottom: 4px;
+    }
+    .story-quote {
+      background: #e8f4ff;
+      border-left: 4px solid #1a7bc0;
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      font-size: 15px;
+      font-weight: bold;
+      color: #333;
+      margin: 12px 0;
+      line-height: 1.8;
+    }
+    .story-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .story-table th {
+      background: #1a4a6b;
+      color: white;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    .story-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #f0f0f0;
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .story-table tr:last-child td { border-bottom: none; }
+    .story-table td:first-child { color: #666; width: 90px; white-space: nowrap; }
+    .action-list { list-style: none; padding: 0; }
+    .action-list li {
+      padding: 6px 0 6px 20px;
+      border-bottom: 1px dashed #eee;
+      font-size: 14px;
+      line-height: 1.7;
+      position: relative;
+    }
+    .action-list li::before { content: "▸"; position: absolute; left: 0; color: #1a4a6b; }
+    .action-list li:last-child { border-bottom: none; }
+    .result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .result-item {
+      background: #e8f4ff;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .result-item strong { color: #1a4a6b; font-size: 15px; display: block; }
+    .keyword {
+      display: inline-block;
+      background: #1a4a6b;
+      color: white;
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-size: 13px;
+      margin: 4px 4px 0 0;
+    }
+    .data-box {
+      background: linear-gradient(135deg, #e8f4ff, #f0faff);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin: 10px 0;
+      border: 1px solid #c5e3f7;
+    }
+    .data-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      border-bottom: 1px dashed #d0e8f5;
+      font-size: 13px;
+    }
+    .data-row:last-child { border-bottom: none; }
+    .data-num {
+      font-size: 20px;
+      font-weight: bold;
+      color: #1a7bc0;
+    }
+
+    /* ===== 计划区 ===== */
+    .plan-week-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .plan-week-header {
+      background: linear-gradient(135deg, #1a4a6b, #0d2a40);
+      color: white;
+      padding: 14px 18px;
+      font-size: 15px;
+      font-weight: bold;
+    }
+    .plan-day {
+      padding: 14px 18px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .plan-day:last-child { border-bottom: none; }
+    .plan-day-title {
+      font-weight: bold;
+      color: #1a4a6b;
+      font-size: 14px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .plan-today {
+      background: #f0f7ff;
+      border-left: 3px solid #1a7bc0;
+    }
+    .plan-today .plan-day-title { color: #1a7bc0; }
+    .plan-task {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.8;
+      padding-left: 20px;
+    }
+    .today-badge {
+      background: #1a7bc0;
+      color: white;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: normal;
+    }
+
+    /* ===== 框架区 ===== */
+    .framework-card {
+      background: white;
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      border-top: 4px solid #1a4a6b;
+    }
+    .fw-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .fw-num {
+      background: #1a4a6b;
+      color: white;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+    .fw-name { font-size: 16px; font-weight: bold; color: #1a4a6b; }
+    .fw-logic {
+      background: #eaf0f9;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 13px;
+      line-height: 1.9;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .fw-scene {
+      font-size: 12px;
+      color: #888;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .fw-scene::before { content: "💡"; }
+    .fw-example {
+      background: #fff8f0;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 13px;
+      line-height: 1.9;
+      color: #555;
+      margin-top: 10px;
+      border-left: 3px solid #e67e22;
+    }
+    .fw-example-title {
+      font-weight: bold;
+      color: #e67e22;
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+
+    /* ===== 底部 ===== */
+    .footer {
+      text-align: center;
+      color: #aaa;
+      font-size: 12px;
+      padding: 20px 0 30px;
+    }
+
+    /* ===== 进度条 ===== */
+    .progress-bar-wrap {
+      background: #f0f0f0;
+      border-radius: 10px;
+      height: 6px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .progress-bar {
+      height: 100%;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #1a7bc0, #40c0f0);
+    }
+
+    /* ===== 陕西热点标签 ===== */
+    .shaanxi-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #c0392b, #e74c3c);
+      color: white;
+      border-radius: 4px;
+      padding: 3px 10px;
+      font-size: 12px;
+      margin-left: 6px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<!-- 封面 -->
+<div class="cover">
+  <div class="cover-badge">陕西遴选 · 备考计划</div>
+  <h1>Day <span>04</span></h1>
+  <div class="cover-sub">2026年03月18日（周三）· 第一周</div>
+  <div class="cover-tags">
+    <div class="cover-tag">📌 金句积累 · 政务服务/数字政府</div>
+    <div class="cover-tag">📖 故事素材 · 秦务员改革</div>
+    <div class="cover-tag">🌐 陕西热点 · 数字政府建设</div>
+  </div>
+</div>
+
+<!-- 导航 -->
+<div class="nav">
+  <div class="nav-btn active" onclick="switchTab('juju', this)">📌 今日金句</div>
+  <div class="nav-btn" onclick="switchTab('story', this)">📖 故事素材</div>
+  <div class="nav-btn" onclick="switchTab('plan', this)">📅 本周计划</div>
+  <div class="nav-btn" onclick="switchTab('framework', this)">✍️ 写作框架</div>
+</div>
+
+<!-- 内容 -->
+<div class="content">
+
+  <!-- ===== 金句 ===== -->
+  <div class="section active" id="sec-juju">
+    <div class="section-title">📌 Day 04 金句积累 · 政务服务/数字政府</div>
+
+    <div class="juju-card">
+      <div class="juju-num">①</div>
+      <div class="juju-title">让百姓少跑腿、数据多跑路</div>
+      <div class="juju-quote">要让数据多跑路、群众少跑腿，不断提升公共服务均等化、普惠化、便捷化水平。</div>
+      <div class="meta">
+        <div>▶ 出处：2020年10月，深圳经济特区建立40周年庆祝大会讲话；此后多次强调</div>
+        <div style="margin-top:6px">▶ 适用：<span class="tag">政务服务改革</span><span class="tag">数字政府建设</span><span class="tag">便民利民</span><span class="tag">以人民为中心</span></div>
+        <div style="margin-top:6px">▶ 写作示范：论述政务服务改革意义时必引金句，可作分论点标题"数据多跑路，群众少烦恼"；结合陕西"秦务员"APP实际案例佐证</div>
+      </div>
+    </div>
+
+    <div class="juju-card">
+      <div class="juju-num">②</div>
+      <div class="juju-title">加强数字政府建设是基础性先导性工程</div>
+      <div class="juju-quote">加强数字政府建设是建设网络强国、数字中国的基础性和先导性工程。要全面贯彻网络强国战略，把数字技术广泛应用于政府管理服务，推动政府数字化、智能化运行，为推进国家治理体系和治理能力现代化提供有力支撑。</div>
+      <div class="meta">
+        <div>▶ 出处：2022年4月19日，中央全面深化改革委员会第二十五次会议（审议《关于加强数字政府建设的指导意见》）</div>
+        <div style="margin-top:6px">▶ 适用：<span class="tag">数字政府战略定位</span><span class="tag">国家治理现代化</span><span class="tag">数字中国</span></div>
+        <div style="margin-top:6px">▶ 写作示范：论述数字政府重要性的开篇破题，地位表述准确、高度清晰</div>
+      </div>
+    </div>
+
+    <div class="juju-card">
+      <div class="juju-num">③</div>
+      <div class="juju-title">打通信息壁垒，构建信息资源共享体系</div>
+      <div class="juju-quote">要以信息化推进国家治理体系和治理能力现代化，构建一体化在线服务平台，打通信息壁垒，构建全国信息资源共享体系，更好用信息化手段感知社会态势、畅通沟通渠道、辅助科学决策。</div>
+      <div class="meta">
+        <div>▶ 出处：2016年4月19日，网络安全和信息化工作座谈会</div>
+        <div style="margin-top:6px">▶ 适用：<span class="tag">数据共享</span><span class="tag">一体化平台</span><span class="tag">跨部门协同</span><span class="tag">科学决策</span></div>
+        <div style="margin-top:6px">▶ 写作示范：论述"一网通办"、打破数据孤岛等改革举措时的有力依据</div>
+      </div>
+    </div>
+
+    <div class="juju-card">
+      <div class="juju-num">④</div>
+      <div class="juju-title">从信息化到智能化再到智慧化</div>
+      <div class="juju-quote">通过大数据、云计算、人工智能等手段推进城市治理现代化，大城市也可以变得更"聪明"。从信息化到智能化再到智慧化，是建设智慧城市的必由之路，前景广阔。</div>
+      <div class="meta">
+        <div>▶ 出处：浙江杭州城市大脑运营指挥中心考察讲话</div>
+        <div style="margin-top:6px">▶ 适用：<span class="tag">智慧城市</span><span class="tag">城市治理现代化</span><span class="tag">数字化转型路径</span></div>
+        <div style="margin-top:6px">▶ 写作示范：论述数字化治理路径时，用三个递进层次体现政策深度</div>
+      </div>
+    </div>
+
+    <div class="juju-card">
+      <div class="juju-num">⑤</div>
+      <div class="juju-title">善用互联网，着力在融合共享便民安全上下功夫</div>
+      <div class="juju-quote">各级党委和政府要强化互联网思维，善于利用互联网优势，着力在融合、共享、便民、安全上下功夫。领导干部要学网、懂网、用网。</div>
+      <div class="meta">
+        <div>▶ 出处：习近平在海南省政务数据中心考察时强调</div>
+        <div style="margin-top:6px">▶ 适用：<span class="tag">干部能力建设</span><span class="tag">互联网思维</span><span class="tag">数字化治理能力</span></div>
+        <div style="margin-top:6px">▶ 写作示范：论述干部队伍能力提升、适应数字化治理时适用；遴选考试"领导干部能力"类题目必备</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title" style="font-size:15px">📝 复习速查</div>
+      <table class="review-table">
+        <tr><th>序号</th><th>关键词记忆</th><th>出处时间</th></tr>
+        <tr><td>①</td><td>数据多跑路→群众少跑腿</td><td>2020年10月·深圳</td></tr>
+        <tr><td>②</td><td>数字政府→基础性先导性工程</td><td>2022年4月19日</td></tr>
+        <tr><td>③</td><td>打通信息壁垒→构建共享体系</td><td>2016年4月19日</td></tr>
+        <tr><td>④</td><td>信息化→智能化→智慧化</td><td>浙江杭州考察</td></tr>
+        <tr><td>⑤</td><td>融合·共享·便民·安全→学网懂网用网</td><td>海南政务数据中心考察</td></tr>
+      </table>
+      <div style="margin-top:12px;font-size:13px;color:#999">💡 建议：今日抄写一遍，明天默写①②，后天默写③④⑤</div>
+      <div style="margin-top:10px;font-size:13px;color:#1a7bc0;background:#f0f7ff;border-radius:8px;padding:10px">
+        🌐 <strong>陕西热点链接</strong>：陕西"秦务员"APP已上线8968项服务，省级事项"最多跑一次"占比达84.54%，平均跑动次数仅0.69次——这正是金句①的生动注脚。
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 故事 ===== -->
+  <div class="section" id="sec-story">
+    <div class="section-title">📖 Day 04 故事素材 · 陕西"秦务员"改革</div>
+
+    <div class="card">
+      <div style="font-size:16px;font-weight:bold;color:#1a4a6b;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #d6eaf8">🌐 背景：从"来回跑"到"一次都不跑"<span class="shaanxi-badge">陕西热点</span></div>
+      <div class="story-bg">
+        <strong>改革前的困境：</strong>群众办事要在多个部门间来回奔波，材料重复提交，窗口排队漫长，"办个事跑断腿"是真实写照。部门间信息孤岛林立，数据无法共享，基层干部也深感掣肘。
+      </div>
+      <div class="story-bg">
+        <strong>改革契机：</strong>2019年起，陕西省全力推进"互联网+政务服务"改革，打造"秦务员"政务服务平台，将移动端、电脑端、窗口端、自助端和12345热线、"好差评"系统整合为一体。
+      </div>
+      <div class="story-quote">"前一天晚上在'秦务员'APP上填了资料，第二天上午户籍室就通知我领取新户口本。" ——西安电子科技大学毕业生 刘纯</div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:16px;font-weight:bold;color:#1a4a6b;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #d6eaf8">🔥 核心案例：购房"一件事"套餐</div>
+      <div class="story-bg">
+        <strong>改革前：</strong>买一套房，需要跑住房局、税务局、不动产中心等多个部门，分别提交材料，往往要折腾两三周甚至更长时间。
+      </div>
+      <div class="story-bg">
+        <strong>改革后：</strong>西咸新区政务服务（沣西）中心将住房信息查询、契税缴纳、不动产权证办理等<strong>跨部门事项整合为"购房一件事"套餐</strong>，群众只需跑一个窗口。
+      </div>
+      <div style="margin-bottom:10px;font-weight:bold;color:#1a4a6b;font-size:14px">⚡ 成效：</div>
+      <ul class="action-list">
+        <li>全程办理时限：从<strong>2-3周压缩至1小时内</strong>完成</li>
+        <li>材料提交次数：从<strong>跑多个部门</strong>变为<strong>"只进一扇门"</strong></li>
+        <li>"高效办成一件事"已推广至全省 <strong>41个</strong> 高频事项套餐</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div style="font-size:16px;font-weight:bold;color:#1a4a6b;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #d6eaf8">📊 陕西数字政府建设成效数据</div>
+      <div class="data-box">
+        <div class="data-row">
+          <span>省级政务事项"最多跑一次"占比</span>
+          <span class="data-num">84.54%</span>
+        </div>
+        <div class="data-row">
+          <span>群众平均跑动次数</span>
+          <span class="data-num">0.69次</span>
+        </div>
+        <div class="data-row">
+          <span>承诺时限压缩比例</span>
+          <span class="data-num">43.54%</span>
+        </div>
+        <div class="data-row">
+          <span>移动端上线服务事项</span>
+          <span class="data-num">8968项</span>
+        </div>
+        <div class="data-row">
+          <span>实现"全省通办"事项数</span>
+          <span class="data-num">396项</span>
+        </div>
+        <div class="data-row">
+          <span>"高效办成一件事"套餐</span>
+          <span class="data-num">41件</span>
+        </div>
+      </div>
+      <div style="margin-top:10px;font-size:12px;color:#999">数据来源：2024年7月《陕西日报》·陕西省政府官网 / 2026年2月陕西省数据和政务服务工作会议</div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:16px;font-weight:bold;color:#1a4a6b;margin-bottom:12px">✍️ 大作文使用指南</div>
+      <table class="story-table">
+        <tr><th>使用场景</th><th>用法示范</th></tr>
+        <tr><td>数字政府</td><td>陕西"秦务员"将8968项服务搬上指尖，平均跑腿次数从"N次"降至0.69次，是"数据多跑路"的生动实践</td></tr>
+        <tr><td>改革创新</td><td>"购房一件事"套餐将原本横跨多部门的繁琐手续整合为"进一扇门，办一揽子事"，体现系统观念和集成改革思维</td></tr>
+        <tr><td>为民情怀</td><td>从"跑断腿"到"动动手指"，背后是无数政务工作者打通数据壁垒、优化流程的默默付出</td></tr>
+        <tr><td>干部能力</td><td>面对数字化转型，干部要"学网、懂网、用网"，用互联网思维重塑政务流程，方能真正让改革红利惠及群众</td></tr>
+        <tr><td>陕西特色</td><td>引用"秦务员"品牌及具体数据，体现对陕西本地实情的了解，增加作文说服力</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div style="font-size:16px;font-weight:bold;color:#1a4a6b;margin-bottom:12px">🔑 可提炼关键词</div>
+      <div>
+        <span class="keyword">数据多跑路</span>
+        <span class="keyword">一网通办</span>
+        <span class="keyword">一件事改革</span>
+        <span class="keyword">只进一扇门</span>
+        <span class="keyword">打通信息孤岛</span>
+      </div>
+      <div style="margin-top:12px">
+        <span class="blue-tag">政务服务</span>
+        <span class="blue-tag">数字政府</span>
+        <span class="blue-tag">便民利民</span>
+        <span class="green-tag">陕西热点</span>
+        <span class="green-tag">秦务员</span>
+        <span class="blue-tag">改革创新</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 计划 ===== -->
+  <div class="section" id="sec-plan">
+    <div class="section-title">📅 本周学习计划 · 第一周</div>
+
+    <div class="card" style="background:linear-gradient(135deg,#f0f7ff,#fff);border-left:4px solid #1a7bc0">
+      <div style="font-size:15px;font-weight:bold;color:#1a7bc0;margin-bottom:8px">🌟 今日任务（周三）</div>
+      <div style="font-size:14px;color:#555;line-height:2">
+        ✅ 📌 金句积累：<strong>政务服务/数字政府主题，5条</strong>（已完成）<br>
+        ✅ 📖 故事素材：<strong>陕西"秦务员"改革故事</strong>（已完成）<br>
+        ⬜ 📝 练习：用今日金句①②写一段<strong>150字论述段落</strong><br>
+        ⬜ 🔁 复习：默写Day01-03金句各2条，巩固记忆
+      </div>
+    </div>
+
+    <div class="card" style="background:#f0f7ff;border-left:4px solid #1a7bc0">
+      <div style="font-size:14px;font-weight:bold;color:#1a4a6b;margin-bottom:8px">📊 已完成进度</div>
+      <div style="font-size:13px;color:#555;margin-bottom:6px">第一周学习进度：4/7天</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar" style="width:57%"></div>
+      </div>
+      <div style="font-size:12px;color:#888;margin-top:6px">已积累金句：<strong>20条</strong> | 故事素材：<strong>3个</strong> | 框架掌握：<strong>框架①②</strong></div>
+    </div>
+
+    <div class="plan-week-card">
+      <div class="plan-week-header">📅 第一周每日任务安排</div>
+      <div class="plan-day">
+        <div class="plan-day-title">周一 ✅</div>
+        <div class="plan-task">📌 金句积累：基层治理主题，5条<br>📖 故事素材：廖俊波（人民的樵夫）</div>
+      </div>
+      <div class="plan-day">
+        <div class="plan-day-title">周二 ✅</div>
+        <div class="plan-task">📌 金句积累：乡村振兴主题，5条<br>✍️ 框架学习：框架①总分总结构<br>📝 练习：用框架写200字段落</div>
+      </div>
+      <div class="plan-day">
+        <div class="plan-day-title">周三 ✅</div>
+        <div class="plan-task">📌 金句积累：政务服务/数字政府主题，5条（陕西"秦务员"热点）<br>📖 故事素材：陕西数字政府改革案例</div>
+      </div>
+      <div class="plan-day plan-today">
+        <div class="plan-day-title">周三 <span class="today-badge">今天</span></div>
+        <div class="plan-task">⬜ 练习：用今日金句写150字论述段 | ⬜ 复习Day01-03金句</div>
+      </div>
+      <div class="plan-day">
+        <div class="plan-day-title">周四</div>
+        <div class="plan-task">📌 金句积累：生态文明/绿色发展主题，5条<br>🔍 精析文章①：重点分析立意、结构、开头结尾</div>
+      </div>
+      <div class="plan-day">
+        <div class="plan-day-title">周五</div>
+        <div class="plan-task">📌 金句积累：社会治理/民生保障主题，5条<br>📄 范文学习①：学习分论点提炼方式、材料运用</div>
+      </div>
+      <div class="plan-day">
+        <div class="plan-day-title">周六</div>
+        <div class="plan-task">📌 金句积累：党建/廉洁自律主题，5条<br>📄 范文学习②：重点学开头引入与结尾升华技巧</div>
+      </div>
+      <div class="plan-day">
+        <div class="plan-day-title">周日</div>
+        <div class="plan-task">🔍 精析文章②：可选政论文/领导讲话，输出精析笔记<br>✍️ 框架学习：框架②问题-原因-对策结构<br>📝 总结：复习本周金句35条，巩固记忆</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:15px;font-weight:bold;color:#1a4a6b;margin-bottom:12px">📊 30天学习目标</div>
+      <table class="review-table">
+        <tr><th>模块</th><th>每日目标</th><th>30天完成量</th></tr>
+        <tr><td>主题金句</td><td>每日5条，覆盖1个主题</td><td>150条</td></tr>
+        <tr><td>故事素材</td><td>每日1个典型故事</td><td>30个故事</td></tr>
+        <tr><td>范文精析</td><td>每周精析2篇</td><td>8篇精析</td></tr>
+        <tr><td>范文阅读</td><td>每周阅读2篇</td><td>8篇范文</td></tr>
+        <tr><td>实战写作</td><td>每两周写1篇</td><td>2篇</td></tr>
+        <tr><td>框架掌握</td><td>系统学习10个框架</td><td>全程贯穿</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== 框架 ===== -->
+  <div class="section" id="sec-framework">
+    <div class="section-title">✍️ 10大写作框架</div>
+
+    <div class="card" style="background:linear-gradient(135deg,#f0f7ff,#fff);border-left:4px solid #1a7bc0;margin-bottom:20px">
+      <div style="font-size:14px;font-weight:bold;color:#1a7bc0;margin-bottom:6px">🌟 今日重点提示：框架③ 是什么-为什么-怎么做</div>
+      <div style="font-size:13px;color:#666;line-height:1.8">框架③几乎是万能框架，陕西遴选数字政府类题目高度适配。<br>今日建议用今天的金句和"秦务员"案例，套用框架③写一段200字练习段落。</div>
+    </div>
+
+    <div class="framework-card" style="border-top-color:#1a7bc0">
+      <div class="fw-header">
+        <span class="fw-num" style="background:#1a7bc0">框架①</span>
+        <span class="fw-name">总 — 分 — 总</span>
+      </div>
+      <div class="fw-logic">引论（点题）→ 分论点1 → 分论点2 → 分论点3 → 结论升华</div>
+      <div class="fw-scene">适用题型：观点类、意义类（如"谈谈你对……的认识"）</div>
+      <div class="fw-example">
+        <div class="fw-example-title">📝 今日套用示例·数字政府主题</div>
+        数字政府建设是推进国家治理体系现代化的重要引擎（总）。一要打通信息壁垒，让数据"联"起来；二要优化服务流程，让群众"跑"少一点；三要强化干部能力，让治理"智"起来（分）。唯其如此，才能真正让"数据多跑路、群众少跑腿"落地生根（总）。
+      </div>
+    </div>
+
+    <div class="framework-card" style="border-top-color:#1a7bc0">
+      <div class="fw-header">
+        <span class="fw-num" style="background:#1a7bc0">框架②</span>
+        <span class="fw-name">问题 — 原因 — 对策</span>
+        <span class="today-badge" style="background:#1a7bc0">高频框架</span>
+      </div>
+      <div class="fw-logic">提出问题 → 分析根源 → 系统对策 → 愿景展望</div>
+      <div class="fw-scene">适用题型：问题分析类（如"针对……存在的问题……"）</div>
+    </div>
+
+    <div class="framework-card" style="border-top-color:#1a7bc0">
+      <div class="fw-header">
+        <span class="fw-num" style="background:#1a7bc0">框架③</span>
+        <span class="fw-name">是什么 — 为什么 — 怎么做</span>
+        <span class="today-badge" style="background:#e67e22">今日重点</span>
+      </div>
+      <div class="fw-logic">概念阐释 → 重要意义 → 路径举措 → 结尾</div>
+      <div class="fw-scene">适用题型：万能通用框架，几乎适合所有题目</div>
+      <div class="fw-example">
+        <div class="fw-example-title">📝 今日套用示例·"数字政府"题目</div>
+        <strong>是什么：</strong>数字政府是运用信息化、智能化手段重塑政府治理模式的系统工程，是国家治理现代化的重要载体。<br>
+        <strong>为什么：</strong>习近平总书记指出，这是"基础性和先导性工程"；群众对便捷高效服务的期盼，要求政府必须加快数字化转型。<br>
+        <strong>怎么做：</strong>一是打通信息壁垒，构建共享体系；二是优化流程，推进"一网通办"；三是强化干部学网懂网用网能力。
+      </div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架④</span>
+        <span class="fw-name">历史 — 现状 — 展望</span>
+      </div>
+      <div class="fw-logic">历史成就 → 当前形势 → 未来方向</div>
+      <div class="fw-scene">适用题型：发展类、成就类主题</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架⑤</span>
+        <span class="fw-name">政治 — 经济 — 社会 — 文化</span>
+      </div>
+      <div class="fw-logic">从四个维度分别展开论述</div>
+      <div class="fw-scene">适用题型：宏观综合类题目</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架⑥</span>
+        <span class="fw-name">思想 — 制度 — 行动</span>
+      </div>
+      <div class="fw-logic">思想认识 → 制度保障 → 具体行动</div>
+      <div class="fw-scene">适用题型：党建、治理类主题</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架⑦</span>
+        <span class="fw-name">知 — 信 — 行</span>
+      </div>
+      <div class="fw-logic">认知层 → 信念层 → 实践层</div>
+      <div class="fw-scene">适用题型：党员修养、价值观类主题</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架⑧</span>
+        <span class="fw-name">主体分析法</span>
+      </div>
+      <div class="fw-logic">政府 → 社会 → 个人（各主体职责分析）</div>
+      <div class="fw-scene">适用题型：社会治理、民生类主题</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架⑨</span>
+        <span class="fw-name">理论 — 实践 — 价值</span>
+      </div>
+      <div class="fw-logic">理论依据 → 实践路径 → 现实价值</div>
+      <div class="fw-scene">适用题型：政策解读类题目</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架⑩</span>
+        <span class="fw-name">破立结合</span>
+      </div>
+      <div class="fw-logic">破（批判错误观点/现象）→ 立（正确做法）→ 升华</div>
+      <div class="fw-scene">适用题型：辩证分析类题目</div>
+    </div>
+
+  </div>
+
+  <div class="footer">Day 04 · 2026-03-18 · 陕西遴选备考 · 政务服务/数字政府主题</div>
+
+</div>
+
+<script>
+  function switchTab(name, btn) {
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('sec-' + name).classList.add('active');
+    window.scrollTo({ top: document.querySelector('.nav').offsetTop - 10, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
