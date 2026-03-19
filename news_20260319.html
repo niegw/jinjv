@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>今日时政要闻 · 2026年3月19日</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: #f0f2f5;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    /* 顶部Header */
+    .header {
+      background: linear-gradient(135deg, #c0392b 0%, #922b21 50%, #7b241c 100%);
+      padding: 24px 16px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -30px; right: -30px;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: -20px;
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+    .header-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      color: #ffe;
+      font-size: 11px;
+      letter-spacing: 2px;
+      padding: 3px 12px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+    .header h1 {
+      color: #fff;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+    .header .date-line {
+      color: rgba(255,255,255,0.82);
+      font-size: 13px;
+    }
+    .header .subtitle {
+      color: rgba(255,255,255,0.68);
+      font-size: 11.5px;
+      margin-top: 4px;
+    }
+
+    /* 内容区 */
+    .content {
+      padding: 14px 12px 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* 每条新闻卡片 */
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      margin-bottom: 14px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: #c0392b;
+      border-radius: 4px 0 0 4px;
+    }
+    .card.very-important::before {
+      background: linear-gradient(180deg, #e74c3c, #c0392b);
+    }
+    .card.important::before {
+      background: linear-gradient(180deg, #e67e22, #d35400);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .badge {
+      flex-shrink: 0;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+    .badge-vip {
+      background: #fdecea;
+      color: #c0392b;
+    }
+    .badge-imp {
+      background: #fef3e2;
+      color: #d35400;
+    }
+    .card-title {
+      font-size: 15.5px;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.5;
+    }
+    .card-summary {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.75;
+      margin-bottom: 10px;
+    }
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11.5px;
+      color: #999;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .meta-source { color: #c0392b; font-weight: 600; }
+
+    .writing-tip {
+      background: linear-gradient(135deg, #fff8f0, #fef6ee);
+      border: 1px solid #fde0c0;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12.5px;
+      color: #7c4706;
+      line-height: 1.6;
+    }
+    .writing-tip::before {
+      content: '✏️ 写作提示：';
+      font-weight: 700;
+      color: #c0392b;
+    }
+
+    /* 写作素材板块 */
+    .writing-section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 18px 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      margin-top: 6px;
+    }
+    .section-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f0f2f5;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .section-title-icon {
+      width: 20px; height: 20px;
+      background: #c0392b;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 11px;
+    }
+
+    .material-item {
+      padding: 12px 0;
+      border-bottom: 1px dashed #eee;
+    }
+    .material-item:last-child { border-bottom: none; }
+    .material-no {
+      display: inline-block;
+      background: #c0392b;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 20px;
+      margin-right: 6px;
+      flex-shrink: 0;
+    }
+    .material-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+    }
+    .material-usage {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.7;
+      padding-left: 26px;
+    }
+    .highlight { color: #c0392b; font-weight: 600; }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 16px;
+      color: #bbb;
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    /* 分区标签 */
+    .section-label {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #999;
+      text-transform: uppercase;
+      margin: 18px 0 10px 2px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- 顶部 Header -->
+<div class="header">
+  <div class="header-tag">陕西遴选备考 · 时政速递</div>
+  <h1>今日时政要闻</h1>
+  <div class="date-line">2026年3月19日 · 星期四</div>
+  <div class="subtitle">来源：人民日报 · 新华社 · 央视新闻 · 陕西日报</div>
+</div>
+
+<div class="content">
+
+  <!-- ===== 中央动态 ===== -->
+  <div class="section-label">▪ 中央动态</div>
+
+  <!-- 新闻1 -->
+  <div class="card very-important">
+    <div class="card-header">
+      <span class="badge badge-vip">★★ 非常重要</span>
+      <div class="card-title">习近平会见土库曼斯坦领导人，强调"一带一路"与命运共同体建设</div>
+    </div>
+    <div class="card-summary">
+      3月18日下午，国家主席习近平在北京钓鱼台国宾馆会见来华进行友好访问的土库曼斯坦民族领袖、人民委员会主席别尔德穆哈梅多夫。习近平指出，"十五五"规划纲要实施将为中国基本实现社会主义现代化奠定坚实基础，也将惠及世界各国。习近平强调，双方要加快推进共建"一带一路"倡议和"复兴丝绸之路"战略对接，扩大天然气领域合作规模，拓展人工智能、数字经济、清洁能源等非资源领域合作，中方将始终做土方值得信赖的合作伙伴。
+    </div>
+    <div class="card-meta">
+      <span class="meta-source">新华社</span>
+      <span>2026-03-18</span>
+      <span>元首外交</span>
+    </div>
+    <div class="writing-tip">可用于<span class="highlight">对外开放、构建人类命运共同体、"一带一路"倡议</span>类大作文，体现大国外交格局与全球治理主动作为。</div>
+  </div>
+
+  <!-- 新闻2 -->
+  <div class="card very-important">
+    <div class="card-header">
+      <span class="badge badge-vip">★★ 非常重要</span>
+      <div class="card-title">中央两办发布意见：第二轮土地承包到期后再延长30年，全面开展整省试点</div>
+    </div>
+    <div class="card-summary">
+      3月18日，《中共中央办公厅 国务院办公厅关于做好第二轮土地承包到期后再延长30年试点工作的意见》对外发布。《意见》明确，坚持"大稳定、小调整"，以户为单位开展延包，确保绝大多数农户原有承包地继续保持稳定；今年将在29个省（区、市）全面开展整省试点，"十五五"期间约1.6亿户承包地到期将得到妥善处理。文件强调，不能推倒重来、打乱重分，不能借机违法调整或收回农户承包地，切实给亿万农户吃下"定心丸"。
+    </div>
+    <div class="card-meta">
+      <span class="meta-source">新华社受权发布</span>
+      <span>2026-03-18</span>
+      <span>三农·乡村振兴</span>
+    </div>
+    <div class="writing-tip">可用于<span class="highlight">乡村振兴、农村改革、维护农民权益、基层治理稳定</span>类大作文，是今年最重要的农业农村政策文件，论据分量十足。</div>
+  </div>
+
+  <!-- 新闻3 -->
+  <div class="card important">
+    <div class="card-header">
+      <span class="badge badge-imp">★ 重要</span>
+      <div class="card-title">丁薛祥主持全国高校毕业生就业创业会议：促进青年高质量充分就业</div>
+    </div>
+    <div class="card-summary">
+      全国高校毕业生等青年就业创业工作视频会议3月18日在京举行，中共中央政治局常委、国务院副总理丁薛祥出席并讲话。丁薛祥指出，促进高校毕业生等青年就业是家事，更是国事，是讲政治、保民生、促发展的重要工作。要牢固树立和践行正确政绩观，全力稳定和扩大就业总量，着力提升就业质量，强化援助帮扶，更好服务大局、服务民生、服务发展。
+    </div>
+    <div class="card-meta">
+      <span class="meta-source">新华社</span>
+      <span>2026-03-18</span>
+      <span>民生保障</span>
+    </div>
+    <div class="writing-tip">可用于<span class="highlight">民生保障、正确政绩观、青年发展、就业优先战略</span>类大作文，"是家事更是国事"这一表述是重要论点素材。</div>
+  </div>
+
+  <!-- 新闻4 -->
+  <div class="card important">
+    <div class="card-header">
+      <span class="badge badge-imp">★ 重要</span>
+      <div class="card-title">外交部：元首外交发挥不可替代引领作用，中美双方就特朗普访华持续沟通</div>
+    </div>
+    <div class="card-summary">
+      外交部发言人林剑3月18日在例行记者会上表示，元首外交对中美关系发挥着不可替代的战略引领作用，中美双方将继续就特朗普总统访华事保持沟通。此前有媒体报道特朗普以霍尔木兹海峡护航问题为由欲推迟访华，外交部表示已注意到美方澄清声明。当前中美关系处于关键时期，双方均有意愿通过高层接触管控分歧、稳定双边关系。
+    </div>
+    <div class="card-meta">
+      <span class="meta-source">外交部发言人</span>
+      <span>2026-03-18</span>
+      <span>中美关系</span>
+    </div>
+    <div class="writing-tip">可用于<span class="highlight">大国关系、对外开放、全球治理、中国外交</span>类大作文，体现中国以元首外交引领双边关系的主动姿态。</div>
+  </div>
+
+  <!-- ===== 陕西动态 ===== -->
+  <div class="section-label">▪ 陕西动态</div>
+
+  <!-- 新闻5 -->
+  <div class="card very-important">
+    <div class="card-header">
+      <span class="badge badge-vip">★★ 非常重要</span>
+      <div class="card-title">陕西省委全面依法治省委员会召开年度会议，部署"十五五"法治建设重点任务</div>
+    </div>
+    <div class="card-summary">
+      3月18日，陕西省委全面依法治省委员会召开会议，深入学习贯彻习近平法治思想，总结去年工作，安排部署2026年重点任务。省委书记赵一德主持并讲话，省长赵刚出席。赵一德指出，今年是"十五五"开局之年，要守正创新、稳中求进，更加注重法治与改革、发展、稳定相协同，保障和促进社会公平正义；要着力推动经济发展在法治轨道上运行，完善民营经济促进法配套法规政策，打造市场化法治化国际化一流营商环境，为谱写陕西新篇、争做西部示范提供有力法治保障。
+    </div>
+    <div class="card-meta">
+      <span class="meta-source">陕西日报</span>
+      <span>2026-03-18/19</span>
+      <span>法治政府·陕西</span>
+    </div>
+    <div class="writing-tip">可用于<span class="highlight">法治政府、营商环境、基层治理、依法行政</span>类大作文，"法治轨道上运行"是近年高频遴选考点，"争做西部示范"是陕西特色政策语境。</div>
+  </div>
+
+  <!-- 新闻6 -->
+  <div class="card important">
+    <div class="card-header">
+      <span class="badge badge-imp">★ 重要</span>
+      <div class="card-title">陕西全面学习贯彻两会精神，省委深改委部署"三个年"活动打好"八场硬仗"</div>
+    </div>
+    <div class="card-summary">
+      连日来，陕西各地各部门召开会议认真传达学习习近平总书记在全国两会上的重要讲话精神。3月17日，省委全面深化改革委员会召开会议，部署围绕"三个年"（项目建设年、优化营商环境年、干部能力提升年）活动、深入打好"八场硬仗"、全面提升"三服务"质效等重点工作强化改革攻坚。赵一德强调，要加力推动"三项改革"（科技成果转化改革）拓面提质增效，提升高质量发展水平，助力"十五五"实现良好开局。
+    </div>
+    <div class="card-meta">
+      <span class="meta-source">陕西日报·西部网</span>
+      <span>2026-03-18/19</span>
+      <span>陕西·全面深化改革</span>
+    </div>
+    <div class="writing-tip">可用于<span class="highlight">改革攻坚、项目推进、营商环境、政府服务效能提升</span>类大作文，"三个年""八场硬仗"是陕西遴选常见命题情境，须熟悉其内涵。</div>
+  </div>
+
+  <!-- 新闻7 -->
+  <div class="card important">
+    <div class="card-header">
+      <span class="badge badge-imp">★ 重要</span>
+      <div class="card-title">陕西省长赵刚赴咸阳调研春耕：扎实推进春耕春管，确保全年粮食产量目标</div>
+    </div>
+    <div class="card-summary">
+      陕西省长赵刚赴咸阳市调研春耕春管工作，强调要扎实推进春耕春管，提升农业综合生产能力，确保实现全年粮食产量目标，为"十五五"开好局打牢农业基础。本次调研正值农业生产关键时节，结合中央两办刚发布的土地承包延期30年政策，陕西粮食主产区将加快落地延包试点，稳定农民预期，充分调动粮食生产积极性。
+    </div>
+    <div class="card-meta">
+      <span class="meta-source">西部网</span>
+      <span>2026-03-18</span>
+      <span>三农·粮食安全·陕西</span>
+    </div>
+    <div class="writing-tip">可用于<span class="highlight">粮食安全、乡村振兴、农业农村现代化、基层治理</span>类大作文，省领导亲赴基层调研是"抓落实、转作风"的生动体现，可作为论据引用。</div>
+  </div>
+
+  <!-- ===== 写作素材板块 ===== -->
+  <div class="writing-section">
+    <div class="section-title">
+      <span class="section-title-icon">材</span>
+      今日写作素材提示
+    </div>
+
+    <div class="material-item">
+      <div class="material-title">
+        <span class="material-no">1</span>
+        今日首推素材 · 大作文首选
+      </div>
+      <div class="material-usage">
+        <strong>土地承包延期30年</strong>（新闻2）是今日分量最重的政策文件，适合写<span class="highlight">乡村振兴、农村改革、基层治理稳定、维护群众权益</span>题型的大作文。核心论点：稳定土地承包关系是农村长治久安的制度基础；"大稳定、小调整"体现了尊重群众意愿、实事求是的工作方法；可引习近平总书记关于"土地是农民的命根子"的论断。
+      </div>
+    </div>
+
+    <div class="material-item">
+      <div class="material-title">
+        <span class="material-no">2</span>
+        法治政府专项素材
+      </div>
+      <div class="material-usage">
+        <strong>陕西法治建设部署</strong>（新闻5）适合<span class="highlight">法治政府、依法行政、优化营商环境</span>类题目。陕西"争做西部示范"目标可作为展示地方担当的素材，"法治轨道上运行"可作为论证依法行政必要性的有力支撑。
+      </div>
+    </div>
+
+    <div class="material-item">
+      <div class="material-title">
+        <span class="material-no">3</span>
+        民生保障类素材
+      </div>
+      <div class="material-usage">
+        <strong>青年就业会议</strong>（新闻3）与<span class="highlight">民生保障、正确政绩观</span>高度相关。"就业是家事更是国事"这句话适合在文章开头引用，体现政府重视民生的价值取向；"牢固树立正确政绩观"与当前学习教育主题高度契合，是近年遴选大作文频繁出现的关键词。
+      </div>
+    </div>
+
+    <div class="material-item">
+      <div class="material-title">
+        <span class="material-no">4</span>
+        陕西地方特色素材
+      </div>
+      <div class="material-usage">
+        <strong>"三个年"活动+八场硬仗</strong>（新闻6）是陕西遴选必考情境，建议熟记：项目建设年、优化营商环境年、干部能力提升年；五大硬仗涵盖改革攻坚、科技创新、民生保障等核心领域。写陕西地方治理类作文，此类关键词的准确使用能有效体现考生对省情政策的熟悉程度。
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="footer">
+  本页面由自动化程序生成 · 每日早9时更新<br>
+  内容来源：新华社、人民日报、陕西日报、光明日报<br>
+  仅供陕西遴选备考学习参考使用
+</div>
+
+</body>
+</html>
