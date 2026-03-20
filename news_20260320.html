@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>今日时政要闻 · 2026年3月20日</title>
+  <style>
+    :root {
+      --red:    #c0392b;
+      --red-lt: #f8e8e7;
+      --gold:   #b5860d;
+      --gold-lt:#fdf6e3;
+      --blue:   #1a5276;
+      --blue-lt:#eaf2fb;
+      --text:   #2c3e50;
+      --sub:    #5d6d7e;
+      --bg:     #f5f5f5;
+      --white:  #ffffff;
+      --border: #dde1e7;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+                   "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ── 顶部 Header ── */
+    .header {
+      background: linear-gradient(135deg, #8b0000 0%, #c0392b 60%, #e74c3c 100%);
+      color: #fff;
+      padding: 20px 16px 16px;
+      text-align: center;
+      position: relative;
+    }
+    .header .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 20px;
+      font-size: 12px;
+      padding: 3px 12px;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+    .header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    .header .meta {
+      margin-top: 6px;
+      font-size: 13px;
+      opacity: 0.85;
+    }
+    .header .tagline {
+      margin-top: 8px;
+      font-size: 12px;
+      opacity: 0.7;
+      letter-spacing: 1px;
+    }
+
+    /* ── 正文容器 ── */
+    .container { max-width: 700px; margin: 0 auto; padding: 14px 12px 30px; }
+
+    /* ── 分区标题 ── */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--sub);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 18px 0 10px;
+    }
+    .section-title::before {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── 新闻卡片 ── */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      border-left: 4px solid transparent;
+      transition: box-shadow 0.2s;
+    }
+    .card:active { box-shadow: 0 2px 10px rgba(0,0,0,0.12); }
+
+    .card.level-2 { border-left-color: var(--red); }
+    .card.level-1 { border-left-color: var(--gold); }
+
+    /* 卡片顶部行 */
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .card-title {
+      font-size: 15.5px;
+      font-weight: 700;
+      line-height: 1.45;
+      flex: 1;
+    }
+    .tag {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 2px 9px;
+      border-radius: 20px;
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+    .tag.hot  { background: var(--red-lt);  color: var(--red);  }
+    .tag.warn { background: var(--gold-lt); color: var(--gold); }
+
+    .card-body {
+      font-size: 14px;
+      color: #34495e;
+      line-height: 1.72;
+    }
+
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--sub);
+      border-top: 1px solid #f0f0f0;
+      padding-top: 9px;
+    }
+    .card-meta span { display: flex; align-items: center; gap: 4px; }
+
+    /* 写作提示条 */
+    .writing-tip {
+      background: var(--blue-lt);
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--blue);
+      line-height: 1.6;
+    }
+    .writing-tip strong { font-weight: 600; }
+
+    /* ── 写作素材板块 ── */
+    .material-box {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 18px 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      border-top: 4px solid var(--blue);
+    }
+    .material-box h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .material-item {
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .material-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .material-item .m-title {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .material-item .m-desc {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+    }
+    .material-item .m-tag {
+      display: inline-block;
+      background: var(--blue-lt);
+      color: var(--blue);
+      font-size: 11.5px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-top: 5px;
+      font-weight: 600;
+    }
+
+    /* ── 底部 ── */
+    .footer {
+      text-align: center;
+      padding: 20px 16px 10px;
+      font-size: 12px;
+      color: #aaa;
+      line-height: 1.8;
+    }
+    .footer a { color: #aaa; text-decoration: none; }
+
+    /* 序号圆点 */
+    .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--red);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-right: 4px;
+    }
+    .num.gold { background: var(--gold); }
+  </style>
+</head>
+<body>
+
+<!-- ▌顶部 -->
+<div class="header">
+  <div class="badge">陕西遴选备考 · 每日时政</div>
+  <h1>今日时政要闻</h1>
+  <div class="meta">📅 2026年3月20日（星期五）· 春分</div>
+  <div class="tagline">党政动态 · 遴选写作素材 · 陕西专栏</div>
+</div>
+
+<div class="container">
+
+  <!-- ── 中央动态 ── -->
+  <div class="section-title">中央动态</div>
+
+  <!-- 1 -->
+  <div class="card level-2">
+    <div class="card-header">
+      <div class="card-title"><span class="num">1</span>中央和国家机关深入推进正确政绩观学习教育</div>
+      <span class="tag hot">★★ 非常重要</span>
+    </div>
+    <div class="card-body">
+      中共中央办公厅印发通知，自2026年2月起在全党开展"树立和践行正确政绩观学习教育"，以县处级以上领导干部为重点，聚焦"立党为公、为民造福、科学决策、真抓实干"四大总要求。近日，新华社报道中央和国家机关坚持"学查改一体推进"，各部委分别成立工作专班，建立问题清单，要求干部创造"经得起实践、人民、历史检验的实绩"。最高检针对"就案办案、程序空转"等政绩观偏差问题专项整改，国家卫健委将成效转化为"群众可感可及"的服务。
+    </div>
+    <div class="writing-tip">
+      <strong>✍ 写作提示：</strong>可用于<strong>「正确政绩观」「为民造福」「基层干部作风建设」</strong>类大作文。核心论点："实干为民才是真政绩，经得起历史检验才是好业绩。"可引申至遴选考核中"考什么、干什么"的价值导向问题。
+    </div>
+    <div class="card-meta">
+      <span>📰 新华社 / 央视新闻</span>
+      <span>📅 2026-03-16</span>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card level-2">
+    <div class="card-header">
+      <div class="card-title"><span class="num">2</span>国务院令修改《社会团体登记管理条例》即日施行</div>
+      <span class="tag hot">★★ 非常重要</span>
+    </div>
+    <div class="card-body">
+      国务院总理李强签署第800号国务院令，公布《国务院关于修改〈社会团体登记管理条例〉的决定》，自公布之日（2026年3月17日）起施行。本次修改明确降低社会团体准入门槛、规范登记流程、取消年检收费，并完善民营经济促进法配套政策，旨在激发社会力量参与基层治理与公益服务的活力，推动形成共建共治共享的社会治理格局。
+    </div>
+    <div class="writing-tip">
+      <strong>✍ 写作提示：</strong>可用于<strong>「社会治理」「基层治理现代化」「多元共治」</strong>类大作文。论述"政府主导、社会协同、公众参与"的治理体系建设，结合陕西"三个年"社会稳定专项内容展开。
+    </div>
+    <div class="card-meta">
+      <span>📰 新华社</span>
+      <span>📅 2026-03-17</span>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card level-2">
+    <div class="card-header">
+      <div class="card-title"><span class="num">3</span>最高法首发涉未成年人民事审判工作指引</div>
+      <span class="tag hot">★★ 非常重要</span>
+    </div>
+    <div class="card-body">
+      最高人民法院3月18日发布《人民法院审理涉未成年人民事案件工作指引》，这是最高法首次专门针对涉未成年人民事审判制发系统性规范文件，共设总则、案件受理、审理与裁判等篇章。《指引》深入贯彻习近平总书记关于未成年人保护的重要指示，将强化对未成年人监护、抚养、教育、人格权益等方面的司法保障，全面落实"最有利于未成年人"原则，为守护"少年的你"筑牢法治防线。
+    </div>
+    <div class="writing-tip">
+      <strong>✍ 写作提示：</strong>可用于<strong>「法治社会建设」「未成年人保护」「民生保障」</strong>类大作文。论据：以司法创新强化社会治理、以制度供给弥补未成年人权益保护短板，体现"全面依法治国"在基层民生领域的深化落实。
+    </div>
+    <div class="card-meta">
+      <span>📰 最高人民法院 / 新华社</span>
+      <span>📅 2026-03-18</span>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card level-1">
+    <div class="card-header">
+      <div class="card-title"><span class="num gold">4</span>王毅与英国外长库珀通话：就中东局势交换立场</div>
+      <span class="tag warn">★ 重要</span>
+    </div>
+    <div class="card-body">
+      3月19日，中共中央政治局委员、外交部长王毅应约同英国外交大臣库珀通电话，双方重点就中东局势交换意见。王毅指出，当前中东局势持续紧张，中方坚定支持通过对话协商化解冲突，反对扩大战事规模，强调国际社会应守护平民生命安全、维护人道主义准则。此次通话是两国在当前国际动荡背景下保持战略沟通的重要举措。
+    </div>
+    <div class="writing-tip">
+      <strong>✍ 写作提示：</strong>可用于<strong>「大国外交」「人类命运共同体」「中国特色大国外交」</strong>类大作文。论述中国在全球治理中的负责任大国担当，强调"对话代替对抗"的中国方案。
+    </div>
+    <div class="card-meta">
+      <span>📰 外交部 / 新华社</span>
+      <span>📅 2026-03-19</span>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="card level-1">
+    <div class="card-header">
+      <div class="card-title"><span class="num gold">5</span>春分节气：全国紧扣一号文件推进春耕生产开局</div>
+      <span class="tag warn">★ 重要</span>
+    </div>
+    <div class="card-body">
+      今日恰逢二十四节气"春分"，也是今年农历二月初二"龙抬头"。农业农村部部署各地抓住关键农时，紧扣2026年中央一号文件要求，确保全年粮食产量目标1.4万亿斤。据央视报道，从江南育秧到华北备耕，春耕生产由南向北次第铺开，气象部门深入田间提供精准气象服务。"十五五"开局之年，粮食安全被写入政府工作报告首要任务，夯实"大国粮仓"是推进农业农村现代化的根本底线。
+    </div>
+    <div class="writing-tip">
+      <strong>✍ 写作提示：</strong>可用于<strong>「粮食安全」「乡村振兴」「农业农村现代化」</strong>类大作文。切入点：春分·春耕·"十五五"开局，三者叠加，体现"藏粮于地、藏粮于技"战略的时代新实践。
+    </div>
+    <div class="card-meta">
+      <span>📰 新华社 / 央视新闻</span>
+      <span>📅 2026-03-20</span>
+    </div>
+  </div>
+
+  <!-- ── 陕西专栏 ── -->
+  <div class="section-title">陕西专栏</div>
+
+  <!-- 6 -->
+  <div class="card level-2">
+    <div class="card-header">
+      <div class="card-title"><span class="num">6</span>陕西前2月经济"稳中向好"：民间投资增长8.8%、外贸大幅跃升</div>
+      <span class="tag hot">★★ 非常重要</span>
+    </div>
+    <div class="card-body">
+      3月19日，陕西省统计局发布今年前2月经济数据：规模以上工业增加值同比增长4.1%；固定资产投资增长1.9%，较上年全年加快4.7个百分点；民间投资增长8.8%；货物进出口总额1211.37亿元，同比大增69%，其中出口增长85.2%，机电产品占出口总额90.7%。光缆、太阳能电池、电子元件产量分别增长76.9%、47.6%和42.3%，显示数字经济与新能源产业强劲拉动。省统计局指出，陕西深化"三个年"活动、聚力打好"八场硬仗"，经济起步积极稳健。
+    </div>
+    <div class="writing-tip">
+      <strong>✍ 写作提示：</strong>可用于<strong>「高质量发展」「营商环境优化」「民营经济」「陕西地方治理」</strong>类大作文。强有力的数据支撑，可作为"一带一路"倡议带动区域开放的生动佐证，也可论证"三个年"活动的实效。
+    </div>
+    <div class="card-meta">
+      <span>📰 陕西日报 / 省统计局</span>
+      <span>📅 2026-03-19</span>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="card level-1">
+    <div class="card-header">
+      <div class="card-title"><span class="num gold">7</span>陕西启动新开工民间投资项目贷款贴息：最高3.5%补贴</div>
+      <span class="tag warn">★ 重要</span>
+    </div>
+    <div class="card-body">
+      陕西省发展改革委会同省委金融办、省财政厅等5部门联合发布通知，2026年新开工民间投资项目贷款贴息工作正式启动。政策明确，符合条件的高技术项目可获最长2年、每年3.5个百分点贴息补助，单个项目最高1000万元；制造业和其他项目分别享受3%和2%的贴息补贴。据省发改委介绍，该政策实施3年来已成为撬动民营资本深度参与陕西现代化产业体系建设的重要"杠杆"，进一步优化了营商环境，增强了市场主体信心。
+    </div>
+    <div class="writing-tip">
+      <strong>✍ 写作提示：</strong>可用于<strong>「民营经济」「优化营商环境」「政府服务型转变」</strong>类大作文。该政策体现政府"服务于企、不缺位不越位"的角色转变，可论述"有为政府+有效市场"双轮驱动高质量发展。
+    </div>
+    <div class="card-meta">
+      <span>📰 省发改委 / 陕西日报</span>
+      <span>📅 2026-03-18</span>
+    </div>
+  </div>
+
+  <!-- ── 写作素材板块 ── -->
+  <div class="section-title">写作素材提示</div>
+
+  <div class="material-box">
+    <h2>📝 今日大作文素材推荐</h2>
+
+    <div class="material-item">
+      <div class="m-title">🥇 首选素材：正确政绩观学习教育（条目①）</div>
+      <div class="m-desc">
+        <strong>主题：</strong>"为民造福是最大的政绩"<br>
+        <strong>用法：</strong>作为开篇"政策背景段"——2026年"十五五"开局，党中央在全党开展正确政绩观学习教育，正是因为"以实绩论英雄、以群众口碑评好坏"是新时代选人用人的核心标准。适合"干事创业""初心使命""作风建设"三类题型。<br>
+        <strong>金句备用：</strong>"坚持从实际出发、按规律办事，自觉为人民出政绩、以实干出政绩。——习近平"
+      </div>
+      <span class="m-tag">适用题型：综合分析 · 大作文</span>
+    </div>
+
+    <div class="material-item">
+      <div class="m-title">🥈 次选素材：陕西经济"稳中向好"数据（条目⑥）</div>
+      <div class="m-desc">
+        <strong>主题：</strong>"以数据说话，用实绩服人"<br>
+        <strong>用法：</strong>在涉及"陕西高质量发展""营商环境""数字经济"类题目中作为本地鲜活案例。民间投资+8.8%、出口+85.2%均为有说服力的硬数据，可直接写入政策建议类答题。
+      </div>
+      <span class="m-tag">适用题型：情景模拟 · 政策建议</span>
+    </div>
+
+    <div class="material-item">
+      <div class="m-title">🥉 第三选：春分春耕·粮食安全（条目⑤）</div>
+      <div class="m-desc">
+        <strong>主题：</strong>"中国饭碗要牢牢端在自己手中"<br>
+        <strong>用法：</strong>结合节气文化（春分·龙抬头）与政策主线（一号文件），论述粮食安全作为"国之大者"的战略底线，适合"三农""乡村振兴""基层治理"类作文开篇借景引题。
+      </div>
+      <span class="m-tag">适用题型：大作文开篇 · 情境写作</span>
+    </div>
+
+    <div class="material-item">
+      <div class="m-title">💡 备用：社会治理现代化（条目②③联用）</div>
+      <div class="m-desc">
+        <strong>主题：</strong>"共建共治共享的社会治理格局"<br>
+        <strong>用法：</strong>修改社会团体条例（条目②）+ 最高法未成年人指引（条目③），可组成"法治+多元参与"的双轮论据，论述"打造人人有责、人人尽责、人人享有的社会治理共同体"的现实路径。
+      </div>
+      <span class="m-tag">适用题型：综合分析 · 社会治理</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- 底部 -->
+<div class="footer">
+  <div>数据来源：新华社 · 人民日报 · 央视新闻 · 陕西日报 · 省统计局</div>
+  <div>本页面由 AI 自动整理 · 供遴选备考参考</div>
+  <div style="margin-top:6px; color:#ccc;">生成时间：2026年3月20日 · 春分</div>
+</div>
+
+</body>
+</html>
