@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 05 每日学习 | 陕西遴选备考</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f0f2f5;
+      color: #333;
+    }
+
+    /* ===== 顶部封面 ===== */
+    .cover {
+      background: linear-gradient(135deg, #1a3a6b 0%, #0d2340 60%, #1a3a6b 100%);
+      color: white;
+      padding: 40px 20px 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 250px; height: 250px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 50%;
+    }
+    .cover-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 4px 16px;
+      font-size: 13px;
+      margin-bottom: 14px;
+      letter-spacing: 1px;
+    }
+    .cover h1 {
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+    .cover h1 span { color: #f0c040; }
+    .cover-sub {
+      font-size: 14px;
+      opacity: 0.75;
+      margin-bottom: 20px;
+    }
+    .cover-tags {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .cover-tag {
+      background: rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* ===== 导航 ===== */
+    .nav {
+      background: white;
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      border-bottom: 1px solid #e8e8e8;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .nav-btn {
+      padding: 14px 18px;
+      font-size: 13px;
+      color: #666;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .nav-btn:hover { color: #7b3fa0; }
+    .nav-btn.active { color: #7b3fa0; border-bottom-color: #7b3fa0; font-weight: bold; }
+
+    /* ===== 内容区 ===== */
+    .content { padding: 20px 16px; max-width: 700px; margin: 0 auto; }
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* ===== 通用卡片 ===== */
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #5b2d82;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e8d9f5;
+    }
+
+    /* ===== 金句区（紫色主题） ===== */
+    .juju-card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      border-left: 5px solid #7b3fa0;
+    }
+    .juju-num {
+      display: inline-block;
+      background: #7b3fa0;
+      color: white;
+      border-radius: 50%;
+      width: 28px; height: 28px;
+      line-height: 28px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .juju-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #7b3fa0;
+      margin-bottom: 12px;
+    }
+    .juju-quote {
+      background: #f8f1fd;
+      border-radius: 8px;
+      padding: 14px 16px 14px 32px;
+      font-size: 15px;
+      line-height: 1.9;
+      color: #222;
+      font-weight: 500;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .juju-quote::before {
+      content: '"';
+      font-size: 40px;
+      color: #d0a8e8;
+      position: absolute;
+      top: -4px; left: 8px;
+      line-height: 1;
+    }
+    .meta { font-size: 13px; color: #666; line-height: 2; }
+    .tag {
+      display: inline-block;
+      background: #f0e6fa;
+      color: #7b3fa0;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      margin-right: 4px;
+      margin-top: 4px;
+    }
+    .blue-tag {
+      display: inline-block;
+      background: #d6eaf8;
+      color: #1a5276;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      margin-right: 4px;
+      margin-top: 4px;
+    }
+
+    /* ===== 复习表 ===== */
+    .review-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .review-table th {
+      background: #7b3fa0;
+      color: white;
+      padding: 8px 10px;
+      text-align: left;
+    }
+    .review-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .review-table tr:last-child td { border-bottom: none; }
+    .review-table tr:nth-child(even) td { background: #f8f1fd; }
+
+    /* ===== 范文区 ===== */
+    .fanwen-card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      border-top: 4px solid #7b3fa0;
+    }
+    .fanwen-header {
+      background: linear-gradient(135deg, #5b2d82, #3d1b5e);
+      color: white;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+    .fanwen-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+    .fanwen-meta {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+    .fanwen-section {
+      margin-bottom: 14px;
+    }
+    .fanwen-section-title {
+      font-size: 14px;
+      font-weight: bold;
+      color: #5b2d82;
+      border-left: 3px solid #7b3fa0;
+      padding-left: 10px;
+      margin-bottom: 8px;
+    }
+    .fanwen-text {
+      font-size: 14px;
+      line-height: 2;
+      color: #444;
+      background: #faf7fd;
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+    .fanwen-highlight {
+      background: #fff3cd;
+      border-left: 3px solid #f39c12;
+      border-radius: 0 6px 6px 0;
+      padding: 10px 14px;
+      font-size: 13px;
+      line-height: 1.8;
+      color: #555;
+      margin: 8px 0;
+    }
+    .analysis-box {
+      background: #eaf4fb;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 13px;
+      line-height: 1.9;
+      color: #333;
+      margin-top: 8px;
+    }
+    .analysis-box strong { color: #1a5276; }
+    .structure-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px dashed #e8d9f5;
+    }
+    .structure-item:last-child { border-bottom: none; }
+    .structure-num {
+      background: #7b3fa0;
+      color: white;
+      border-radius: 50%;
+      width: 24px; height: 24px;
+      line-height: 24px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    .structure-content {
+      font-size: 13px;
+      line-height: 1.8;
+      color: #444;
+    }
+    .structure-content strong { color: #5b2d82; }
+
+    /* ===== 计划区 ===== */
+    .plan-week-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .plan-week-header {
+      background: linear-gradient(135deg, #1a3a6b, #0d2340);
+      color: white;
+      padding: 14px 18px;
+      font-size: 15px;
+      font-weight: bold;
+    }
+    .plan-day {
+      padding: 14px 18px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .plan-day:last-child { border-bottom: none; }
+    .plan-day-title {
+      font-weight: bold;
+      color: #1a3a6b;
+      font-size: 14px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .plan-today {
+      background: #f8f1fd;
+      border-left: 3px solid #7b3fa0;
+    }
+    .plan-today .plan-day-title { color: #7b3fa0; }
+    .plan-task {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.8;
+      padding-left: 20px;
+    }
+    .today-badge {
+      background: #7b3fa0;
+      color: white;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: normal;
+    }
+
+    /* ===== 框架区 ===== */
+    .framework-card {
+      background: white;
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      border-top: 4px solid #1a3a6b;
+    }
+    .fw-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .fw-num {
+      background: #1a3a6b;
+      color: white;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+    .fw-name { font-size: 16px; font-weight: bold; color: #1a3a6b; }
+    .fw-logic {
+      background: #eaf0f9;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 13px;
+      line-height: 1.9;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .fw-scene {
+      font-size: 12px;
+      color: #888;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .fw-scene::before { content: "💡"; }
+
+    /* ===== 底部 ===== */
+    .footer {
+      text-align: center;
+      color: #aaa;
+      font-size: 12px;
+      padding: 20px 0 30px;
+    }
+
+    /* ===== 进度条 ===== */
+    .progress-bar-wrap {
+      background: #f0f0f0;
+      border-radius: 10px;
+      height: 6px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .progress-bar {
+      height: 100%;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #7b3fa0, #a855c8);
+    }
+
+    /* ===== 关键词 ===== */
+    .keyword {
+      display: inline-block;
+      background: #5b2d82;
+      color: white;
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-size: 13px;
+      margin: 4px 4px 0 0;
+    }
+
+    /* ===== 提示框 ===== */
+    .tip-box {
+      background: linear-gradient(135deg, #f8f1fd, #fff);
+      border-left: 4px solid #7b3fa0;
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      font-size: 13px;
+      line-height: 1.8;
+      color: #555;
+      margin: 12px 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- 封面 -->
+<div class="cover">
+  <div class="cover-badge">陕西遴选 · 备考计划</div>
+  <h1>Day <span>05</span></h1>
+  <div class="cover-sub">2026年03月21日（周六）· 第二周</div>
+  <div class="cover-tags">
+    <div class="cover-tag">🔴 金句积累 · 党建/廉洁自律</div>
+    <div class="cover-tag">📄 范文学习 · 全面从严治党</div>
+    <div class="cover-tag">✍️ 写作框架 · 思想-制度-行动</div>
+  </div>
+</div>
+
+<!-- 导航 -->
+<div class="nav">
+  <div class="nav-btn active" onclick="switchTab('juju', this)">🔴 今日金句</div>
+  <div class="nav-btn" onclick="switchTab('fanwen', this)">📄 范文学习</div>
+  <div class="nav-btn" onclick="switchTab('plan', this)">📅 本周计划</div>
+  <div class="nav-btn" onclick="switchTab('framework', this)">✍️ 写作框架</div>
+</div>
+
+<!-- 内容 -->
+<div class="content">
+
+  <!-- ===== 金句 ===== -->
+  <div class="section active" id="sec-juju">
+    <div class="section-title">🔴 Day 05 金句积累 · 党建/廉洁自律</div>
+
+    <div class="juju-card">
+      <div class="juju-num">①</div>
+      <div class="juju-title">腐败是最大威胁，反腐败是最彻底的自我革命</div>
+      <div class="juju-quote">腐败是我们党面临的最大威胁，反腐败是最彻底的自我革命。进入新时代，面对党内党风廉政建设和反腐败斗争的突出问题，我们坚持有腐必反、有贪必肃，不断纯洁干部队伍。</div>
+      <div class="meta">
+        <div>▶ 出处：2025年1月6日，习近平在二十届中央纪委四次全会上的重要讲话</div>
+        <div style="margin-top:6px">▶ 适用：<span class="tag">反腐败斗争</span><span class="tag">自我革命</span><span class="tag">全面从严治党</span><span class="tag">党建文章破题</span></div>
+        <div style="margin-top:6px">▶ 写作示范：可用于大作文开篇破题，突出全面从严治党的紧迫性；分论点"以自我革命精神推进党的建设"的标题支撑句</div>
+      </div>
+    </div>
+
+    <div class="juju-card">
+      <div class="juju-num">②</div>
+      <div class="juju-title">明大德、守公德、严私德</div>
+      <div class="juju-quote">共产党人拥有人格力量，才能赢得民心。全党同志都要明大德、守公德、严私德，清清白白做人、干干净净做事，做到克己奉公、以俭修身，永葆清正廉洁的政治本色。</div>
+      <div class="meta">
+        <div>▶ 出处：2021年6月29日，"七一勋章"颁授仪式重要讲话</div>
+        <div style="margin-top:6px">▶ 适用：<span class="tag">廉洁自律</span><span class="tag">党员修养</span><span class="tag">道德建设</span><span class="tag">人格力量</span></div>
+        <div style="margin-top:6px">▶ 写作示范："明大德→守公德→严私德"三层递进结构完美契合分论点；结尾升华段的点睛之笔</div>
+      </div>
+    </div>
+
+    <div class="juju-card">
+      <div class="juju-num">③</div>
+      <div class="juju-title">把他律转化为自律，内化为日用而不觉的言行准则</div>
+      <div class="juju-quote">加强党的纪律建设是一项经常性工作，要引导党员、干部把他律转化为自律，内化为日用而不觉的言行准则，建立常态化长效化的纪律教育机制。</div>
+      <div class="meta">
+        <div>▶ 出处：2025年1月6日，二十届中央纪委四次全会重要讲话</div>
+        <div style="margin-top:6px">▶ 适用：<span class="tag">纪律建设</span><span class="tag">廉洁自律</span><span class="tag">内外兼修</span><span class="tag">党员教育</span></div>
+        <div style="margin-top:6px">▶ 写作示范：陕西遴选"党纪学习教育"题目必用句；体现"外化于行、内化于心"的辩证逻辑</div>
+      </div>
+    </div>
+
+    <div class="juju-card">
+      <div class="juju-num">④</div>
+      <div class="juju-title">打铁还需自身硬</div>
+      <div class="juju-quote">打铁还需自身硬。我们的责任，就是同全党同志一道，坚持党要管党、从严治党，切实解决自身存在的突出问题，切实改进工作作风，密切联系群众，使我们的党始终成为中国特色社会主义事业的坚强领导核心。</div>
+      <div class="meta">
+        <div>▶ 出处：2012年11月15日，习近平在十八届中央政治局常委与中外记者见面会上的讲话（十八大召开后首次亮相）</div>
+        <div style="margin-top:6px">▶ 适用：<span class="tag">党的自身建设</span><span class="tag">作风建设</span><span class="tag">纪检监察</span><span class="tag">经典金句</span></div>
+        <div style="margin-top:6px">▶ 写作示范：党建类文章必备经典，使用频率极高；可作文章标题核心词</div>
+      </div>
+    </div>
+
+    <div class="juju-card">
+      <div class="juju-num">⑤</div>
+      <div class="juju-title">驰而不息推进全面从严治党</div>
+      <div class="juju-quote">面对新征程上的新挑战新考验，我们必须高度警醒，永远保持赶考的清醒和谨慎，驰而不息推进全面从严治党，使百年大党在自我革命中不断焕发蓬勃生机，始终成为中国人民最可靠、最坚强的主心骨。</div>
+      <div class="meta">
+        <div>▶ 出处：2022年10月23日，习近平在二十届中共中央政治局常委同中外记者见面时的讲话</div>
+        <div style="margin-top:6px">▶ 适用：<span class="tag">全面从严治党</span><span class="tag">赶考精神</span><span class="tag">自我革命</span><span class="tag">文章结尾升华</span></div>
+        <div style="margin-top:6px">▶ 写作示范："驰而不息"四字极具力度，适合文章结尾"永远在路上"的升华表达</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title" style="font-size:15px">📝 复习速查</div>
+      <table class="review-table">
+        <tr><th>序号</th><th>关键词记忆</th><th>出处时间</th></tr>
+        <tr><td>①</td><td>腐败→最大威胁→反腐败→最彻底自我革命</td><td>2025年1月（纪委四次全会）</td></tr>
+        <tr><td>②</td><td>明大德·守公德·严私德→清清白白→干干净净</td><td>2021年6月（七一勋章颁授）</td></tr>
+        <tr><td>③</td><td>他律→自律→内化→日用而不觉</td><td>2025年1月（纪委四次全会）</td></tr>
+        <tr><td>④</td><td>打铁→自身硬→党要管党从严治党</td><td>2012年11月（十八大后首亮相）</td></tr>
+        <tr><td>⑤</td><td>驰而不息→赶考清醒→自我革命→蓬勃生机</td><td>2022年10月（二十大后）</td></tr>
+      </table>
+      <div style="margin-top:12px;font-size:13px;color:#999">💡 建议：今日抄写一遍；重点背熟②③；①④为经典金句，务必牢记出处</div>
+      <div class="progress-bar-wrap" style="margin-top:14px">
+        <div class="progress-bar" style="width:16.7%"></div>
+      </div>
+      <div style="font-size:12px;color:#aaa;margin-top:6px;text-align:right">30天进度：Day05 / 30</div>
+    </div>
+
+    <div class="card">
+      <div class="section-title" style="font-size:15px">🗺️ 陕西结合热点</div>
+      <div class="tip-box">
+        <strong>陕西本地切入点：</strong><br>
+        ① 陕西省委巡视工作发现的问题整改落实（"两个责任"压实）<br>
+        ② 陕西"勤快严实精细廉"干部作风要求，将廉洁自律融入日常<br>
+        ③ 秦岭保护问题整改——从教训中汲取廉洁建设经验<br>
+        ④ 陕西历届纪委全会精神：推进不敢腐、不能腐、不想腐一体建设
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 范文学习 ===== -->
+  <div class="section" id="sec-fanwen">
+    <div class="section-title">📄 Day 05 范文学习 · 全面从严治党</div>
+
+    <div class="fanwen-card">
+      <div class="fanwen-header">
+        <div class="fanwen-title">《紧握作风建设之笔，绘就全面从严治党新画卷》</div>
+        <div class="fanwen-meta">来源：2025公务员遴选考试大作文范文 | 类型：党建党纪类 | 难度：★★★★☆</div>
+      </div>
+
+      <div class="fanwen-section">
+        <div class="fanwen-section-title">📌 文章立意解析</div>
+        <div class="analysis-box">
+          <strong>核心主题：</strong>作风建设是党的建设永恒课题，全面从严治党"永远在路上"<br>
+          <strong>文章逻辑：</strong>总起（重要性）→ 分论①（自我革命/党性）→ 分论②（权力监督）→ 分论③（责任担当）→ 总结（号召）<br>
+          <strong>陕西遴选适用场景：</strong>党政机关干部晋升，须体现对全面从严治党的深刻理解，此类文章价值极高
+        </div>
+      </div>
+
+      <div class="fanwen-section">
+        <div class="fanwen-section-title">✍️ 开头段（示范）</div>
+        <div class="fanwen-text">
+          "全面从严治党永远在路上，党的自我革命永远在路上。"党的十八大以来，以习近平同志为核心的党中央将党风廉政建设和反腐败斗争提升到关乎党和国家生死存亡的战略高度，以"打铁还需自身硬"的政治担当，书写了百年大党自我净化、自我完善的壮阔篇章。新征程上，我们当持续擦亮党的政治本色，紧握作风建设之笔，绘就全面从严治党的崭新画卷。
+        </div>
+        <div class="fanwen-highlight">
+          📝 <strong>分析：</strong>开篇引用习近平金句"永远在路上"定调，再用"打铁还需自身硬"承接，历史感与使命感兼备。注意"书写"与后文"笔"的意象呼应，凸显文章主线。
+        </div>
+      </div>
+
+      <div class="fanwen-section">
+        <div class="fanwen-section-title">✍️ 三大分论点结构</div>
+        <div class="structure-item">
+          <div class="structure-num">一</div>
+          <div class="structure-content">
+            <strong>推进自我革命，筑牢思想根基</strong><br>
+            坚定理想信念是党员廉洁自律的"总开关"。要明大德、守公德、严私德，引导党员干部把他律转化为自律，将纪律规矩内化为日用而不觉的行为准则。
+          </div>
+        </div>
+        <div class="structure-item">
+          <div class="structure-num">二</div>
+          <div class="structure-content">
+            <strong>规范权力运行，常怀敬畏之心</strong><br>
+            权力是把双刃剑。要树牢正确权力观、政绩观、事业观，强化对权力的制度性约束，让权力在阳光下运行、在制度的笼子里运行。
+          </div>
+        </div>
+        <div class="structure-item">
+          <div class="structure-num">三</div>
+          <div class="structure-content">
+            <strong>压实主体责任，形成治理合力</strong><br>
+            各级党委要扛起全面从严治党主体责任，实现"两个责任"同频共振，推进不敢腐、不能腐、不想腐一体建设，让风清气正成为政治生态的底色。
+          </div>
+        </div>
+      </div>
+
+      <div class="fanwen-section">
+        <div class="fanwen-section-title">✍️ 结尾段（示范）</div>
+        <div class="fanwen-text">
+          全面从严治党是一场输不起的持久战。面对新征程上的新挑战新考验，我们当"驰而不息推进全面从严治党"，以自我革命的政治勇气破除党内积弊，以"永远赶考"的清醒谨慎保持政治定力，使百年大党在自我革命中不断焕发蓬勃生机。清清白白做人，干干净净做事，以实际行动践行对党和人民的庄严承诺。
+        </div>
+        <div class="fanwen-highlight">
+          📝 <strong>分析：</strong>结尾引用金句②（清清白白/干干净净）和⑤（驰而不息），与今日金句形成完整闭环。"输不起的持久战"句式有力度，"赶考清醒"照应党史传统，升华充分。
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title" style="font-size:15px">🔍 技法精析：金句嵌入四招</div>
+      <table class="review-table">
+        <tr><th>技法</th><th>示范</th><th>效果</th></tr>
+        <tr><td>直引破题</td><td>"打铁还需自身硬"，这是党的庄严承诺……</td><td>气势磅礴，定调有力</td></tr>
+        <tr><td>化用融入</td><td>以"三自"（明大德·守公德·严私德）为修身准则……</td><td>自然流畅，不显堆砌</td></tr>
+        <tr><td>对比衬托</td><td>与腐败之害形成对比，方显廉洁之贵……</td><td>逻辑鲜明，说服力强</td></tr>
+        <tr><td>结尾升华</td><td>"驰而不息"——以金句收束，意蕴深长</td><td>余音绕梁，印象深刻</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="section-title" style="font-size:15px">📚 范文学习：陕西视角切入</div>
+      <div class="analysis-box">
+        <strong>典型案例素材（可写入文章）：</strong><br><br>
+        <strong>秦岭整改案例：</strong>2018年以来，陕西以壮士断腕的勇气整治秦岭北麓违建问题，查处问责干部500余人。这不仅是生态保护的胜利，更是全面从严治党向问题深处延伸的生动注脚。<br><br>
+        <strong>延安精神传承：</strong>陕西是党的革命根据地，延安精神中"实事求是、艰苦奋斗"的精髓，与廉洁自律一脉相承。在党建文章中结合陕西历史优势，能显著提升文章地域辨识度。<br><br>
+        <strong>写法建议：</strong>"历史底色（延安精神）+ 现实案例（秦岭整改）+ 未来愿景（政治生态净化）"三段式陕西特色表达
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 计划 ===== -->
+  <div class="section" id="sec-plan">
+    <div class="section-title">📅 本周学习计划 · 第二周</div>
+
+    <div class="card" style="background:linear-gradient(135deg,#f8f1fd,#fff);border-left:4px solid #7b3fa0">
+      <div style="font-size:15px;font-weight:bold;color:#7b3fa0;margin-bottom:8px">🌟 今日任务（周六）</div>
+      <div style="font-size:14px;color:#555;line-height:2">
+        ✅ 🔴 金句积累：<strong>党建/廉洁自律主题，5条</strong>（已完成）<br>
+        ⬜ 📄 范文学习②：<strong>全面从严治党范文精析</strong>（切换到"范文学习"查看）<br>
+        ⬜ 📝 练习：用"思想-制度-行动"框架写<strong>200字小段落</strong><br>
+        ⬜ 🔁 复习：默写本周Day02乡村振兴金句3条
+      </div>
+    </div>
+
+    <div class="plan-week-card">
+      <div class="plan-week-header">📅 第二周每日任务安排</div>
+      <div class="plan-day">
+        <div class="plan-day-title">周一（Day02补充）</div>
+        <div class="plan-task">📌 金句积累：基层治理主题 5条（第二轮）<br>📖 故事素材：焦裕禄精神</div>
+      </div>
+      <div class="plan-day">
+        <div class="plan-day-title">周二（Day03补充）</div>
+        <div class="plan-task">📌 金句积累：乡村振兴主题 5条<br>✍️ 框架学习：框架①总分总深化练习</div>
+      </div>
+      <div class="plan-day">
+        <div class="plan-day-title">周三（Day04）</div>
+        <div class="plan-task">📌 金句积累：政务服务/数字政府 5条<br>📖 故事素材：陕西"秦务员"改革</div>
+      </div>
+      <div class="plan-day">
+        <div class="plan-day-title">周四</div>
+        <div class="plan-task">📌 金句积累：生态文明/绿色发展 5条<br>🔍 精析文章①：选取政论文，分析立意结构</div>
+      </div>
+      <div class="plan-day">
+        <div class="plan-day-title">周五</div>
+        <div class="plan-task">📌 金句积累：社会治理/民生保障 5条<br>📄 范文学习①：学习分论点提炼方式</div>
+      </div>
+      <div class="plan-day plan-today">
+        <div class="plan-day-title">周六 <span class="today-badge">今天</span></div>
+        <div class="plan-task">🔴 金句积累：党建/廉洁自律 5条<br>📄 范文学习②：全面从严治党范文精析<br>📝 练习：用"思想-制度-行动"框架写200字段落</div>
+      </div>
+      <div class="plan-day">
+        <div class="plan-day-title">周日</div>
+        <div class="plan-task">🔍 精析文章②：可选领导讲话，输出精析笔记<br>✍️ 框架学习：框架⑥"思想-制度-行动"深化<br>📝 周总结：复习本周金句，默写测试</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:15px;font-weight:bold;color:#1a3a6b;margin-bottom:12px">📊 30天学习目标</div>
+      <table class="review-table">
+        <tr><th>模块</th><th>每日目标</th><th>30天完成量</th><th>当前进度</th></tr>
+        <tr><td>主题金句</td><td>每日5条</td><td>150条</td><td>25条 ✅</td></tr>
+        <tr><td>故事素材</td><td>每日1个</td><td>30个</td><td>3个</td></tr>
+        <tr><td>范文学习</td><td>每周2篇</td><td>8篇</td><td>1篇 ✅</td></tr>
+        <tr><td>精析文章</td><td>每周2篇</td><td>8篇</td><td>0篇</td></tr>
+        <tr><td>框架掌握</td><td>全程贯穿</td><td>10个</td><td>2个</td></tr>
+        <tr><td>实战写作</td><td>每两周1篇</td><td>2篇</td><td>0篇</td></tr>
+      </table>
+      <div class="progress-bar-wrap" style="margin-top:12px">
+        <div class="progress-bar" style="width:16.7%"></div>
+      </div>
+      <div style="font-size:12px;color:#aaa;margin-top:4px;text-align:right">Day05/30，已完成16.7%</div>
+    </div>
+  </div>
+
+  <!-- ===== 框架 ===== -->
+  <div class="section" id="sec-framework">
+    <div class="section-title">✍️ 10大写作框架</div>
+
+    <div class="card" style="background:linear-gradient(135deg,#f8f1fd,#fff);border-left:4px solid #7b3fa0;margin-bottom:20px">
+      <div style="font-size:14px;font-weight:bold;color:#7b3fa0;margin-bottom:6px">🌟 今日重点：框架⑥ 思想-制度-行动</div>
+      <div style="font-size:13px;color:#666;line-height:1.8">党建、廉洁自律类文章最实用框架，陕西遴选高频考查方向。<br>今日范文即是此框架的完整示范，建议对照学习。</div>
+    </div>
+
+    <div class="framework-card" style="border-top-color:#7b3fa0">
+      <div class="fw-header">
+        <span class="fw-num" style="background:#7b3fa0">框架⑥</span>
+        <span class="fw-name" style="color:#7b3fa0">思想 — 制度 — 行动</span>
+        <span class="today-badge">今日重点</span>
+      </div>
+      <div class="fw-logic">
+        <strong>第一层（思想）：</strong>理想信念 / 党性修养 / 廉洁自律意识<br>
+        <strong>第二层（制度）：</strong>监督机制 / 制度笼子 / 法规约束<br>
+        <strong>第三层（行动）：</strong>实践落实 / 典型示范 / 作风建设长效化
+      </div>
+      <div style="background:#f8f1fd;border-radius:6px;padding:10px 12px;font-size:13px;margin-bottom:8px;line-height:1.8">
+        <strong style="color:#7b3fa0">党建类套用示范：</strong><br>
+        ① 思想层：强化理想信念教育，引导干部明大德、守公德、严私德<br>
+        ② 制度层：健全权力运行机制，将权力关进制度的笼子<br>
+        ③ 行动层：推动全面从严治党向基层延伸，解决群众身边的腐败问题
+      </div>
+      <div class="fw-scene">适用题型：党建类、廉洁类、作风建设类，陕西遴选高频题型</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架①</span>
+        <span class="fw-name">总 — 分 — 总</span>
+      </div>
+      <div class="fw-logic">引论（点题）→ 分论点1 → 分论点2 → 分论点3 → 结论升华</div>
+      <div class="fw-scene">适用题型：观点类、意义类（如"谈谈你对……的认识"）</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架②</span>
+        <span class="fw-name">问题 — 原因 — 对策</span>
+      </div>
+      <div class="fw-logic">提出问题 → 分析根源 → 系统对策 → 愿景展望</div>
+      <div class="fw-scene">适用题型：问题分析类（如"针对……存在的问题……"）</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架③</span>
+        <span class="fw-name">是什么 — 为什么 — 怎么做</span>
+      </div>
+      <div class="fw-logic">概念阐释 → 重要意义 → 路径举措 → 结尾</div>
+      <div class="fw-scene">适用题型：万能通用框架，几乎适合所有题目</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架④</span>
+        <span class="fw-name">历史 — 现状 — 展望</span>
+      </div>
+      <div class="fw-logic">历史成就 → 当前形势 → 未来方向</div>
+      <div class="fw-scene">适用题型：发展类、成就类主题</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架⑤</span>
+        <span class="fw-name">政治 — 经济 — 社会 — 文化</span>
+      </div>
+      <div class="fw-logic">从四个维度分别展开论述</div>
+      <div class="fw-scene">适用题型：宏观综合类题目</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架⑦</span>
+        <span class="fw-name">知 — 信 — 行</span>
+      </div>
+      <div class="fw-logic">认知层 → 信念层 → 实践层</div>
+      <div class="fw-scene">适用题型：党员修养、价值观类主题</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架⑧</span>
+        <span class="fw-name">主体分析法</span>
+      </div>
+      <div class="fw-logic">政府 → 社会 → 个人（各主体职责分析）</div>
+      <div class="fw-scene">适用题型：社会治理、民生类主题</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架⑨</span>
+        <span class="fw-name">理论 — 实践 — 价值</span>
+      </div>
+      <div class="fw-logic">理论依据 → 实践路径 → 现实价值</div>
+      <div class="fw-scene">适用题型：政策解读类题目</div>
+    </div>
+
+    <div class="framework-card">
+      <div class="fw-header">
+        <span class="fw-num">框架⑩</span>
+        <span class="fw-name">破立结合</span>
+      </div>
+      <div class="fw-logic">破（批判错误观点/现象）→ 立（正确做法）→ 升华</div>
+      <div class="fw-scene">适用题型：辩证分析类题目</div>
+    </div>
+
+  </div>
+
+  <div class="footer">Day 05 · 2026-03-21 · 陕西遴选备考 · 党建/廉洁自律主题</div>
+
+</div>
+
+<script>
+  function switchTab(name, btn) {
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('sec-' + name).classList.add('active');
+    window.scrollTo({ top: document.querySelector('.nav').offsetTop - 10, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
