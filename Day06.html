@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 06 每日学习 | 陕西遴选备考</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f0f2f5;
+      color: #333;
+    }
+
+    /* ===== 顶部封面 ===== */
+    .cover {
+      background: linear-gradient(135deg, #1b4f72 0%, #0e2f44 60%, #1b4f72 100%);
+      color: white;
+      padding: 40px 20px 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 250px; height: 250px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 50%;
+    }
+    .cover-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 4px 16px;
+      font-size: 13px;
+      margin-bottom: 14px;
+      letter-spacing: 1px;
+    }
+    .cover h1 {
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+    .cover h1 span { color: #f39c12; }
+    .cover-sub {
+      font-size: 14px;
+      opacity: 0.75;
+      margin-bottom: 20px;
+    }
+    .cover-tags {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .cover-tag {
+      background: rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .week-summary-badge {
+      display: inline-block;
+      background: rgba(243,156,18,0.25);
+      border: 1px solid rgba(243,156,18,0.5);
+      border-radius: 20px;
+      padding: 4px 16px;
+      font-size: 12px;
+      margin-top: 10px;
+      color: #f7dc6f;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== 导航 ===== */
+    .nav {
+      background: white;
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      border-bottom: 1px solid #e8e8e8;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      overflow-x: auto;
+    }
+    .nav-btn {
+      padding: 14px 15px;
+      font-size: 13px;
+      color: #666;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+      white-space: nowrap;
+      user-select: none;
+      flex-shrink: 0;
+    }
+    .nav-btn:hover { color: #1b4f72; }
+    .nav-btn.active { color: #1b4f72; border-bottom-color: #1b4f72; font-weight: bold; }
+
+    /* ===== 内容区 ===== */
+    .content { padding: 20px 16px; max-width: 700px; margin: 0 auto; }
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* ===== 通用卡片 ===== */
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1b4f72;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #d5e8f5;
+    }
+
+    /* ===== 精析文章区 ===== */
+    .article-meta {
+      background: linear-gradient(135deg, #eaf4fb, #d6eaf8);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+    .article-meta strong { color: #1b4f72; }
+    .article-title-box {
+      background: #1b4f72;
+      color: white;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .sub-title {
+      font-size: 15px;
+      font-weight: bold;
+      color: #1b4f72;
+      margin: 16px 0 8px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #d5e8f5;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .highlight-box {
+      background: #fef9e7;
+      border-left: 4px solid #f39c12;
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      font-size: 14px;
+      line-height: 1.9;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .highlight-box.blue {
+      background: #eaf4fb;
+      border-left-color: #1b4f72;
+    }
+    .highlight-box.green {
+      background: #eafaf1;
+      border-left-color: #27ae60;
+    }
+    .highlight-box.red {
+      background: #fdf2f2;
+      border-left-color: #c0392b;
+    }
+    .structure-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 10px 0;
+    }
+    .flow-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .flow-num {
+      background: #1b4f72;
+      color: white;
+      border-radius: 50%;
+      width: 26px; height: 26px;
+      line-height: 26px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: bold;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .flow-content {
+      flex: 1;
+      font-size: 14px;
+      line-height: 1.8;
+      color: #444;
+      background: #f8fbfd;
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+    .flow-content strong { color: #1b4f72; }
+    .score-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    .score-table th {
+      background: #1b4f72;
+      color: white;
+      padding: 8px 10px;
+      text-align: left;
+    }
+    .score-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #f0f0f0;
+      vertical-align: top;
+      line-height: 1.7;
+    }
+    .score-table tr:last-child td { border-bottom: none; }
+    .score-table tr:nth-child(even) td { background: #f0f7fd; }
+    .star { color: #f39c12; }
+    .writing-sample {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 14px;
+      line-height: 2;
+      color: #333;
+      border: 1px dashed #b8daef;
+      margin: 10px 0;
+    }
+    .writing-sample em { color: #c0392b; font-style: normal; font-weight: bold; }
+
+    /* ===== 框架学习区 ===== */
+    .fw-main-card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      border-top: 5px solid #1b4f72;
+    }
+    .fw-badge {
+      display: inline-block;
+      background: #1b4f72;
+      color: white;
+      border-radius: 8px;
+      padding: 3px 12px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-right: 8px;
+    }
+    .fw-name { font-size: 16px; font-weight: bold; color: #1b4f72; }
+    .fw-header { display: flex; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 6px; }
+    .fw-logic {
+      background: #eaf0f9;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 13px;
+      line-height: 1.9;
+      color: #333;
+      margin-bottom: 12px;
+    }
+    .fw-scene {
+      font-size: 12px;
+      color: #888;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .fw-scene::before { content: "💡"; }
+    .fw-steps {
+      margin-top: 12px;
+    }
+    .fw-step {
+      padding: 10px 14px;
+      border-left: 3px solid #1b4f72;
+      margin-bottom: 8px;
+      background: #f8fbfd;
+      border-radius: 0 8px 8px 0;
+    }
+    .fw-step-title { font-weight: bold; color: #1b4f72; font-size: 14px; margin-bottom: 4px; }
+    .fw-step-content { font-size: 13px; color: #555; line-height: 1.7; }
+    .fw-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .fw-compare-item {
+      background: #f0f7fd;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 13px;
+    }
+    .fw-compare-item strong { color: #1b4f72; display: block; margin-bottom: 4px; }
+    .today-badge {
+      background: #e67e22;
+      color: white;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: normal;
+    }
+    .new-badge {
+      background: #27ae60;
+      color: white;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: normal;
+    }
+
+    /* ===== 周总结区 ===== */
+    .week-banner {
+      background: linear-gradient(135deg, #1b4f72, #0e2f44);
+      color: white;
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .week-banner h2 { font-size: 20px; margin-bottom: 6px; }
+    .week-banner p { font-size: 14px; opacity: 0.8; }
+    .week-stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin: 12px 0;
+    }
+    .week-stat-item {
+      background: rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+    }
+    .week-stat-num { font-size: 24px; font-weight: bold; color: #f7dc6f; }
+    .week-stat-label { font-size: 11px; opacity: 0.8; margin-top: 2px; }
+    .juju-review-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .juju-review-header {
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: bold;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .juju-item {
+      padding: 10px 16px;
+      border-bottom: 1px solid #f5f5f5;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+    .juju-item:last-child { border-bottom: none; }
+    .juju-item .kw { font-weight: bold; color: #1b4f72; }
+    .juju-item .src { color: #999; font-size: 12px; }
+    .check-list {
+      list-style: none;
+      padding: 0;
+    }
+    .check-list li {
+      padding: 8px 0 8px 24px;
+      border-bottom: 1px dashed #eee;
+      font-size: 14px;
+      line-height: 1.7;
+      position: relative;
+      color: #444;
+    }
+    .check-list li::before {
+      content: "✅";
+      position: absolute;
+      left: 0;
+      font-size: 13px;
+    }
+    .check-list li:last-child { border-bottom: none; }
+    .pending-list {
+      list-style: none;
+      padding: 0;
+    }
+    .pending-list li {
+      padding: 8px 0 8px 24px;
+      border-bottom: 1px dashed #eee;
+      font-size: 14px;
+      line-height: 1.7;
+      position: relative;
+      color: #666;
+    }
+    .pending-list li::before {
+      content: "⬜";
+      position: absolute;
+      left: 0;
+      font-size: 13px;
+    }
+    .pending-list li:last-child { border-bottom: none; }
+    .next-week-card {
+      background: linear-gradient(135deg, #fff8f0, #fff);
+      border: 1px solid #f5cba7;
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    .next-week-title {
+      font-size: 15px;
+      font-weight: bold;
+      color: #c0392b;
+      margin-bottom: 12px;
+    }
+    .next-day {
+      padding: 8px 0;
+      border-bottom: 1px solid #fdebd0;
+      font-size: 13px;
+      color: #555;
+      line-height: 1.7;
+    }
+    .next-day:last-child { border-bottom: none; }
+    .next-day strong { color: #c0392b; }
+
+    /* ===== 计划区 ===== */
+    .plan-week-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .plan-week-header {
+      background: linear-gradient(135deg, #1b4f72, #0e2f44);
+      color: white;
+      padding: 14px 18px;
+      font-size: 15px;
+      font-weight: bold;
+    }
+    .plan-day {
+      padding: 14px 18px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .plan-day:last-child { border-bottom: none; }
+    .plan-day-title {
+      font-weight: bold;
+      color: #1b4f72;
+      font-size: 14px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .plan-today {
+      background: #fff8f0;
+      border-left: 3px solid #e67e22;
+    }
+    .plan-today .plan-day-title { color: #c0392b; }
+    .plan-task {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.8;
+      padding-left: 20px;
+    }
+    .done-day { background: #f0fff4; }
+    .done-day .plan-day-title { color: #27ae60; }
+    .review-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .review-table th {
+      background: #1b4f72;
+      color: white;
+      padding: 8px 10px;
+      text-align: left;
+    }
+    .review-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .review-table tr:last-child td { border-bottom: none; }
+    .review-table tr:nth-child(even) td { background: #f0f7fd; }
+    .tag {
+      display: inline-block;
+      background: #d6eaf8;
+      color: #1b4f72;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+      margin-right: 4px;
+      margin-top: 4px;
+    }
+    .tag.red {
+      background: #fdeaea;
+      color: #c0392b;
+    }
+    .tag.green {
+      background: #eafaf1;
+      color: #1e8449;
+    }
+
+    /* ===== 底部 ===== */
+    .footer {
+      text-align: center;
+      color: #aaa;
+      font-size: 12px;
+      padding: 20px 0 30px;
+    }
+
+    /* ===== 进度条 ===== */
+    .progress-bar-wrap {
+      background: #f0f0f0;
+      border-radius: 10px;
+      height: 8px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .progress-bar {
+      height: 100%;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #1b4f72, #2e86c1);
+    }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #888;
+      margin-top: 4px;
+    }
+    .motiv-box {
+      background: linear-gradient(135deg, #fef9e7, #fdebd0);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 16px;
+      text-align: center;
+      border: 1px solid #f0d9b5;
+    }
+    .motiv-box p { font-size: 15px; color: #555; line-height: 1.9; }
+    .motiv-box .motiv-quote { font-size: 14px; font-weight: bold; color: #c0392b; margin-top: 8px; }
+  </style>
+</head>
+<body>
+
+<!-- 封面 -->
+<div class="cover">
+  <div class="cover-badge">陕西遴选 · 备考计划</div>
+  <h1>Day <span>06</span></h1>
+  <div class="cover-sub">2026年03月22日（周日）· 第一周收官</div>
+  <div class="cover-tags">
+    <div class="cover-tag">🔍 精析文章</div>
+    <div class="cover-tag">✍️ 框架⑥深化</div>
+    <div class="cover-tag">📊 第一周总结</div>
+  </div>
+  <div class="week-summary-badge">🏆 第一周圆满完成 · 累计积累25条金句</div>
+</div>
+
+<!-- 导航 -->
+<div class="nav">
+  <div class="nav-btn active" onclick="switchTab('analyze', this)">🔍 精析文章</div>
+  <div class="nav-btn" onclick="switchTab('framework', this)">✍️ 框架深化</div>
+  <div class="nav-btn" onclick="switchTab('summary', this)">📊 周总结</div>
+  <div class="nav-btn" onclick="switchTab('plan', this)">📅 本周计划</div>
+</div>
+
+<!-- 内容 -->
+<div class="content">
+
+  <!-- ===== 精析文章 ===== -->
+  <div class="section active" id="sec-analyze">
+    <div class="section-title">🔍 Day 06 精析文章</div>
+
+    <div class="article-title-box">
+      《完整把握中国式现代化的核心要义》
+      <div style="font-size:13px;opacity:0.8;margin-top:6px;font-weight:normal">——源自《习近平谈治国理政》第五卷精析</div>
+    </div>
+
+    <div class="article-meta">
+      <strong>文章背景：</strong>《习近平谈治国理政》第五卷于2025年8月正式发行，收录习近平总书记2022年5月至2024年12月间91篇重要论述，系新征程治国理政最新理论成果。<br>
+      <strong>适用方向：</strong>改革发展、中国式现代化、党的建设、治国理政<br>
+      <strong>陕西切入：</strong>陕西作为西部欠发达省份，"追赶超越"目标与中国式现代化深度契合，可结合秦岭生态修复、关中平原城市群建设等案例论述。
+    </div>
+
+    <!-- 立意分析 -->
+    <div class="card">
+      <div class="sub-title">① 立意解析——四重核心命题</div>
+      <div class="structure-flow">
+        <div class="flow-item">
+          <div class="flow-num">A</div>
+          <div class="flow-content"><strong>最大政治：</strong>中国式现代化是"新时代最大的政治"——以此破题，高屋建瓴，定性全文基调</div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-num">B</div>
+          <div class="flow-content"><strong>关键一招：</strong>改革开放是决定中国式现代化成败的"关键一招"——激活全篇动力机制</div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-num">C</div>
+          <div class="flow-content"><strong>最大法宝：</strong>"两个结合"是取得成功的"最大法宝"——提炼实践智慧，体现文化自信</div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-num">D</div>
+          <div class="flow-content"><strong>最大优势：</strong>党的领导+制度优势+人民拥护的有机统一是"最大优势"——强化论证，收束升华</div>
+        </div>
+      </div>
+      <div class="highlight-box">
+        <strong>💡 遴选写作启示：</strong>政论文立意要有"高度"——以国家战略眼光俯瞰问题，避免停留在就事论事的层面。上面四重命题，每一个都可单独作为大作文的破题角度。
+      </div>
+    </div>
+
+    <!-- 结构精析 -->
+    <div class="card">
+      <div class="sub-title">② 结构精析——"分论递进"框架</div>
+      <div class="structure-flow">
+        <div class="flow-item">
+          <div class="flow-num">1</div>
+          <div class="flow-content"><strong>总起段：</strong>党的二十大以来，习近平新时代中国特色社会主义思想开辟了马克思主义中国化时代化新境界<br><span style="color:#888;font-size:12px">→ 点题，交代时代背景，奠定权威性</span></div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-num">2</div>
+          <div class="flow-content"><strong>分论1：</strong>学懂弄通，要深刻把握"中国式现代化"这个新时代最大的政治<br><span style="color:#888;font-size:12px">→ 聚焦战略主题，阐释"是什么"</span></div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-num">3</div>
+          <div class="flow-content"><strong>分论2：</strong>学懂弄通，要深刻把握改革开放是"决定中国命运的关键一招"<br><span style="color:#888;font-size:12px">→ 阐释动力机制，论述"为什么"</span></div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-num">4</div>
+          <div class="flow-content"><strong>分论3：</strong>学懂弄通，要深刻把握"两个结合"是最大法宝<br><span style="color:#888;font-size:12px">→ 点出方法论，揭示"怎么干"</span></div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-num">5</div>
+          <div class="flow-content"><strong>分论4：</strong>学懂弄通，要进一步发挥党的领导等"最大的优势"<br><span style="color:#888;font-size:12px">→ 提炼制度优势，完成升华收束</span></div>
+        </div>
+      </div>
+      <div class="highlight-box blue">
+        <strong>结构特征：</strong>本文采用"总—分递进—收束"结构，每个分论点都用"学懂弄通……就要深刻把握……"作为引导句，形成排比气势，层层递进，逻辑严密。<br><br>
+        <strong>遴选写作借鉴：</strong>分论点段首句式可固定化，如"推进……，关键在于……""推动……，重在……"，既有气势又便于阅卷老师识别结构。
+      </div>
+    </div>
+
+    <!-- 开头结尾示范 -->
+    <div class="card">
+      <div class="sub-title">③ 开头结尾示范仿写</div>
+      <div style="font-size:14px;font-weight:bold;color:#1b4f72;margin-bottom:8px">📝 仿写开头（800字文章适用）：</div>
+      <div class="writing-sample">
+        中国式现代化，是<em>新时代最大的政治</em>，是亿万中国人的共同奋斗目标。<em>改革开放</em>如同破冰之舟，为现代化注入不竭动力；<em>"两个结合"</em>如同定海神针，让中国道路越走越宽广。站在第一个百年奋斗目标胜利实现的历史交汇点上，我们比任何时候都更接近、更有信心和能力实现中华民族伟大复兴的历史梦想。
+      </div>
+      <div style="font-size:14px;font-weight:bold;color:#1b4f72;margin:12px 0 8px">📝 仿写结尾（升华收束）：</div>
+      <div class="writing-sample">
+        历史长河奔腾不息，改革旗帜迎风飘扬。<em>守正创新</em>是我们在变局中开新局的密钥，<em>自我革命</em>是我们永葆先进性的内在基因。以<em>人民为中心</em>，以<em>中国式现代化</em>为引领，我们必将在三秦大地上书写出追赶超越、高质量发展的崭新篇章，不辜负人民期待，不辜负时代嘱托。
+      </div>
+    </div>
+
+    <!-- 金句提炼 -->
+    <div class="card">
+      <div class="sub-title">④ 精华金句提炼（直接可用）</div>
+      <table class="score-table">
+        <tr><th>序号</th><th>金句原文</th><th>适用场景</th></tr>
+        <tr>
+          <td>①</td>
+          <td>中国式现代化是新时代最大的政治</td>
+          <td><span class="tag">破题</span><span class="tag">立意</span></td>
+        </tr>
+        <tr>
+          <td>②</td>
+          <td>改革开放是决定当代中国命运的关键一招，也是决定中国式现代化成败的关键一招</td>
+          <td><span class="tag">改革发展</span><span class="tag">开篇论证</span></td>
+        </tr>
+        <tr>
+          <td>③</td>
+          <td>"两个结合"是我们取得成功的最大法宝</td>
+          <td><span class="tag">党建</span><span class="tag">理论方法论</span></td>
+        </tr>
+        <tr>
+          <td>④</td>
+          <td>守正才能不迷失方向，创新才能把握时代、引领时代</td>
+          <td><span class="tag">改革创新</span><span class="tag">分论点</span></td>
+        </tr>
+        <tr>
+          <td>⑤</td>
+          <td>人心向背关系党的生死存亡，决定党和人民事业成败</td>
+          <td><span class="tag">党建</span><span class="tag">为民情怀</span><span class="tag">结尾升华</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 精析评价 -->
+    <div class="card">
+      <div class="sub-title">⑤ 文章综合评分</div>
+      <table class="score-table">
+        <tr><th>维度</th><th>评价</th><th>评分</th></tr>
+        <tr><td>立意高度</td><td>以"中国式现代化"为统领，站位极高，适合借鉴到遴选题目</td><td><span class="star">★★★★★</span></td></tr>
+        <tr><td>结构逻辑</td><td>分论并列+递进结合，段落整齐，层次分明，易于仿写</td><td><span class="star">★★★★★</span></td></tr>
+        <tr><td>语言风格</td><td>典型官方政论文风格，四字短语丰富，书面感强</td><td><span class="star">★★★★☆</span></td></tr>
+        <tr><td>可迁移度</td><td>金句可直接嵌入遴选大作文，结构框架普适性强</td><td><span class="star">★★★★★</span></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== 框架深化 ===== -->
+  <div class="section" id="sec-framework">
+    <div class="section-title">✍️ Day 06 框架深化学习</div>
+
+    <div class="card" style="background:linear-gradient(135deg,#fff8f0,#fff);border-left:4px solid #f39c12;margin-bottom:20px">
+      <div style="font-size:14px;font-weight:bold;color:#c0392b;margin-bottom:8px">🌟 今日重点：框架⑥ 深化 + 综合运用</div>
+      <div style="font-size:13px;color:#666;line-height:1.8">本周我们学习了框架①总分总（Day01）、框架②问题-原因-对策。今日周日重点深化框架⑥"思想-制度-行动"三维论证法，这是陕西遴选大作文中频率最高的框架之一。</div>
+    </div>
+
+    <!-- 框架⑥ 深化 -->
+    <div class="fw-main-card">
+      <div class="fw-header">
+        <span class="fw-badge">框架⑥</span>
+        <span class="fw-name">思想 — 制度 — 行动 三维论证法</span>
+        <span class="new-badge">今日深化</span>
+      </div>
+      <div class="fw-logic">
+        <strong>基本逻辑：</strong>任何治理难题的解决，都需要从思想认识→制度保障→具体行动三个层面同步发力，缺一不可。<br>
+        <strong>适用题型：</strong>党建类、廉政类、作风建设类、治理能力提升类题目（陕西遴选高频）
+      </div>
+      <div class="fw-scene">关键词触发：全面从严治党、作风建设、队伍建设、能力提升、廉洁从政、制度建设</div>
+
+      <div class="fw-steps">
+        <div class="fw-step">
+          <div class="fw-step-title">第一维 · 思想层——"知"</div>
+          <div class="fw-step-content">
+            核心要义：提高思想认识，筑牢精神之基<br>
+            常用句式：以……为思想引领、强化……意识、树立……理念<br>
+            金句配套："自我革命这根弦必须绷得更紧"（2025年）
+          </div>
+        </div>
+        <div class="fw-step">
+          <div class="fw-step-title">第二维 · 制度层——"信"</div>
+          <div class="fw-step-content">
+            核心要义：完善制度机制，扎牢制度笼子<br>
+            常用句式：健全……制度、建立……机制、完善……体系<br>
+            金句配套："把权力关进制度的笼子"（习近平，2013年）
+          </div>
+        </div>
+        <div class="fw-step">
+          <div class="fw-step-title">第三维 · 行动层——"行"</div>
+          <div class="fw-step-content">
+            核心要义：狠抓落地落实，强化执行力度<br>
+            常用句式：以……为抓手、驰而不息……、久久为功……<br>
+            金句配套："驰而不息推进全面从严治党"（2022年党的二十大）
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:14px">
+        <div class="sub-title" style="font-size:14px">📝 框架⑥套用示范（以"提升干部作风建设"为题）</div>
+        <div class="highlight-box blue">
+          <strong>一、筑牢思想之基：</strong>以习近平新时代中国特色社会主义思想为指引，引导干部强化宗旨意识，自觉把"人民至上"内化于心、外化于行，切实解决"四风"问题在思想层面的根源。<br><br>
+          <strong>二、扎紧制度笼子：</strong>健全作风建设长效机制，完善党内监督制度，推行权力清单和负面清单管理，形成"不能腐""不想腐""不敢腐"的系统性制度体系。<br><br>
+          <strong>三、强化行动落实：</strong>驰而不息推进正风肃纪，以常态化巡察督导、定期问责通报等举措压实主体责任，确保作风建设各项要求落地落细落实。
+        </div>
+      </div>
+
+      <div class="fw-compare">
+        <div class="fw-compare-item">
+          <strong>🔍 容易犯的错误</strong>
+          三个分论点都在讲"如何做"，没有区分思想/制度/行动三个维度，变成了三条措施的简单堆砌。
+        </div>
+        <div class="fw-compare-item">
+          <strong>✅ 正确运用要点</strong>
+          思想层=内因/意识；制度层=外规/规则；行动层=执行/落实。三者形成逻辑闭环，互为支撑。
+        </div>
+      </div>
+    </div>
+
+    <!-- 框架对比速查 -->
+    <div class="card">
+      <div class="sub-title">本周框架速查对比表</div>
+      <table class="review-table">
+        <tr><th>框架</th><th>名称</th><th>适用场景</th><th>关键词触发</th></tr>
+        <tr>
+          <td><span class="tag">①</span></td>
+          <td>总—分—总</td>
+          <td>观点类、意义类</td>
+          <td>谈认识/谈看法</td>
+        </tr>
+        <tr>
+          <td><span class="tag">②</span></td>
+          <td>问—因—策</td>
+          <td>问题分析类</td>
+          <td>存在的问题/困境</td>
+        </tr>
+        <tr>
+          <td><span class="tag">③</span></td>
+          <td>是—为—怎</td>
+          <td>万能通用</td>
+          <td>几乎适合所有题型</td>
+        </tr>
+        <tr>
+          <td><span class="tag">⑥</span></td>
+          <td>思想—制度—行动</td>
+          <td>党建/廉政/治理类</td>
+          <td>全面从严治党/作风建设</td>
+        </tr>
+        <tr>
+          <td><span class="tag">⑦</span></td>
+          <td>知—信—行</td>
+          <td>党员修养类</td>
+          <td>价值观/初心使命</td>
+        </tr>
+        <tr>
+          <td><span class="tag">⑧</span></td>
+          <td>主体分析</td>
+          <td>社会治理/民生类</td>
+          <td>多方参与/协同共治</td>
+        </tr>
+      </table>
+      <div style="margin-top:12px;font-size:13px;color:#999">💡 备考建议：框架①③最通用，框架②⑥最高频，优先达到熟练程度</div>
+    </div>
+
+    <!-- 写作训练题 -->
+    <div class="card" style="border: 2px dashed #d5e8f5; background: #f8fbfd;">
+      <div class="sub-title">✏️ 今日练习题</div>
+      <div class="highlight-box">
+        <strong>题目：</strong>请以"以全面从严治党推动陕西高质量发展"为题，运用框架⑥（思想-制度-行动），写一篇不少于800字的政论文。<br><br>
+        <strong>提示：</strong>① 开头引用今日金句"人心向背关系党的生死存亡"破题；② 三个分论点分别对应思想/制度/行动；③ 结尾可用"延安精神"等陕西本地素材升华
+      </div>
+      <div style="font-size:13px;color:#888;margin-top:8px">建议用时：45分钟 | 完成后对照今日精析文章自评结构逻辑</div>
+    </div>
+  </div>
+
+  <!-- ===== 周总结 ===== -->
+  <div class="section" id="sec-summary">
+    <div class="section-title">📊 第一周学习总结</div>
+
+    <div class="motiv-box">
+      <p>完成了备考第一周的全部任务！坚持是最好的答案。<br>每一条金句，都是考场上的底气；每一篇精析，都是思路的积累。</p>
+      <div class="motiv-quote">把历史视角、战略思维，都落实到具体行动上来。——习近平，2025年</div>
+    </div>
+
+    <!-- 本周成果统计 -->
+    <div class="week-banner">
+      <h2>🏆 第一周成果统计</h2>
+      <p>2026年3月17日 — 3月22日</p>
+      <div class="week-stat-grid">
+        <div class="week-stat-item">
+          <div class="week-stat-num">25</div>
+          <div class="week-stat-label">金句积累（条）</div>
+        </div>
+        <div class="week-stat-item">
+          <div class="week-stat-num">2</div>
+          <div class="week-stat-label">故事素材（个）</div>
+        </div>
+        <div class="week-stat-item">
+          <div class="week-stat-num">1</div>
+          <div class="week-stat-label">精析文章（篇）</div>
+        </div>
+        <div class="week-stat-item">
+          <div class="week-stat-num">2</div>
+          <div class="week-stat-label">范文学习（篇）</div>
+        </div>
+        <div class="week-stat-item">
+          <div class="week-stat-num">6</div>
+          <div class="week-stat-label">覆盖框架（个）</div>
+        </div>
+        <div class="week-stat-item">
+          <div class="week-stat-num">6</div>
+          <div class="week-stat-label">主题覆盖（个）</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;font-size:13px;opacity:0.8">完成进度：6/30天 · 第一周满勤 🎉</div>
+      <div class="progress-bar-wrap" style="margin-top:8px">
+        <div class="progress-bar" style="width:20%;background:linear-gradient(90deg,#f7dc6f,#f39c12)"></div>
+      </div>
+      <div style="font-size:12px;opacity:0.7;text-align:center;margin-top:4px">20% 完成</div>
+    </div>
+
+    <!-- 本周金句速查 -->
+    <div class="juju-review-card">
+      <div class="juju-review-header" style="background:#1b4f72">📌 本周25条金句速查（默写检测）</div>
+
+      <div class="juju-review-header" style="background:#2e86c1;font-size:13px">周一·基层治理</div>
+      <div class="juju-item"><span class="kw">①基础不牢，地动山摇</span> <span class="src">（2020年9月基层代表座谈会）</span></div>
+      <div class="juju-item"><span class="kw">②上面千条线，底下一根针</span> <span class="src">（1990年/2022年多次引用）</span></div>
+      <div class="juju-item"><span class="kw">③基层强则国家强，基层安则天下安</span> <span class="src">（《基层治理论述摘编》）</span></div>
+      <div class="juju-item"><span class="kw">④基层是党的执政之基、力量之源</span> <span class="src">（2016年两学一做）</span></div>
+      <div class="juju-item"><span class="kw">⑤社区治理只能加强、不能削弱</span> <span class="src">（2024年4月）</span></div>
+
+      <div class="juju-review-header" style="background:#1a7bc0;font-size:13px">周二·乡村振兴</div>
+      <div class="juju-item"><span class="kw">⑥全面推进乡村振兴是新时代"三农"工作的总抓手</span> <span class="src">（2022年中央农村工作会议）</span></div>
+      <div class="juju-item"><span class="kw">⑦产业振兴是乡村振兴的重中之重</span> <span class="src">（2023年中央一号文件精神）</span></div>
+      <div class="juju-item"><span class="kw">⑧千村示范、万村整治</span> <span class="src">（2023年学习推广浙江"千万工程"经验）</span></div>
+      <div class="juju-item"><span class="kw">⑨让农民有更多获得感幸福感安全感</span> <span class="src">（多次强调）</span></div>
+      <div class="juju-item"><span class="kw">⑩建设宜居宜业和美乡村</span> <span class="src">（党的二十大报告）</span></div>
+
+      <div class="juju-review-header" style="background:#1a7bc0;font-size:13px">周三·政务服务/数字政府</div>
+      <div class="juju-item"><span class="kw">⑪让数据多跑路，群众少跑腿</span> <span class="src">（2020年深圳考察）</span></div>
+      <div class="juju-item"><span class="kw">⑫数字政府是推进国家治理体系和能力现代化的重要基础</span> <span class="src">（2022年4月）</span></div>
+      <div class="juju-item"><span class="kw">⑬打通信息壁垒，构建共享平台</span> <span class="src">（2016年4月网络安全大会）</span></div>
+      <div class="juju-item"><span class="kw">⑭从信息化到智能化再到智慧化</span> <span class="src">（浙江杭州城市大脑）</span></div>
+      <div class="juju-item"><span class="kw">⑮数字中国建设要融合共享、便民安全</span> <span class="src">（海南自贸港讲话）</span></div>
+
+      <div class="juju-review-header" style="background:#196f3d;font-size:13px">周四·生态文明</div>
+      <div class="juju-item"><span class="kw">⑯绿水青山就是金山银山</span> <span class="src">（2005年浙江安吉考察）</span></div>
+      <div class="juju-item"><span class="kw">⑰像保护眼睛一样保护生态环境</span> <span class="src">（多次引用）</span></div>
+      <div class="juju-item"><span class="kw">⑱山水林田湖草沙是生命共同体</span> <span class="src">（2013年党的十八届三中全会）</span></div>
+      <div class="juju-item"><span class="kw">⑲要坚持精准治污、科学治污、依法治污</span> <span class="src">（2022年生态环境保护大会）</span></div>
+      <div class="juju-item"><span class="kw">⑳生态环境保护和经济发展不是矛盾对立的</span> <span class="src">（多次考察讲话）</span></div>
+
+      <div class="juju-review-header" style="background:#7d6608;font-size:13px">周五·社会治理/民生</div>
+      <div class="juju-item"><span class="kw">㉑社会治理是一门大学问</span> <span class="src">（2019年重庆考察）</span></div>
+      <div class="juju-item"><span class="kw">㉒民心是最大的政治</span> <span class="src">（多次讲话）</span></div>
+      <div class="juju-item"><span class="kw">㉓坚持在发展中保障和改善民生</span> <span class="src">（党的二十大报告）</span></div>
+      <div class="juju-item"><span class="kw">㉔打通服务群众"最后一公里"</span> <span class="src">（2023年上海考察）</span></div>
+      <div class="juju-item"><span class="kw">㉕解决问题的过程，也是发展前进的过程</span> <span class="src">（2025年全国两会）</span></div>
+    </div>
+
+    <!-- 已完成项目 -->
+    <div class="card">
+      <div class="sub-title">✅ 本周已完成清单</div>
+      <ul class="check-list">
+        <li><strong>Day01（周二）：</strong>基层治理金句5条 + 廖俊波故事素材 + 总分总框架</li>
+        <li><strong>Day02（周三）：</strong>乡村振兴金句5条 + 框架①总分总结构练习（推测）</li>
+        <li><strong>Day03（周四）：</strong>生态文明金句5条 + 精析文章（推测）</li>
+        <li><strong>Day04（周四/周三）：</strong>政务服务/数字政府金句5条 + 陕西"秦务员"故事素材</li>
+        <li><strong>Day05（周六）：</strong>党建/廉洁自律金句5条 + 范文精析《紧握作风建设之笔》</li>
+        <li><strong>Day06（今日）：</strong>精析《中国式现代化核心要义》+ 框架⑥深化 + 周总结</li>
+      </ul>
+    </div>
+
+    <!-- 待补充/下周提醒 -->
+    <div class="card">
+      <div class="sub-title">⬜ 本周遗留任务（下周优先补完）</div>
+      <ul class="pending-list">
+        <li>社会治理/民生金句默写检测（5条，建议周一完成）</li>
+        <li>框架①总分总：手写200字段落练习</li>
+        <li>廖俊波故事：背诵颁奖词，尝试在段落中使用</li>
+        <li>"秦务员"案例数据：熟记"跑动0.69次/占比84.54%"等关键数字</li>
+      </ul>
+    </div>
+
+    <!-- 下周计划预告 -->
+    <div class="next-week-card">
+      <div class="next-week-title">🗓️ 第二周计划预告（3月23日起）</div>
+      <div class="next-day"><strong>周一（Day07）：</strong>金句积累·基层治理（进阶版）+ 故事素材：焦裕禄</div>
+      <div class="next-day"><strong>周二（Day08）：</strong>金句积累·乡村振兴（进阶版）+ 框架②问题-原因-对策 深化</div>
+      <div class="next-day"><strong>周三（Day09）：</strong>金句积累·科技创新/新质生产力 + 故事素材</div>
+      <div class="next-day"><strong>周四（Day10）：</strong>金句积累·绿色发展（陕西秦岭专题）+ 精析文章②</div>
+      <div class="next-day"><strong>周五（Day11）：</strong>金句积累·教育/人才强国 + 范文学习③</div>
+      <div class="next-day"><strong>周六（Day12）：</strong>金句积累·改革发展/中国式现代化 + 范文学习④</div>
+      <div class="next-day"><strong>周日（Day13）：</strong>精析文章③ + 框架深化 + 第二周总结</div>
+    </div>
+
+    <!-- 励志收尾 -->
+    <div class="card" style="background:linear-gradient(135deg,#eaf4fb,#fff);text-align:center">
+      <div style="font-size:16px;font-weight:bold;color:#1b4f72;margin-bottom:10px">第一周，圆满收官！</div>
+      <div style="font-size:14px;color:#555;line-height:2">
+        25条金句，是你在考场上的底气；<br>
+        2个故事，是你在文章中的温度；<br>
+        6个框架，是你谋篇布局的骨架。<br>
+        <strong style="color:#c0392b">继续前行，第二周见！</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 计划 ===== -->
+  <div class="section" id="sec-plan">
+    <div class="section-title">📅 本周学习计划 · 第一周</div>
+
+    <div class="card" style="background:linear-gradient(135deg,#fff8f0,#fff);border-left:4px solid #27ae60">
+      <div style="font-size:15px;font-weight:bold;color:#27ae60;margin-bottom:8px">🌟 今日任务（周日）</div>
+      <div style="font-size:14px;color:#555;line-height:2">
+        ✅ 🔍 精析文章：<strong>《习近平谈治国理政》第五卷精析</strong><br>
+        ✅ ✍️ 框架学习：<strong>框架⑥思想-制度-行动 深化</strong><br>
+        ✅ 📊 周总结：<strong>复习本周25条金句，记录学习成果</strong><br>
+        ⬜ 📝 练习题：用框架⑥写<strong>800字文章（建议今日完成）</strong>
+      </div>
+    </div>
+
+    <div class="plan-week-card">
+      <div class="plan-week-header">📅 第一周每日任务完成情况</div>
+      <div class="plan-day done-day">
+        <div class="plan-day-title">周一 <span style="color:#27ae60;font-size:11px">✅已完成</span></div>
+        <div class="plan-task">📌 金句：基层治理5条 ｜ 📖 故事：廖俊波</div>
+      </div>
+      <div class="plan-day done-day">
+        <div class="plan-day-title">周二 <span style="color:#27ae60;font-size:11px">✅已完成</span></div>
+        <div class="plan-task">📌 金句：乡村振兴5条 ｜ ✍️ 框架①总分总</div>
+      </div>
+      <div class="plan-day done-day">
+        <div class="plan-day-title">周三 <span style="color:#27ae60;font-size:11px">✅已完成</span></div>
+        <div class="plan-task">📌 金句：政务服务5条 ｜ 📖 故事：陕西"秦务员"改革</div>
+      </div>
+      <div class="plan-day done-day">
+        <div class="plan-day-title">周四 <span style="color:#27ae60;font-size:11px">✅已完成</span></div>
+        <div class="plan-task">📌 金句：生态文明5条 ｜ 🔍 精析文章①</div>
+      </div>
+      <div class="plan-day done-day">
+        <div class="plan-day-title">周五 <span style="color:#27ae60;font-size:11px">✅已完成</span></div>
+        <div class="plan-task">📌 金句：社会治理5条 ｜ 📄 范文：作风建设</div>
+      </div>
+      <div class="plan-day done-day">
+        <div class="plan-day-title">周六 <span style="color:#27ae60;font-size:11px">✅已完成</span></div>
+        <div class="plan-task">📌 金句：党建/廉洁自律5条 ｜ 📄 范文精析</div>
+      </div>
+      <div class="plan-day plan-today">
+        <div class="plan-day-title">周日 <span class="today-badge">今天</span></div>
+        <div class="plan-task">🔍 精析文章：中国式现代化 ｜ ✍️ 框架⑥深化 ｜ 📊 第一周总结</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:15px;font-weight:bold;color:#1b4f72;margin-bottom:12px">📊 30天学习进度追踪</div>
+      <div style="font-size:14px;color:#555;margin-bottom:6px">第一周：6/6天 满勤完成 🎉</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar" style="width:100%;background:linear-gradient(90deg,#27ae60,#2ecc71)"></div>
+      </div>
+      <div class="progress-label"><span>第一周完成</span><span>100%</span></div>
+      <div style="font-size:14px;color:#555;margin:12px 0 6px">总体进度：6/30天</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar" style="width:20%;background:linear-gradient(90deg,#1b4f72,#2e86c1)"></div>
+      </div>
+      <div class="progress-label"><span>已完成6天</span><span>还剩24天</span></div>
+
+      <div style="margin-top:16px">
+        <table class="review-table">
+          <tr><th>模块</th><th>本周完成</th><th>30天目标</th><th>进度</th></tr>
+          <tr><td>主题金句</td><td>25条</td><td>150条</td><td>17%</td></tr>
+          <tr><td>故事素材</td><td>2个</td><td>30个</td><td>7%</td></tr>
+          <tr><td>精析文章</td><td>1篇</td><td>8篇</td><td>12%</td></tr>
+          <tr><td>范文学习</td><td>2篇</td><td>8篇</td><td>25%</td></tr>
+          <tr><td>框架掌握</td><td>6个了解</td><td>10个熟练</td><td>60%</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">Day 06 · 2026-03-22（周日）· 陕西遴选备考 · 第一周圆满收官</div>
+</div>
+
+<script>
+  function switchTab(name, btn) {
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('sec-' + name).classList.add('active');
+    window.scrollTo({ top: document.querySelector('.nav').offsetTop - 10, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
