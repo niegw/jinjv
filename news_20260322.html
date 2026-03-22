@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>今日时政要闻 · 2026年3月22日</title>
+  <style>
+    :root {
+      --red: #c0392b;
+      --red-light: #e74c3c;
+      --gold: #d4a017;
+      --dark: #1a1a2e;
+      --text: #2c3e50;
+      --text-light: #7f8c8d;
+      --bg: #f4f6f9;
+      --card: #ffffff;
+      --border: #e8ecf0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* 头部 */
+    .header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+      color: #fff;
+      padding: 28px 20px 22px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -30px; right: -30px;
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: rgba(192,57,43,0.15);
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: -20px; left: -20px;
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: rgba(212,160,23,0.12);
+    }
+    .header-badge {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    .header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+    .header .date {
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 1px;
+    }
+    .header .special-day {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--gold);
+    }
+
+    /* 提示条 */
+    .notice-bar {
+      background: #fff7e6;
+      border-left: 3px solid var(--gold);
+      padding: 10px 16px;
+      font-size: 12px;
+      color: #8a6200;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* 主内容 */
+    .container { padding: 14px 14px 30px; max-width: 680px; margin: 0 auto; }
+
+    /* 分区标题 */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 18px 0 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .section-title::before {
+      content: '';
+      width: 3px; height: 14px;
+      background: var(--red);
+      border-radius: 2px;
+    }
+
+    /* 新闻卡片 */
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+    }
+    .card.level-2::before { background: var(--red); }
+    .card.level-1::before { background: #e67e22; }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .level-tag {
+      flex-shrink: 0;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+    .level-2 .level-tag { background: #fdecea; color: var(--red); }
+    .level-1 .level-tag { background: #fef3e2; color: #e67e22; }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--dark);
+    }
+    .card-body {
+      font-size: 13.5px;
+      color: #4a5568;
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-light);
+      border-top: 1px solid var(--border);
+      padding-top: 8px;
+    }
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .writing-tip {
+      margin-top: 8px;
+      background: linear-gradient(135deg, #f0f9ff, #e8f4fd);
+      border: 1px solid #bee3f8;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: #2b6cb0;
+      line-height: 1.6;
+    }
+    .writing-tip::before {
+      content: '✍️ 写作提示 · ';
+      font-weight: 700;
+    }
+
+    /* 写作素材板块 */
+    .material-section {
+      background: linear-gradient(135deg, #fff5f5, #fff0f0);
+      border: 1px solid #fed7d7;
+      border-radius: 14px;
+      padding: 18px;
+      margin-top: 20px;
+    }
+    .material-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--red);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .material-item {
+      margin-bottom: 14px;
+      padding-bottom: 14px;
+      border-bottom: 1px dashed #fca5a5;
+    }
+    .material-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .material-item h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #c53030;
+      margin-bottom: 5px;
+    }
+    .material-item p {
+      font-size: 13px;
+      color: #4a5568;
+      line-height: 1.7;
+    }
+    .material-tag {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-size: 10px;
+      padding: 1px 7px;
+      border-radius: 3px;
+      margin-right: 5px;
+    }
+
+    /* 底部 */
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 11px;
+      color: var(--text-light);
+      border-top: 1px solid var(--border);
+      margin-top: 10px;
+    }
+
+    /* 编号 */
+    .news-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px; height: 20px;
+      background: var(--dark);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 10px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">陕西遴选 · 时政备考</div>
+  <h1>今日时政要闻</h1>
+  <div class="date">2026年3月22日 · 星期日</div>
+  <div class="special-day">📅 第三十四届世界水日 &nbsp;|&nbsp; 第三十九届中国水周</div>
+</div>
+
+<div class="notice-bar">
+  <span>📌</span>
+  今日重点：世界水日国家水网成就、李强春耕粮食安全批示、生态文明新实践、秦岭土特产新华社报道
+</div>
+
+<div class="container">
+
+  <div class="section-title">国家要事 · 中央动态</div>
+
+  <!-- 新闻1 -->
+  <div class="card level-2">
+    <div class="card-header">
+      <span class="news-num">1</span>
+      <div>
+        <span class="level-tag">★★ 非常重要</span>
+        <div class="card-title">世界水日｜国家水网建设成就发布：大国治水展非凡魄力</div>
+      </div>
+    </div>
+    <div class="card-body">
+      3月22日是第三十四届"世界水日"，今年中国水周主题为"国家水网 世纪画卷"。央视网发布重磅报道，以硬核数据展示我国覆盖全国的水利基础设施网络加速成型成就：从江南水乡到北方平原、从大江大河到田间地头，国家水网工程全面推进，充分体现大国治水能力。水利部同步发布"世界水日""中国水周"系列宣传活动，3月22日至28日在全国范围集中开展节水护水宣传教育。
+    </div>
+    <div class="card-meta">
+      <span class="meta-item">📰 来源：央视网、水利部</span>
+      <span class="meta-item">📅 2026.03.22</span>
+    </div>
+    <div class="writing-tip">可用于"生态文明建设""人与自然和谐共生""绿色发展"类大作文，以"国家水网"为例论证党的十八大以来生态治理重大成就；亦可引用习近平总书记"十六字治水思路"（节水优先、空间均衡、系统治理、两手发力）作为核心论据。</div>
+  </div>
+
+  <!-- 新闻2 -->
+  <div class="card level-2">
+    <div class="card-header">
+      <span class="news-num">2</span>
+      <div>
+        <span class="level-tag">★★ 非常重要</span>
+        <div class="card-title">李强作重要批示：高水平保障粮食安全，为"十五五"开局提供有力支撑</div>
+      </div>
+    </div>
+    <div class="card-body">
+      全国春季农业生产工作会议3月20日在河南省周口市召开，国务院总理李强对此作出重要批示：今年是"十五五"开局之年，各地要毫不放松抓好粮食生产，实施好新一轮千亿斤粮食产能提升行动，高水平保障粮食等重要农产品稳定安全供给。批示特别强调要强化农资供应保障、稳定粮食播种面积、促进小麦苗情转壮，力争夏季粮油再获丰收。国务院副总理刘国中出席会议并讲话，要求绷紧粮食安全这根弦，精细抓好春管春耕。
+    </div>
+    <div class="card-meta">
+      <span class="meta-item">📰 来源：新华社、人民日报头版</span>
+      <span class="meta-item">📅 2026.03.21</span>
+    </div>
+    <div class="writing-tip">可用于"粮食安全""三农工作""乡村振兴"类大作文，"千亿斤粮食产能提升行动"是十五五开局重大举措，可论证以更高标准扛起保障国家粮食安全责任；基层公务员写作可结合"春耕春管"具体落实场景增强真实感。</div>
+  </div>
+
+  <!-- 新闻3 -->
+  <div class="card level-2">
+    <div class="card-header">
+      <span class="news-num">3</span>
+      <div>
+        <span class="level-tag">★★ 非常重要</span>
+        <div class="card-title">习近平总书记关切事｜以林为笔的生态答卷——国土绿化成就综述</div>
+      </div>
+    </div>
+    <div class="card-body">
+      新华社3月21日发布长篇报道《习近平总书记关切事｜以林为笔的生态答卷》，全面展示党的十八大以来在习近平生态文明思想指引下国土绿化行动成就：我国人工林保存面积超9240万公顷，居世界第一。报道以内蒙古科尔沁沙地"绿色长城"、海南热带雨林国家公园"生态原真守护"、黑龙江伊春"碳汇经济探索"三地为典型，展示扩绿、兴绿、护绿三条路径。习近平总书记强调"森林是水库、粮库、钱库、碳库"，绿水青山就是金山银山理念深入实践。
+    </div>
+    <div class="card-meta">
+      <span class="meta-item">📰 来源：新华社</span>
+      <span class="meta-item">📅 2026.03.21</span>
+    </div>
+    <div class="writing-tip">可用于"生态文明""绿色发展""高质量发展"类大作文，"人工林面积世界第一"是有力数据论据；"水库、粮库、钱库、碳库"是习近平原话，引用可大幅提升文章层次；碳汇经济亦可与"双碳目标""绿色低碳转型"话题结合。</div>
+  </div>
+
+  <!-- 新闻4 -->
+  <div class="card level-2">
+    <div class="card-header">
+      <span class="news-num">4</span>
+      <div>
+        <span class="level-tag">★★ 非常重要</span>
+        <div class="card-title">大国工程进行时：首台550兆瓦F级燃气机组投产、四川发现世界第二大稀土矿、风云四号C星发布首图</div>
+      </div>
+    </div>
+    <div class="card-body">
+      央视网3月22日报道，我国多个重大项目同日实现突破：①首台550兆瓦F级燃气机组（华电重庆潼南项目）完成168小时满负荷运行正式投产，成国内单机容量最大、效率最高机组；②自然资源部发布四川冕宁牦牛坪矿区勘探成果，发现世界第二大在产轻稀土矿，稀土氧化物总量达966.56万吨；③中国气象局发布风云四号C星首套观测图像，该卫星为目前全球单星综合探测能力最强的静止气象卫星，将于主汛期投入业务试用。多项"世界级"成就集中展示"十五五"开局高质量发展新势能。
+    </div>
+    <div class="card-meta">
+      <span class="meta-item">📰 来源：央视网</span>
+      <span class="meta-item">📅 2026.03.22</span>
+    </div>
+    <div class="writing-tip">可用于"科技自立自强""高质量发展""新质生产力"类大作文，三大工程分别代表清洁能源、战略资源、气象科技三个领域，论述中国科技实力时可形成排比句式，增强论证厚度。</div>
+  </div>
+
+  <div class="section-title">地方要事 · 陕西动态</div>
+
+  <!-- 新闻5 -->
+  <div class="card level-2">
+    <div class="card-header">
+      <span class="news-num">5</span>
+      <div>
+        <span class="level-tag">★★ 非常重要</span>
+        <div class="card-title">新华社陕西报道｜秦岭土特产何以变"潮牌"：商洛生态产品价值实现的典型样本</div>
+      </div>
+    </div>
+    <div class="card-body">
+      新华社记者3月21日深入陕西商洛一线，发布记者手记《秦岭土特产何以变"潮牌"》。商洛市（全域位于秦岭保护区）依托森林覆盖率70%的生态禀赋，将柞水木耳拓展为22类99种深加工产品，品牌价值达53.23亿元；洛南核桃推出"红仁核桃"新品种及巧克力、核桃油等延伸产品；当地引进新加坡分子育种草莓远销海外。2024年商洛被确定为国家生态产品价值实现机制试点，80余种农特产品"因绿而升"。"燕窝鲜炖金耳羹"等产品价格不菲却市场畅销，成为"绿水青山就是金山银山"的生动注脚。
+    </div>
+    <div class="card-meta">
+      <span class="meta-item">📰 来源：新华社（西安）</span>
+      <span class="meta-item">📅 2026.03.21</span>
+    </div>
+    <div class="writing-tip">可用于"乡村振兴""生态文明""高质量发展"类大作文，尤其适合涉及陕西本地的遴选写作题目；"秦岭土特产变潮牌"是将抽象政策转化为具体成就的范例，可作为"生态产品价值实现机制"改革的陕西论据，较其他省市案例更具本地说服力。</div>
+  </div>
+
+  <!-- 新闻6 -->
+  <div class="card level-1">
+    <div class="card-header">
+      <span class="news-num">6</span>
+      <div>
+        <span class="level-tag">★ 重要</span>
+        <div class="card-title">《求是》第6期发表习近平重要文章《推动海洋经济高质量发展》</div>
+      </div>
+    </div>
+    <div class="card-body">
+      3月16日出版的第6期《求是》杂志发表习近平总书记重要文章《推动海洋经济高质量发展》。文章强调，要经略海洋、开发海洋，推进"一带一路"国际港口联盟建设，深度参与全球海洋治理，加强全球海洋科研调查、防灾减灾和蓝色经济合作。这是习近平总书记在主持中共中央政治局第十一次集体学习时的讲话。文章的发表，为加快建设海洋强国、推进高水平对外开放提供了根本遵循。
+    </div>
+    <div class="card-meta">
+      <span class="meta-item">📰 来源：新华社、《求是》杂志</span>
+      <span class="meta-item">📅 2026.03.16</span>
+    </div>
+    <div class="writing-tip">可用于"高质量发展""对外开放""人类命运共同体"类大作文，引用《求是》文章原文可提升论证权威性；"蓝色经济""海洋治理"亦是当前考试热词，可积累相关论述。</div>
+  </div>
+
+  <!-- 新闻7 -->
+  <div class="card level-1">
+    <div class="card-header">
+      <span class="news-num">7</span>
+      <div>
+        <span class="level-tag">★ 重要</span>
+        <div class="card-title">全国春耕生产新质生产力上阵：科技赋能，冬小麦一二类苗占比超八成</div>
+      </div>
+    </div>
+    <div class="card-body">
+      据光明日报3月20日报道，当前全国春耕生产全面展开，南方早稻开始育秧，全国冬小麦一、二类苗占比已超过八成，苗情长势好于往年。各地以无人机植保、AI病虫害监测、智慧农机等科技手段赋能春耕，"科技主场"成春管现场的鲜明标志。新华社文章《学习手记｜抓好春耕生产，总书记念兹在兹》梳理了习近平总书记历年对春耕粮食安全的高度重视，强调"十五五"规划纲要提出粮食综合生产能力达到1.45万亿斤的新目标。
+    </div>
+    <div class="card-meta">
+      <span class="meta-item">📰 来源：光明日报、新华社</span>
+      <span class="meta-item">📅 2026.03.20-21</span>
+    </div>
+    <div class="writing-tip">可用于"粮食安全""新质生产力""科技兴农"类大作文，"冬小麦一二类苗超八成"是今年实时数据，可作为粮食安全有保障的数据佐证；"1.45万亿斤"是十五五新目标，写作时注意更新数字，避免用旧目标。</div>
+  </div>
+
+  <!-- 写作素材提示板块 -->
+  <div class="material-section">
+    <div class="material-title">📝 今日写作素材精选提示</div>
+
+    <div class="material-item">
+      <h4><span class="material-tag">首推</span>生态文明建设大作文：以林为笔 + 国家水网 + 秦岭案例</h4>
+      <p>今日有三条新闻高度契合"生态文明"主题：习近平关切国土绿化（人工林面积世界第一）、世界水日国家水网建设成就、以及陕西商洛秦岭土特产变潮牌。<strong>建议构建论证结构：</strong>"扩绿增汇守护绿色底色（国土绿化）→ 治水兴水构建生态基础（国家水网）→ 两山转化实现绿色富民（秦岭案例）"。三段可形成排比，陕西本地案例最契合遴选写作需求。</p>
+    </div>
+
+    <div class="material-item">
+      <h4><span class="material-tag">重点</span>粮食安全大作文：春耕+李强批示+新质生产力</h4>
+      <p>李强对春季农业生产的重要批示登上人民日报头版，是当前最新、最权威的粮食安全素材。<strong>可用论据链：</strong>党中央高度重视（批示原话）→ 具体目标（千亿斤产能提升、1.45万亿斤目标）→ 科技赋能路径（无人机植保、智慧农机）→ 现实成效（冬小麦优良率超八成）。逻辑自洽，层次分明。</p>
+    </div>
+
+    <div class="material-item">
+      <h4><span class="material-tag">备选</span>高质量发展/科技自强大作文：大国工程三连突破</h4>
+      <p>首台550兆瓦F级燃气机组（清洁能源）+ 世界第二大稀土矿（战略资源）+ 风云四号C星（气象科技）三个"世界级"成就同日见诸报端，构成排比论据，适合论证"十五五开局科技实力跃升"。可结合政府工作报告提出的"以科技创新引领新质生产力发展"来展开。</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  本页面由WorkBuddy自动生成 · 内容来源：新华社、央视网、人民日报、光明日报<br>
+  仅供陕西公务员遴选备考参考 · 2026年3月22日
+</div>
+
+</body>
+</html>
